@@ -5,12 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Cargo;
+package frc.robot.commands.cargo;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CargoJettison extends Command {
-  public CargoJettison() {
+public class CargoJettisonC extends Command {
+  public CargoJettisonC() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
