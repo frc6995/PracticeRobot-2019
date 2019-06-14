@@ -7,11 +7,11 @@ from the ground and score on the cargo ship. The claw will not score on either s
 in the front. He will also climb using our 14 inch cylinders. 
 He will possibly vision align with the pixycam and may have a usb camera for driver vision.  
 
-*Drivebase:*
+*Drivebase:*  
 Style: Standard Andymark Drivebase  
 Motors: 4 CIMs, 2 on each side all controlled by Victor SPXs.  
 
-*Rotating Arm:*
+*Rotating Arm:*  
 Motors: 2 CIMs controlled by Talon SRXs  
 Limits: 2 limit switches at both mechanical limits  
 Encoder: [An Andymark Absolute Encoder](https://www.andymark.com/products/absolute-encoder-with-cable)  
