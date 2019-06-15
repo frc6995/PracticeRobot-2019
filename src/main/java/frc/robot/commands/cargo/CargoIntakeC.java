@@ -15,6 +15,8 @@ public class CargoIntakeC extends Command {
 
   @Override
   protected void initialize() {
+    
+    this.setTimeout(10);
 
   }
 

@@ -15,6 +15,8 @@ public class CargoJettisonC extends Command {
 
   @Override
   protected void initialize() {
+    
+    this.setTimeout(10);
 
   }
 
