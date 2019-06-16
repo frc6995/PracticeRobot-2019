@@ -30,8 +30,7 @@ public class CargoIntakeS extends Subsystem {
 
   public boolean getCargoLimit() {
 
-    //inverses the output of the limit swich, when it is pressed send false and when not pressed send true.
-    return !cargoLimit.get();
+    return cargoLimit.get();
 
   }
   
