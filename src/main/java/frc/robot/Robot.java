@@ -10,6 +10,7 @@ import frc.robot.subsystems.arm.*;
 public class Robot extends TimedRobot {
   
   //Subsystems
+  public static CargoArmS m_CargoArmS = new CargoArmS();
   public static CargoHandS m_CargoHandS = new CargoHandS();
   //Commands
   public static CargoIntakeC m_CargoIntakeC;
@@ -22,6 +23,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
     //Subsystems
+    m_CargoArmS = new CargoArmS();
     m_CargoHandS = new CargoHandS();
     //Commands
     m_CargoIntakeC = new CargoIntakeC();
