@@ -1,15 +1,15 @@
-package frc.robot.commands.cargo;
+package frc.robot.commands.hand;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class CargoIntakeC extends Command {
+public class CargoJettisonC extends Command {
 
-  private double intakeSpeed = -0.7; //negative values intake?
+  private double jettisonSpeed = 0.7; //positive values jettison?
 
-  public CargoIntakeC() {
+  public CargoJettisonC() {
 
-    requires(Robot.m_CargoIntakeS);
+    requires(Robot.m_CargoHandS);
 
   }
 
@@ -23,21 +23,21 @@ public class CargoIntakeC extends Command {
   @Override
   protected void execute() {
 
-    Robot.m_CargoIntakeS.cargoIntakeMotor.setSpeed(intakeSpeed);
+    Robot.m_CargoHandS.cargoIntakeMotor.setSpeed(jettisonSpeed);
 
   }
 
   @Override
   protected boolean isFinished() {
 
-    return Robot.m_CargoIntakeS.getCargoLimit() || isTimedOut();
+    return Robot.m_CargoHandS.getCargoLimit() || isTimedOut();
 
   }
 
   @Override
   protected void end() {
 
-    Robot.m_CargoIntakeS.cargoIntakeMotor.setSpeed(0.0);
+    Robot.m_CargoHandS.cargoIntakeMotor.setSpeed(0.0);
 
   }
 

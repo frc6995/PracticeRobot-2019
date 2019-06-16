@@ -5,12 +5,12 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
-public class CargoIntakeS extends Subsystem {
+public class CargoHandS extends Subsystem {
 
   public Spark cargoIntakeMotor;
   private static DigitalInput cargoLimit;
 
-  public CargoIntakeS() {
+  public CargoHandS() {
 
     cargoIntakeMotor = new Spark(RobotMap.PWM_ID_SPARK_CARGO);
     cargoLimit = new DigitalInput(RobotMap.DIO_LIMIT_CARGO);
