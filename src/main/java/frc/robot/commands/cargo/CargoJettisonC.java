@@ -5,7 +5,7 @@ import frc.robot.Robot;
 
 public class CargoJettisonC extends Command {
 
-  private double intakeSpeed = 0.7; //positive values jettison?
+  private double jettisonSpeed = 0.7; //positive values jettison?
 
   public CargoJettisonC() {
 
@@ -23,7 +23,7 @@ public class CargoJettisonC extends Command {
   @Override
   protected void execute() {
 
-    Robot.m_CargoIntakeS.cargoIntakeMotor.setSpeed(intakeSpeed);
+    Robot.m_CargoIntakeS.cargoIntakeMotor.setSpeed(jettisonSpeed);
 
   }
 

@@ -13,7 +13,7 @@ public class CargoIntakeS extends Subsystem {
   public CargoIntakeS() {
 
     cargoIntakeMotor = new Spark(RobotMap.PWM_ID_SPARK_CARGO);
-    cargoLimit = new DigitalInput(RobotMap.PWM_ID_LIMIT_CARGO);
+    cargoLimit = new DigitalInput(RobotMap.DIO_LIMIT_CARGO);
 
   }
 
