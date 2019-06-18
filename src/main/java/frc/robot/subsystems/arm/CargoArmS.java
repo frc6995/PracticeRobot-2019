@@ -3,6 +3,7 @@ package frc.robot.subsystems.arm;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
@@ -18,6 +19,8 @@ public class CargoArmS extends Subsystem {
   private DigitalInput armUpperLimitSwitch;
   private DigitalInput armLowerLimitSwitch;
 
+  public Encoder armSensor;
+
 
 
   @Override
@@ -30,6 +33,13 @@ public class CargoArmS extends Subsystem {
     armTalonB = new WPI_TalonSRX(RobotMap.CAN_ID_TALON_ARM_B);
     armUpperLimitSwitch = new DigitalInput(RobotMap.DIO_LIMIT_ARM_UPPER);
     armLowerLimitSwitch = new DigitalInput(RobotMap.DIO_LIMIT_ARM_LOWER);
+    armSensor = new Encoder(RobotMap.DIO_LIMIT_ARM_UPPER, RobotMap.DIO_LIMIT_ARM_LOWER, false, Encoder.EncodingType.k4X);
+
+    armSensor.setMaxPeriod(.1);
+    armSensor.setMinRate(10);
+    armSensor.setDistancePerPulse(5);
+    armSensor.setReverseDirection(true);
+    armSensor.setSamplesToAverage(7);
 
     armTalonB.follow(armTalonA);
     
