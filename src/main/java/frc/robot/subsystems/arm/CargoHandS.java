@@ -12,8 +12,8 @@ public class CargoHandS extends Subsystem {
 
   public CargoHandS() {
 
-    cargoIntakeMotor = new Spark(RobotMap.PWM_ID_SPARK_CARGO);
-    cargoLimit = new DigitalInput(RobotMap.DIO_LIMIT_CARGO);
+    cargoIntakeMotor = new Spark(RobotMap.PWM_ID_SPARK_HAND);
+    cargoLimit = new DigitalInput(RobotMap.DIO_LIMIT_HAND);
 
   }
 
