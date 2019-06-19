@@ -7,31 +7,23 @@ import frc.robot.RobotMap;
 
 public class CargoHandS extends Subsystem {
 
-  public Spark cargoIntakeMotor;
+  public static Spark cargoIntakeMotor;
   private static DigitalInput cargoLimit;
 
   public CargoHandS() {
-
     cargoIntakeMotor = new Spark(RobotMap.PWM_ID_SPARK_HAND);
     cargoLimit = new DigitalInput(RobotMap.DIO_LIMIT_HAND);
-
   }
 
   @Override
   public void initDefaultCommand() {
-    
   }
 
   public void cargoSpeed(double speed) {
-
     cargoIntakeMotor.set(speed);
-
   }
 
   public boolean getCargoLimit() {
-
     return cargoLimit.get();
-
   }
-  
 }

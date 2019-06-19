@@ -1,7 +1,6 @@
 package frc.robot;
 
 public class RobotMap {
-  
   //Input Devices
   public final static int OI_XBOX = 0; //I don't know what these ports are
   public final static int OI_BUTTONBOARD = 1;
