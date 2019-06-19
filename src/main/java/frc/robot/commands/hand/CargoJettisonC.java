@@ -23,7 +23,7 @@ public class CargoJettisonC extends Command {
   @Override
   protected void execute() {
 
-    Robot.m_CargoHandS.cargoIntakeMotor.setSpeed(jettisonSpeed);
+    Robot.m_CargoHandS.cargoSpeed(jettisonSpeed);
 
   }
 
@@ -37,7 +37,7 @@ public class CargoJettisonC extends Command {
   @Override
   protected void end() {
 
-    Robot.m_CargoHandS.cargoIntakeMotor.setSpeed(0.0);
+    Robot.m_CargoHandS.cargoSpeed(0.0);
 
   }
 

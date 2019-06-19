@@ -12,8 +12,8 @@ public class OI {
   public OI() {
 
     //Button Board Commands
-    buttonBoard.right_index_toggleOnPress(Robot.m_CargoIntakeC);
-    buttonBoard.right_index_toggleOnPress(Robot.m_CargoJettisonC);
+    buttonBoard.right_index_toggleOnPress(new Robot.m_CargoIntakeC());
+    buttonBoard.right_index_toggleOnPress(new Robot.m_CargoJettisonC());
 
   }
   

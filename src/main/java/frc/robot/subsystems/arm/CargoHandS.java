@@ -7,7 +7,7 @@ import frc.robot.RobotMap;
 
 public class CargoHandS extends Subsystem {
 
-  public Spark cargoIntakeMotor;
+  public static Spark cargoIntakeMotor;
   private static DigitalInput cargoLimit;
 
   public CargoHandS() {

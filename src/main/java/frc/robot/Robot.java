@@ -12,8 +12,8 @@ public class Robot extends TimedRobot {
   //Subsystems
   public static CargoHandS m_CargoHandS = new CargoHandS();
   //Commands
-  public static CargoIntakeC m_CargoIntakeC;
-  public static CargoJettisonC m_CargoJettisonC;
+  public static CargoIntakeC m_CargoIntakeC = new CargoIntakeC();
+  public static CargoJettisonC m_CargoJettisonC = new CargoJettisonC();
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
