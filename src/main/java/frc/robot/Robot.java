@@ -4,16 +4,14 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import frc.robot.commands.hand.*;
 import frc.robot.subsystems.arm.*;
 
 public class Robot extends TimedRobot {
   
   //Subsystems
   public static CargoHandS m_CargoHandS = new CargoHandS();
-  //Commands
-  public static CargoIntakeC m_CargoIntakeC = new CargoIntakeC();
-  public static CargoJettisonC m_CargoJettisonC = new CargoJettisonC();
+
+  public static OI m_oi;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -22,9 +20,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     //Subsystems
     m_CargoHandS = new CargoHandS();
-    //Commands
-    m_CargoIntakeC = new CargoIntakeC();
-    m_CargoJettisonC = new CargoJettisonC();
+    //OI
+    m_oi = new OI();
   }
 
   @Override
