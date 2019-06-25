@@ -14,7 +14,7 @@ public class ArmHomeToRocket extends Command {
 
   @Override
   protected void execute() {
-    Robot.m_CargoArmS.runPID();
+    Robot.m_CargoArmS.upPID();
   }
 
   @Override

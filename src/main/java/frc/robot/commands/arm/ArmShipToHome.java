@@ -14,7 +14,7 @@ public class ArmShipToHome extends Command {
 
   @Override
   protected void execute() {
-    Robot.m_CargoArmS.runPID();
+    Robot.m_CargoArmS.downPID();
   }
 
   @Override

@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
@@ -40,6 +41,9 @@ public class CargoArmS extends Subsystem {
   private double armKi = 0.0009;
   private double armKd = 0.0;
 
+  public PIDController upPid;
+  public PIDController downPid;
+
   public static final int ARM_PID_SLOT = 0;
 
   @Override
@@ -52,23 +56,35 @@ public class CargoArmS extends Subsystem {
 
     armUpperLimitSwitch = new DigitalInput(RobotMap.DIO_LIMIT_ARM_UPPER);
     armLowerLimitSwitch = new DigitalInput(RobotMap.DIO_LIMIT_ARM_LOWER);
+
+    upPid = new PIDController(armUpKp, armKi, armKd, source, this);
+    downPid = new PIDController(armDownKp, armKi, armKd, source, this);
   }
 
+
+  public upPID() {
+    PIDController upPid;
+  }
+  public downPID() {
+    PIDController downPid;
+  }
+
+
   public boolean armHome() {
-    if(getArmLevel == ArmLevel.ARM_HOME) {
+    if(CurrentArmLevel == ArmLevel.ARM_HOME) {
       return true;
     }
   }
 
   public boolean armShip() {
-    if(getArmLevel == ArmLevel.ARM_SHIP) {
+    if(CurrentArmLevel == ArmLevel.ARM_SHIP) {
       return true;
     }
 
   }
 
   public boolean armRocket() {
-    if(getArmLevel == ArmLevel.ARM_ROCKET) {
+    if(CurrentArmLevel == ArmLevel.ARM_ROCKET) {
       return true;
     }
   }
@@ -99,5 +115,17 @@ public class CargoArmS extends Subsystem {
         return 0;
       }
     }
+  }
+
+  public void resetEncoder() {
+    armTalonA.getSensorCollection().setQuadraturePosition(3, 500);
+    armTalonA.setSelectedSensorPosition(0);
+  }
+
+  public boolean lowerLimitSwitchPressed() {
+    return armLowerLimitSwitch.get();
+  }
+  public boolean upperLimitSwitchPressed() {
+    return armUpperLimitSwitch.get();
   }
 }
