@@ -10,6 +10,7 @@ public class Robot extends TimedRobot {
   
   //Subsystems
   public static CargoHandS m_CargoHandS = new CargoHandS();
+  public static CargoArmS m_CargoArmS = new CargoArmS();
 
   public static OI m_oi;
 
@@ -20,6 +21,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     //Subsystems
     m_CargoHandS = new CargoHandS();
+    m_CargoArmS = new CargoArmS();
     //OI
     m_oi = new OI();
   }

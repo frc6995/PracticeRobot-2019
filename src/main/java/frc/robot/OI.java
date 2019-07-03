@@ -4,6 +4,7 @@ import frc.robot.buttons.Xbox;
 import frc.robot.buttons.BBoard;
 import frc.robot.commands.hand.CargoIntakeC;
 import frc.robot.commands.hand.CargoJettisonC;
+import frc.robot.commands.arm.*;
 import frc.robot.RobotMap;
 
 public class OI {
@@ -16,5 +17,8 @@ public class OI {
     //Button Board Commands
     buttonBoard.right_index_toggleOnPress(new CargoIntakeC());
     buttonBoard.right_index_toggleOnPress(new CargoJettisonC());
+    buttonBoard.left_index_runOnPress(new CargoHomeC());
+    buttonBoard.left_middle_runOnPress(new CargoRocketC());
+    buttonBoard.left_ring_runOnPress(new CargoShipC());
   }
 }
