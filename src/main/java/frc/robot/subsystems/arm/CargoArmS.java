@@ -1,5 +1,6 @@
 package frc.robot.subsystems.arm;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -12,6 +13,16 @@ public class CargoArmS extends Subsystem {
   public WPI_TalonSRX armTalonB = null;// armTalonB should be the talon without encoder
   private DigitalInput armUpperLimitSwitch;
   private DigitalInput armLowerLimitSwitch;
+
+  public int countWithinSetPoint = 0;
+  private int setPointRange = RobotMap.ARM_SHIP;
+
+
+  public int getArmSetPointEncoderCount() {
+
+      return 0;
+
+  }
 
 
   public boolean Home() {
@@ -50,27 +61,28 @@ public class CargoArmS extends Subsystem {
     armUpperLimitSwitch = new DigitalInput(RobotMap.DIO_LIMIT_ARM_UPPER);
     armLowerLimitSwitch = new DigitalInput(RobotMap.DIO_LIMIT_ARM_LOWER);
 
+    armTalonB.follow(armTalonA);
+
   }
 
   public double getEncoderCount() {
     return (armTalonA.getSensorCollection().getQuadraturePosition());
   }
 
+  public int getError() {
+    return armTalonA.getClosedLoopError();
+  }
+
   public void up() {
 
-    /* old code
-    ladderPIDActive = true;
+    armTalonA.set(ControlMode.Position, getArmSetPointEncoderCount());
 
-    armTalonA.set(ControlMode.Position, getLadderSetPointEncoderCount());
-
-    // If we are within the set point range add 1 to countWithinSetPoint, else set to 0
-    if (Math.abs(getError()) < setPointRange) {
+    if (Math.abs(getError()) <= setPointRange) {
       countWithinSetPoint++;
     } else {
-      countWithinSetPoint = 0;
-    
+      limitSwitchPressed();
     }
-    */
+    
   }
   public void down() {
 
