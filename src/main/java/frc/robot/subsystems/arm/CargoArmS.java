@@ -12,15 +12,10 @@ public class CargoArmS extends Subsystem {
   public WPI_TalonSRX armTalonB = null;// armTalonB should be the talon without encoder
   private DigitalInput armUpperLimitSwitch;
   private DigitalInput armLowerLimitSwitch;
-  
-  //encoder constants for levels 
-  public int armHome = 0;
-  public int armRocket = 500;
-  public int armShip = 1000;
 
 
   public boolean Home() {
-    if(getEncoderCount() == armHome) {
+    if(getEncoderCount() == RobotMap.ARM_HOME) {
       return true;
     } else {
       return false;
@@ -28,14 +23,14 @@ public class CargoArmS extends Subsystem {
   }
 
   public boolean Rocket() {
-    if (getEncoderCount() == armRocket) {
+    if (getEncoderCount() == RobotMap.ARM_ROCKET) {
       return true;
     } else {
       return false;
     }
   }
   public boolean Ship() {
-    if (getEncoderCount() == armShip) {
+    if (getEncoderCount() == RobotMap.ARM_SHIP) {
       return true;
     } else {
       return false;
@@ -63,6 +58,19 @@ public class CargoArmS extends Subsystem {
 
   public void up() {
 
+    /* old code
+    ladderPIDActive = true;
+
+    armTalonA.set(ControlMode.Position, getLadderSetPointEncoderCount());
+
+    // If we are within the set point range add 1 to countWithinSetPoint, else set to 0
+    if (Math.abs(getError()) < setPointRange) {
+      countWithinSetPoint++;
+    } else {
+      countWithinSetPoint = 0;
+    
+    }
+    */
   }
   public void down() {
 
@@ -70,13 +78,13 @@ public class CargoArmS extends Subsystem {
 
   public void limitSwitchPressed() {
     if (armLowerLimitSwitch.get() == true) {
-      if (getEncoderCount() != armHome) {
+      if (getEncoderCount() != RobotMap.ARM_HOME) {
         up();
       }
     }
 
     if (armUpperLimitSwitch.get() == true) {
-      if (getEncoderCount() != armShip) {
+      if (getEncoderCount() != RobotMap.ARM_SHIP) {
         down();
       }
     }

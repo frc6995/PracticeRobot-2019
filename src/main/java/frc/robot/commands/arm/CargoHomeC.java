@@ -2,6 +2,7 @@ package frc.robot.commands.arm;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class CargoHomeC extends Command {
   public CargoHomeC() {
@@ -14,7 +15,7 @@ public class CargoHomeC extends Command {
 
   @Override
   protected void execute() {
-    if (Robot.m_CargoArmS.getEncoderCount() >= Robot.m_CargoArmS.armHome && Robot.m_CargoArmS.getEncoderCount() <= Robot.m_CargoArmS.armShip) {
+    if (Robot.m_CargoArmS.getEncoderCount() >= RobotMap.ARM_HOME && Robot.m_CargoArmS.getEncoderCount() <= RobotMap.ARM_SHIP) {
       Robot.m_CargoArmS.down();
     }
   }

@@ -1,5 +1,6 @@
 package frc.robot;
 
+
 public class RobotMap {
   //Input Devices
   public final static int OI_XBOX = 0;
@@ -12,5 +13,9 @@ public class RobotMap {
   public final static int CAN_ID_TALON_ARM_B = 0;
   public final static int DIO_LIMIT_ARM_UPPER = 0;
   public final static int DIO_LIMIT_ARM_LOWER = 0;
+  //Arm level encoder Constants
+  public final static int ARM_HOME = 0;
+  public final static int ARM_ROCKET = 500;
+  public final static int ARM_SHIP = 1000;
   
 }
