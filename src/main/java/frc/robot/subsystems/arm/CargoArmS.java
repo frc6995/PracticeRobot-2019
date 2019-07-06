@@ -20,8 +20,13 @@ public class CargoArmS extends Subsystem {
 
   public int getArmSetPointEncoderCount() {
 
+    if (getEncoderCount() == RobotMap.ARM_HOME) {
+      return RobotMap.ARM_HOME;
+//    } else if (){
+//   I shall complete this, long if statement that tells pid when encoders are hit    
+    } else {
       return 0;
-
+    }
   }
 
 
@@ -54,7 +59,6 @@ public class CargoArmS extends Subsystem {
   }
 
   public CargoArmS() {
-
     armTalonA = new WPI_TalonSRX(RobotMap.CAN_ID_TALON_ARM_A);
     armTalonB = new WPI_TalonSRX(RobotMap.CAN_ID_TALON_ARM_B);
 
@@ -62,7 +66,6 @@ public class CargoArmS extends Subsystem {
     armLowerLimitSwitch = new DigitalInput(RobotMap.DIO_LIMIT_ARM_LOWER);
 
     armTalonB.follow(armTalonA);
-
   }
 
   public double getEncoderCount() {
@@ -74,18 +77,20 @@ public class CargoArmS extends Subsystem {
   }
 
   public void up() {
-
     armTalonA.set(ControlMode.Position, getArmSetPointEncoderCount());
-
     if (Math.abs(getError()) <= setPointRange) {
       countWithinSetPoint++;
     } else {
       limitSwitchPressed();
     }
-    
   }
-  public void down() {
 
+  public void down() {
+    if (Math.abs(getError()) <= setPointRange) {
+      countWithinSetPoint = countWithinSetPoint - 1;
+    } else {
+      limitSwitchPressed();
+    }
   }
 
   public void limitSwitchPressed() {
