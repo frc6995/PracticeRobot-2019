@@ -24,7 +24,7 @@ public class CargoRocketC extends Command {
 
   @Override
   protected boolean isFinished() {
-    return Robot.m_CargoArmS.Rocket();
+    return Robot.m_CargoArmS.isRocket();
   }
 
   @Override

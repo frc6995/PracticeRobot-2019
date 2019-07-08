@@ -1,6 +1,8 @@
 package frc.robot.subsystems.arm;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -9,50 +11,13 @@ import frc.robot.RobotMap;
 
 public class CargoArmS extends Subsystem {
 
-  public WPI_TalonSRX armTalonA = null;
-  public WPI_TalonSRX armTalonB = null;// armTalonB should be the talon without encoder
+  public WPI_TalonSRX armTalonA = null; // armTalonA should be the talon with the encoder
+  public WPI_TalonSRX armTalonB = null;
   private DigitalInput armUpperLimitSwitch;
   private DigitalInput armLowerLimitSwitch;
 
   public int countWithinSetPoint = 0;
   private int setPointRange = RobotMap.ARM_SHIP;
-
-
-  public int getArmSetPointEncoderCount() {
-
-    if (getEncoderCount() == RobotMap.ARM_HOME) {
-      return RobotMap.ARM_HOME;
-//    } else if (){
-//   I shall complete this, long if statement that tells pid when encoders are hit    
-    } else {
-      return 0;
-    }
-  }
-
-
-  public boolean Home() {
-    if(getEncoderCount() == RobotMap.ARM_HOME) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  public boolean Rocket() {
-    if (getEncoderCount() == RobotMap.ARM_ROCKET) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  public boolean Ship() {
-    if (getEncoderCount() == RobotMap.ARM_SHIP) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  
 
   @Override
   public void initDefaultCommand() {
@@ -64,10 +29,48 @@ public class CargoArmS extends Subsystem {
 
     armUpperLimitSwitch = new DigitalInput(RobotMap.DIO_LIMIT_ARM_UPPER);
     armLowerLimitSwitch = new DigitalInput(RobotMap.DIO_LIMIT_ARM_LOWER);
+    
+    armTalonA.configFactoryDefault();
+    armTalonB.configFactoryDefault();
 
     armTalonB.follow(armTalonA);
   }
+  public int getArmSetPointEncoderCount() {
 
+    if (getEncoderCount() == RobotMap.ARM_HOME) {
+      return RobotMap.ARM_HOME;
+    } else if (getEncoderCount() == RobotMap.ARM_ROCKET){
+      return RobotMap.ARM_ROCKET;
+    } else if (getEncoderCount() == RobotMap.ARM_SHIP) {
+      return RobotMap.ARM_SHIP;    
+    } else {
+      return 0;
+    }
+
+  }
+
+  public boolean isHome() {
+    if(getEncoderCount() == RobotMap.ARM_HOME) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public boolean isRocket() {
+    if (getEncoderCount() == RobotMap.ARM_ROCKET) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  public boolean isShip() {
+    if (getEncoderCount() == RobotMap.ARM_SHIP) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   public double getEncoderCount() {
     return (armTalonA.getSensorCollection().getQuadraturePosition());
   }
@@ -86,8 +89,9 @@ public class CargoArmS extends Subsystem {
   }
 
   public void down() {
+    armTalonA.set(ControlMode.Position, getArmSetPointEncoderCount());
     if (Math.abs(getError()) <= setPointRange) {
-      countWithinSetPoint = countWithinSetPoint - 1;
+      countWithinSetPoint--;
     } else {
       limitSwitchPressed();
     }

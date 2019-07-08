@@ -22,7 +22,7 @@ public class CargoHomeC extends Command {
 
   @Override
   protected boolean isFinished() {
-    return Robot.m_CargoArmS.Home();
+    return Robot.m_CargoArmS.isHome();
   }
 
   @Override

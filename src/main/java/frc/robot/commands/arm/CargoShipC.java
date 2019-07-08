@@ -22,7 +22,7 @@ public class CargoShipC extends Command {
 
   @Override
   protected boolean isFinished() {
-    return Robot.m_CargoArmS.Ship();
+    return Robot.m_CargoArmS.isShip();
   }
 
   @Override
