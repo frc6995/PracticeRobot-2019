@@ -84,7 +84,7 @@ public class CargoArmS extends Subsystem {
     }
 
   }
-
+  //boolean values that tell returns true if it is at the desired set point
   public boolean isHome() {
     if(getEncoderCount() == RobotMap.ARM_HOME) {
       return true;
@@ -107,6 +107,7 @@ public class CargoArmS extends Subsystem {
       return false;
     }
   }
+  
   public double getEncoderCount() {
     return (armTalonA.getSensorCollection().getQuadraturePosition());
   }
@@ -115,6 +116,9 @@ public class CargoArmS extends Subsystem {
     return armTalonA.getClosedLoopError();
   }
 
+
+
+  //functions for what limit switches do if pressed
   public void up() {
     armTalonA.set(ControlMode.Position, getArmSetPointEncoderCount());
     if (Math.abs(getError()) <= setPointRange) {
@@ -133,6 +137,7 @@ public class CargoArmS extends Subsystem {
     }
   }
 
+  //tells the arm what to do if limit switches are pressed
   public void limitSwitchPressed() {
     if (armLowerLimitSwitch.get() == true) {
       if (getEncoderCount() != RobotMap.ARM_HOME) {
