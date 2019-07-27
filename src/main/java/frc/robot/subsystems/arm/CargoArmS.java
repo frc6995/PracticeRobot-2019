@@ -16,23 +16,9 @@ public class CargoArmS extends Subsystem {
 
   public int countWithinSetPoint = 0;
   private int setPointRange = RobotMap.ARM_SHIP;
-  
-  /* PID Variables/Constants*/
 
-  private final int     LADDER_PID_SLOT = 0;
-
-  private final int     INTEGRAL_ZONE   = 1500;
-  private final double  PEAK_OUTPUT     = 0.2; //peak motor power.
-  private final double  RAMP_TIME       = 0; //time to ramp to full power in seconds.
-
-  private final double  kP              = 0.0;
-  private final double  kI              = 0.0;
-  private final double  kD              = 0.0;
-  private final double  kF              = 0.0; //a constant feed forward (in motor power), this is to account for friction or any other constant force on the system
-    
-  //private final double  kF_nB           = 0.0; //power needed to keep arm up without a ball;
-  //private final double  kF_B            = 0.0; //power needed to keep arm up with ball.
-  private       double  kF_a            = 0.0; //Arbitray feed forward value. This is calculated as the PID is running.
+  //Arbitray feed forward value. This is calculated as the PID is running.
+  private double  kF_a = 0.0;
 
 
   @Override
@@ -70,25 +56,20 @@ public class CargoArmS extends Subsystem {
     armTalonA.configForwardSoftLimitEnable(RobotMap.LIMIT_SOFT_ENABLED, RobotMap.LIMIT_SOFT_TIMEOUT);
     armTalonA.configReverseSoftLimitEnable(RobotMap.LIMIT_SOFT_ENABLED, RobotMap.LIMIT_SOFT_TIMEOUT);
 
-    armTalonA.selectProfileSlot(LADDER_PID_SLOT, 0);
-    armTalonA.configAllowableClosedloopError(LADDER_PID_SLOT, 0);
+    armTalonA.selectProfileSlot(RobotMap.LADDER_PID_SLOT, 0);
+    armTalonA.configAllowableClosedloopError(RobotMap.LADDER_PID_SLOT, 0);
 
-    armTalonA.config_kP(LADDER_PID_SLOT, kP);
-    armTalonA.config_kI(LADDER_PID_SLOT, kI);
-    armTalonA.config_kD(LADDER_PID_SLOT, kD);
-    armTalonA.config_kF(LADDER_PID_SLOT, (kF * 1023) / RobotMap.ENCODER_DUTY_CYCLE);
+    armTalonA.config_kP(RobotMap.LADDER_PID_SLOT, RobotMap.kP);
+    armTalonA.config_kI(RobotMap.LADDER_PID_SLOT, RobotMap.kI);
+    armTalonA.config_kD(RobotMap.LADDER_PID_SLOT, RobotMap.kD);
+    armTalonA.config_kF(RobotMap.LADDER_PID_SLOT, (RobotMap.kF * 1023) / RobotMap.ENCODER_DUTY_CYCLE);
 
-    armTalonA.config_IntegralZone(LADDER_PID_SLOT, INTEGRAL_ZONE);
+    armTalonA.config_IntegralZone(RobotMap.LADDER_PID_SLOT, RobotMap.INTEGRAL_ZONE);
 
-    armTalonA.configClosedLoopPeakOutput(LADDER_PID_SLOT, PEAK_OUTPUT);
-    armTalonA.configClosedloopRamp(RAMP_TIME);
+    armTalonA.configClosedLoopPeakOutput(RobotMap.LADDER_PID_SLOT, RobotMap.PEAK_OUTPUT);
+    armTalonA.configClosedloopRamp(RobotMap.RAMP_TIME);
 
     armTalonA.set(ControlMode.PercentOutput, 0);
-
-    /*Limit switch configuration*/
-    
-    armUpperLimitSwitch = new DigitalInput(RobotMap.DIO_LIMIT_ARM_UPPER);
-    armLowerLimitSwitch = new DigitalInput(RobotMap.DIO_LIMIT_ARM_LOWER);
   }
 
   //PID encoder functions
