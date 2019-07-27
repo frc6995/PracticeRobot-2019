@@ -15,9 +15,7 @@ public class CargoHomeC extends Command {
 
   @Override
   protected void execute() {
-    if (Robot.m_CargoArmS.getEncoderCount() >= RobotMap.ARM_HOME && Robot.m_CargoArmS.getEncoderCount() <= RobotMap.ARM_SHIP) {
-      Robot.m_CargoArmS.down();
-    }
+      Robot.m_CargoArmS.runPID();
   }
 
   @Override

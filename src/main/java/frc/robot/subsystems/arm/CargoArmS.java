@@ -1,6 +1,7 @@
 package frc.robot.subsystems.arm;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -15,6 +16,24 @@ public class CargoArmS extends Subsystem {
 
   public int countWithinSetPoint = 0;
   private int setPointRange = RobotMap.ARM_SHIP;
+  
+  /* PID Variables/Constants*/
+
+  private final int     LADDER_PID_SLOT = 0;
+
+  private final int     INTEGRAL_ZONE   = 1500;
+  private final double  PEAK_OUTPUT     = 0.2; //peak motor power.
+  private final double  RAMP_TIME       = 0; //time to ramp to full power in seconds.
+
+  private final double  kP              = 0.0;
+  private final double  kI              = 0.0;
+  private final double  kD              = 0.0;
+  private final double  kF              = 0.0; //a constant feed forward (in motor power), this is to account for friction or any other constant force on the system
+    
+  //private final double  kF_nB           = 0.0; //power needed to keep arm up without a ball;
+  //private final double  kF_B            = 0.0; //power needed to keep arm up with ball.
+  private       double  kF_a            = 0.0; //Arbitray feed forward value. This is calculated as the PID is running.
+
 
   @Override
   public void initDefaultCommand() {
@@ -51,18 +70,18 @@ public class CargoArmS extends Subsystem {
     armTalonA.configForwardSoftLimitEnable(RobotMap.LIMIT_SOFT_ENABLED, RobotMap.LIMIT_SOFT_TIMEOUT);
     armTalonA.configReverseSoftLimitEnable(RobotMap.LIMIT_SOFT_ENABLED, RobotMap.LIMIT_SOFT_TIMEOUT);
 
-    armTalonA.selectProfileSlot(RobotMap.LADDER_PID_SLOT, 0);
-    armTalonA.configAllowableClosedloopError(RobotMap.LADDER_PID_SLOT, 0);
+    armTalonA.selectProfileSlot(LADDER_PID_SLOT, 0);
+    armTalonA.configAllowableClosedloopError(LADDER_PID_SLOT, 0);
 
-    armTalonA.config_kP(RobotMap.LADDER_PID_SLOT, RobotMap.kP);
-    armTalonA.config_kI(RobotMap.LADDER_PID_SLOT, RobotMap.kI);
-    armTalonA.config_kD(RobotMap.LADDER_PID_SLOT, RobotMap.kD);
-    armTalonA.config_kF(RobotMap.LADDER_PID_SLOT, (RobotMap.kF * 1023) / RobotMap.ENCODER_DUTY_CYCLE);
+    armTalonA.config_kP(LADDER_PID_SLOT, kP);
+    armTalonA.config_kI(LADDER_PID_SLOT, kI);
+    armTalonA.config_kD(LADDER_PID_SLOT, kD);
+    armTalonA.config_kF(LADDER_PID_SLOT, (kF * 1023) / RobotMap.ENCODER_DUTY_CYCLE);
 
-    armTalonA.config_IntegralZone(RobotMap.LADDER_PID_SLOT, RobotMap.INTEGRAL_ZONE);
+    armTalonA.config_IntegralZone(LADDER_PID_SLOT, INTEGRAL_ZONE);
 
-    armTalonA.configClosedLoopPeakOutput(RobotMap.LADDER_PID_SLOT, RobotMap.PEAK_OUTPUT);
-    armTalonA.configClosedloopRamp(RobotMap.RAMP_TIME);
+    armTalonA.configClosedLoopPeakOutput(LADDER_PID_SLOT, PEAK_OUTPUT);
+    armTalonA.configClosedloopRamp(RAMP_TIME);
 
     armTalonA.set(ControlMode.PercentOutput, 0);
 
@@ -71,8 +90,9 @@ public class CargoArmS extends Subsystem {
     armUpperLimitSwitch = new DigitalInput(RobotMap.DIO_LIMIT_ARM_UPPER);
     armLowerLimitSwitch = new DigitalInput(RobotMap.DIO_LIMIT_ARM_LOWER);
   }
-  public int getArmSetPointEncoderCount() {
 
+  //PID encoder functions
+  public int getArmSetPointEncoderCount() {
     if (getEncoderCount() == RobotMap.ARM_HOME) {
       return RobotMap.ARM_HOME;
     } else if (getEncoderCount() == RobotMap.ARM_ROCKET){
@@ -82,9 +102,24 @@ public class CargoArmS extends Subsystem {
     } else {
       return 0;
     }
-
   }
-  //boolean values that tell returns true if it is at the desired set point
+  
+  public double getEncoderCount() {
+    return (armTalonA.getSensorCollection().getQuadraturePosition());
+  }
+
+  public int getError() {
+    return armTalonA.getClosedLoopError();
+  }
+
+  //PID container calculates kF_a
+  public void runPID() {
+    kF_a = kF_a * Math.cos(Math.toRadians((getEncoderCount() - RobotMap.ENCODER_POS_HORIZONTAL) / RobotMap.ENCODER_TICKS_PER_DEG));
+
+    armTalonA.set(ControlMode.Position, getArmSetPointEncoderCount(), DemandType.ArbitraryFeedForward, kF_a);
+  }
+
+  //boolean values that returns true if PID is at the desired set point
   public boolean isHome() {
     if(getEncoderCount() == RobotMap.ARM_HOME) {
       return true;
@@ -100,6 +135,7 @@ public class CargoArmS extends Subsystem {
       return false;
     }
   }
+
   public boolean isShip() {
     if (getEncoderCount() == RobotMap.ARM_SHIP) {
       return true;
@@ -107,16 +143,6 @@ public class CargoArmS extends Subsystem {
       return false;
     }
   }
-  
-  public double getEncoderCount() {
-    return (armTalonA.getSensorCollection().getQuadraturePosition());
-  }
-
-  public int getError() {
-    return armTalonA.getClosedLoopError();
-  }
-
-
 
   //functions for what limit switches do if pressed
   public void up() {

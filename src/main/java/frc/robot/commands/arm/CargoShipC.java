@@ -15,9 +15,7 @@ public class CargoShipC extends Command {
 
   @Override
   protected void execute() {
-    if (Robot.m_CargoArmS.getEncoderCount() >= RobotMap.ARM_HOME && Robot.m_CargoArmS.getEncoderCount() <= RobotMap.ARM_ROCKET) {
       Robot.m_CargoArmS.up();
-    }
   }
 
   @Override
