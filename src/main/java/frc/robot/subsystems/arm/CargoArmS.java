@@ -9,17 +9,26 @@ import frc.robot.RobotMap;
 
 public class CargoArmS extends Subsystem {
 
+  public enum ArmLevel {
+    ARM_HOME, ARM_ROCKET, ARM_SHIP, ARM_REVERSE_ROCKET, ARM_REVERSE_SHIP
+  }
+
   public WPI_TalonSRX armTalonA = null; // armTalonA should be the talon with the encoder
   public WPI_TalonSRX armTalonB = null;
   private DigitalInput armUpperLimitSwitch;
   private DigitalInput armLowerLimitSwitch;
 
-  public int countWithinSetPoint = 0;
-  private int setPointRange = RobotMap.ARM_SHIP;
+  //private ArmLevel currentArmLevel = ArmLevel.ARM_HOME;
+  private ArmLevel nextArmLevel = ArmLevel.ARM_HOME;
+   // Range in encoder counts where we consider ourselves "at" the set point
+   private int setPointRange = 250;
 
-  //Arbitray feed forward value. This is calculated as the PID is running.
-  private double  kF_a = 0.0;
+   //laymans terms's: amount of time it stays within the set points 
 
+   // Counts how many loops we have been within the ladder set point
+   private int countWithinSetPoint = 0;
+   private final int setPointLoops = 0;
+   
 
   @Override
   public void initDefaultCommand() {
@@ -32,7 +41,7 @@ public class CargoArmS extends Subsystem {
     armUpperLimitSwitch = new DigitalInput(RobotMap.DIO_LIMIT_ARM_UPPER);
     armLowerLimitSwitch = new DigitalInput(RobotMap.DIO_LIMIT_ARM_LOWER);
     
-    armTalonA.configFactoryDefault(100);
+    armTalonA.configFactoryDefault(100);//in ms
     armTalonB.configFactoryDefault(100);
 
     armTalonB.follow(armTalonA);
@@ -73,19 +82,31 @@ public class CargoArmS extends Subsystem {
   }
 
   //PID encoder functions
+
+  //tells the PID what encoder position we want to go to
   public int getArmSetPointEncoderCount() {
-    if (getEncoderCount() == RobotMap.ARM_HOME) {
+    if (nextArmLevel == ArmLevel.ARM_HOME) {
       return RobotMap.ARM_HOME;
-    } else if (getEncoderCount() == RobotMap.ARM_ROCKET){
+    } else if (nextArmLevel == ArmLevel.ARM_ROCKET){
       return RobotMap.ARM_ROCKET;
-    } else if (getEncoderCount() == RobotMap.ARM_SHIP) {
-      return RobotMap.ARM_SHIP;    
+    } else if (nextArmLevel == ArmLevel.ARM_SHIP) {
+      return RobotMap.ARM_SHIP;
+    } else if (nextArmLevel == ArmLevel.ARM_REVERSE_ROCKET) {
+      return RobotMap.ARM_REVERSE_ROCKET;
+    } else if (nextArmLevel == ArmLevel.ARM_REVERSE_SHIP) {
+      return RobotMap.ARM_REVERSE_SHIP;   
     } else {
       return 0;
     }
   }
-  
-  public double getEncoderCount() {
+
+  //set arm level outside of class
+  public void setNextArmLevel(ArmLevel nextLevel) {
+    nextArmLevel = nextLevel;
+  }
+
+  //gets encoder current position
+  public double getCurrentEncoderCount() {
     return (armTalonA.getSensorCollection().getQuadraturePosition());
   }
 
@@ -95,67 +116,36 @@ public class CargoArmS extends Subsystem {
 
   //PID container calculates kF_a
   public void runPID() {
-    kF_a = kF_a * Math.cos(Math.toRadians((getEncoderCount() - RobotMap.ENCODER_POS_HORIZONTAL) / RobotMap.ENCODER_TICKS_PER_DEG));
-
+    //arbitrary feed forward
+    double  kF_a;
+    kF_a = RobotMap.kF_nB * Math.cos(Math.toRadians((getCurrentEncoderCount() - RobotMap.ENCODER_POS_HORIZONTAL) / RobotMap.ENCODER_TICKS_PER_DEG));
     armTalonA.set(ControlMode.Position, getArmSetPointEncoderCount(), DemandType.ArbitraryFeedForward, kF_a);
-  }
 
-  //boolean values that returns true if PID is at the desired set point
-  public boolean isHome() {
-    if(getEncoderCount() == RobotMap.ARM_HOME) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  public boolean isRocket() {
-    if (getEncoderCount() == RobotMap.ARM_ROCKET) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  public boolean isShip() {
-    if (getEncoderCount() == RobotMap.ARM_SHIP) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  //functions for what limit switches do if pressed
-  public void up() {
-    armTalonA.set(ControlMode.Position, getArmSetPointEncoderCount());
-    if (Math.abs(getError()) <= setPointRange) {
+    // If we are within the set point range add 1 to countWithinSetPoint, else set to 0
+    if (Math.abs(getError()) < setPointRange) {
+      //counts the loops
       countWithinSetPoint++;
     } else {
-      limitSwitchPressed();
+      //stops counting loops when outside set point range
+      countWithinSetPoint = 0;
     }
   }
 
-  public void down() {
-    armTalonA.set(ControlMode.Position, getArmSetPointEncoderCount());
-    if (Math.abs(getError()) <= setPointRange) {
-      countWithinSetPoint--;
+  public boolean isAtSetPoint() {
+    //If we have been within our set point range for the given time, return true
+    if (countWithinSetPoint > setPointLoops ) {
+      countWithinSetPoint = 0;
+      return true;
     } else {
-      limitSwitchPressed();
+      return false;
     }
   }
 
-  //tells the arm what to do if limit switches are pressed
-  public void limitSwitchPressed() {
-    if (armLowerLimitSwitch.get() == true) {
-      if (getEncoderCount() != RobotMap.ARM_HOME) {
-        up();
-      }
-    }
-
-    if (armUpperLimitSwitch.get() == true) {
-      if (getEncoderCount() != RobotMap.ARM_SHIP) {
-        down();
-      }
-    }
+  //returns true if the limit switch is pressed
+  public boolean lowerlimitSwitchPressed() {
+    return armLowerLimitSwitch.get();
+  }
+  public boolean armUpperLimitSwitch() {
+    return armUpperLimitSwitch.get();
   }
 }
