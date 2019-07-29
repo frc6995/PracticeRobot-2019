@@ -117,8 +117,14 @@ public class CargoArmS extends Subsystem {
   //PID container calculates kF_a
   public void runPID() {
     //arbitrary feed forward
-    double  kF_a;
-    kF_a = RobotMap.kF_nB * Math.cos(Math.toRadians((getCurrentEncoderCount() - RobotMap.ENCODER_POS_HORIZONTAL) / RobotMap.ENCODER_TICKS_PER_DEG));
+    double  kF_a = 0.0;
+
+    if(CargoHandS.getCargoLimit() == true){
+      kF_a = RobotMap.kF_B * Math.cos(Math.toRadians((getCurrentEncoderCount() - RobotMap.ENCODER_POS_HORIZONTAL) / RobotMap.ENCODER_TICKS_PER_DEG));
+    }else if (CargoHandS.getCargoLimit() == false){
+      kF_a = RobotMap.kF_nB * Math.cos(Math.toRadians((getCurrentEncoderCount() - RobotMap.ENCODER_POS_HORIZONTAL) / RobotMap.ENCODER_TICKS_PER_DEG));
+    }
+
     armTalonA.set(ControlMode.Position, getArmSetPointEncoderCount(), DemandType.ArbitraryFeedForward, kF_a);
 
     // If we are within the set point range add 1 to countWithinSetPoint, else set to 0
