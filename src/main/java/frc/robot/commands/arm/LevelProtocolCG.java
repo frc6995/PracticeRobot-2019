@@ -12,12 +12,4 @@ public class LevelProtocolCG extends CommandGroup {
     addSequential(new MovePidC());
     addParallel(new HoldPidC());
   }
-
-  @Override
-  protected void end() {
-  }
-
-  @Override
-  protected void interrupted() {
-  }
 }
