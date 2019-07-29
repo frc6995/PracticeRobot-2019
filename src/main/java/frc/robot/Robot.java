@@ -9,7 +9,7 @@ import frc.robot.subsystems.arm.*;
 public class Robot extends TimedRobot {
   
   //Subsystems
-  public static CargoHandS m_CargoHandS = new CargoHandS();
+  public static CargoClawS m_CargoClawS = new CargoClawS();
   public static CargoArmS m_CargoArmS = new CargoArmS();
 
   public static OI m_oi;
@@ -20,7 +20,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     //Subsystems
-    m_CargoHandS = new CargoHandS();
+    m_CargoClawS = new CargoClawS();
     m_CargoArmS = new CargoArmS();
     //OI
     m_oi = new OI();

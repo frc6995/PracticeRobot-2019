@@ -120,9 +120,9 @@ public class CargoArmS extends Subsystem {
     //arbitrary feed forward
     double  kF_a = 0.0;
 
-    if(Robot.m_CargoHandS.getCargoLimit() == true){
+    if(Robot.m_CargoClawS.getCargoLimit() == true){
       kF_a = RobotMap.kF_B * Math.cos(Math.toRadians((getCurrentEncoderCount() - RobotMap.ENCODER_POS_HORIZONTAL) / RobotMap.ENCODER_TICKS_PER_DEG));
-    }else if(Robot.m_CargoHandS.getCargoLimit() == false){
+    }else if(Robot.m_CargoClawS.getCargoLimit() == false){
       kF_a = RobotMap.kF_nB * Math.cos(Math.toRadians((getCurrentEncoderCount() - RobotMap.ENCODER_POS_HORIZONTAL) / RobotMap.ENCODER_TICKS_PER_DEG));
     }
 
