@@ -23,7 +23,7 @@ public class CargoHandS extends Subsystem {
     cargoIntakeMotor.set(speed);
   }
 
-  public boolean getCargoLimit() {
+  public static boolean getCargoLimit() {
     return cargoLimit.get();
   }
 }
