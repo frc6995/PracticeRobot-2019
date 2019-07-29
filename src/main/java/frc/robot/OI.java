@@ -31,7 +31,7 @@ public class OI {
       //trigger yeets
       jStick.button_5_runOnPress(new YeetProtocolCG());
 
-      //cancel level climb
+      //cancels level PID
       jStick.button_7_runOnPress(new CancelProtocolCG());
 
       //reload is currently button 6
