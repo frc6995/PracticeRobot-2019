@@ -6,11 +6,16 @@ LevelProtocolCG
 
 1. SetLevelC
 2. MovePidC
-3. HoldPidC
+3. HoldPidC //stays in position
 
 YeetProtocolCG
 
 1. HoldPidC //in effect while Yeeting
-2. YeetC
+2. ClawYeetC
 3. SetHomeC
 4. MoveHomeC
+
+CancelProtocolCG
+
+1. SetHomeC
+2. MoveHomeC

@@ -16,7 +16,11 @@ public class OI {
   public final JStick jStick = new JStick(RobotMap.OI_JSTICK);
 
   public OI() {
-      //buttons for joystick, please refer to buttons on image: https://samepage.io/app/#!/55f7d003b627e89b5d0b0c11258e2624567de58f/team-a4f52613587a4eddaeb9a554ab5ee00dac038e98/files/preview-796107915031679377
+      /**
+       * buttons for joystick,
+       * all buttons correspond to buttons mapped on image: 
+       * https://samepage.io/app/#!/55f7d003b627e89b5d0b0c11258e2624567de58f/team-a4f52613587a4eddaeb9a554ab5ee00dac038e98/files/preview-796107915031679377
+      */
 
       //all four levels:
       jStick.button_8_runOnPress(new LevelProtocolCG(ArmLevel.ARM_SHIP));
@@ -32,6 +36,5 @@ public class OI {
 
       //reload is currently button 6
       jStick.button_6_runOnPress(new ClawIntakeC());
-
   }
 }

@@ -36,15 +36,18 @@ public class CargoArmS extends Subsystem {
   }
 
   public CargoArmS() {
+    //instantiates Talons
     armTalonA = new WPI_TalonSRX(RobotMap.CAN_ID_TALON_ARM_A);
     armTalonB = new WPI_TalonSRX(RobotMap.CAN_ID_TALON_ARM_B);
 
+    //instantiates Limit Switches
     armUpperLimitSwitch = new DigitalInput(RobotMap.DIO_LIMIT_ARM_UPPER);
     armLowerLimitSwitch = new DigitalInput(RobotMap.DIO_LIMIT_ARM_LOWER);
-    
-    armTalonA.configFactoryDefault(100);//in ms
-    armTalonB.configFactoryDefault(100);
+  
+    armTalonA.configFactoryDefault(RobotMap.FACTORY_DEFAULT_TIMEOUT);
+    armTalonB.configFactoryDefault(RobotMap.FACTORY_DEFAULT_TIMEOUT);
 
+    //tells armTalonB to mirror everything armTalon does
     armTalonB.follow(armTalonA);
 
     armTalonA.setInverted(RobotMap.MOTOR_A_INVERT);
@@ -111,21 +114,22 @@ public class CargoArmS extends Subsystem {
     return (armTalonA.getSensorCollection().getQuadraturePosition());
   }
 
+  //gets how far away we are from desired set point
   public int getError() {
     return armTalonA.getClosedLoopError();
   }
 
   //PID container calculates kF_a
   public void runPid() {
-    //arbitrary feed forward
+    //arbitrary feed forward calculator
     double  kF_a = 0.0;
-
     if(Robot.m_CargoClawS.getCargoLimit() == true){
       kF_a = RobotMap.kF_B * Math.cos(Math.toRadians((getCurrentEncoderCount() - RobotMap.ENCODER_POS_HORIZONTAL) / RobotMap.ENCODER_TICKS_PER_DEG));
     }else if(Robot.m_CargoClawS.getCargoLimit() == false){
       kF_a = RobotMap.kF_nB * Math.cos(Math.toRadians((getCurrentEncoderCount() - RobotMap.ENCODER_POS_HORIZONTAL) / RobotMap.ENCODER_TICKS_PER_DEG));
     }
 
+    //tells motors to move to desired set point
     armTalonA.set(ControlMode.Position, getArmSetPointEncoderCount(), DemandType.ArbitraryFeedForward, kF_a);
 
     // If we are within the set point range add 1 to countWithinSetPoint, else set to 0
@@ -141,6 +145,7 @@ public class CargoArmS extends Subsystem {
   public boolean isAtSetPoint() {
     //If we have been within our set point range for the given time, return true
     if (countWithinSetPoint > setPointLoops ) {
+      //resets loop count
       countWithinSetPoint = 0;
       return true;
     } else {
