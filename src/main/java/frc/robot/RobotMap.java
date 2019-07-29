@@ -19,6 +19,8 @@ public class RobotMap {
   public final static int               ARM_HOME                    = 0;
   public final static int               ARM_ROCKET                  = 500;
   public final static int               ARM_SHIP                    = 1000;
+  public final static int               ARM_REVERSE_ROCKET          = 1500;
+  public final static int               ARM_REVERSE_SHIP          = 2000;
   //PID Constants
   public final static int              LADDER_PID_SLOT             = 0;
 
@@ -31,8 +33,8 @@ public class RobotMap {
   public final static double           kD                          = 0.0;
   public final static double           kF                          = 0.0; //a constant feed forward (in motor power), this is to account for friction or any other constant force on the system
     
-  //public final static double           kF_nB                       = 0.0; //power needed to keep arm up without a ball;
-  //public final static double           kF_B                        = 0.0; //power needed to keep arm up with ball.
+  public final static double           kF_nB                       = 0.0; //power needed to keep arm up without a ball;
+  public final static double           kF_B                        = 0.0; //power needed to keep arm up with ball.
   //Motor Constants
   public final static int              MOTOR_A_TALONID             = RobotMap.CAN_ID_TALON_ARM_A;
   public final static int              MOTOR_B_TALONID             = RobotMap.CAN_ID_TALON_ARM_B;
