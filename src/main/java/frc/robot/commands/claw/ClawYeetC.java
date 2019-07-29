@@ -3,6 +3,9 @@ package frc.robot.commands.claw;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
+/**
+ * yeets cargo
+ */
 public class ClawYeetC extends Command {
 
   private double yeetSpeed = 0.7; //positive values jettison?

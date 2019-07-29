@@ -3,6 +3,10 @@ package frc.robot.commands.claw;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
+/**
+ * intakes the cargo and hits limit switch,
+ * providing runPID to execute calculations regarding wether or not the arm is loaded 
+ */
 public class ClawIntakeC extends Command {
 
   private double intakeSpeed = -0.7; //negative values intake?

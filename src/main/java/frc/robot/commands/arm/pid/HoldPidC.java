@@ -3,9 +3,13 @@ package frc.robot.commands.arm.pid;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
+/**
+ * holds PID at set point until interrupted
+ */
 public class HoldPidC extends Command {
   public HoldPidC() {
     requires(Robot.m_CargoArmS);
+    this.setInterruptible(true);
   }
 
   // Called just before this Command runs the first time
@@ -13,9 +17,9 @@ public class HoldPidC extends Command {
   protected void initialize() {
   }
 
-  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.m_CargoArmS.runPid();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -33,5 +37,6 @@ public class HoldPidC extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

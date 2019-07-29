@@ -2,36 +2,40 @@ package frc.robot.commands.arm.pid;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.cargo.CargoArmS.ArmLevel;
 
+/**
+ * sets the PID to HOME Position, does not move the PID
+ */
 public class SetHomeC extends Command {
+
+  ArmLevel nextArmLevel = ArmLevel.ARM_HOME;
+
   public SetHomeC() {
-    requires(Robot.m_CargoArmS);
+    nextArmLevel = ArmLevel.ARM_HOME;
   }
 
-  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
   }
 
-  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.m_CargoArmS.setNextArmLevel(nextArmLevel);
   }
 
-  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
-  // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.m_CargoArmS.setNextArmLevel(nextArmLevel);
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

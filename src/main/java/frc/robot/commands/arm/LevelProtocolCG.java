@@ -8,7 +8,7 @@ import frc.robot.subsystems.cargo.CargoArmS.ArmLevel;
 
 public class LevelProtocolCG extends CommandGroup {
   public LevelProtocolCG(ArmLevel level) {
-    addSequential(new SetLevelC());
+    addSequential(new SetLevelC(level));
     addSequential(new MovePidC());
     addParallel(new HoldPidC());
   }
