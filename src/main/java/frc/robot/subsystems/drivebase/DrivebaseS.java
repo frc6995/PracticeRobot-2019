@@ -5,12 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.arm;
+package frc.robot.subsystems.drivebase;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SetPointCG extends Command {
-  public SetPointCG() {
+public class DrivebaseS extends Command {
+  public DrivebaseS() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }

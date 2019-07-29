@@ -5,12 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.arm.pidlogic;
+package frc.robot.commands.arm.pid;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class MoveHome extends Command {
-  public MoveHome() {
+public class MoveHomeC extends Command {
+  public MoveHomeC() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }

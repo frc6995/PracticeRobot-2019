@@ -1,13 +1,13 @@
-package frc.robot.commands.hand;
+package frc.robot.commands.claw;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class CargoIntakeC extends Command {
+public class ClawIntakeC extends Command {
 
   private double intakeSpeed = -0.7; //negative values intake?
 
-  public CargoIntakeC() {
+  public ClawIntakeC() {
     requires(Robot.m_CargoClawS);
   }
 

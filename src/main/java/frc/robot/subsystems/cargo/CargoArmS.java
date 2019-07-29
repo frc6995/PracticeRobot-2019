@@ -1,4 +1,4 @@
-package frc.robot.subsystems.arm;
+package frc.robot.subsystems.cargo;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
@@ -116,7 +116,7 @@ public class CargoArmS extends Subsystem {
   }
 
   //PID container calculates kF_a
-  public void runPID() {
+  public void runPid() {
     //arbitrary feed forward
     double  kF_a = 0.0;
 

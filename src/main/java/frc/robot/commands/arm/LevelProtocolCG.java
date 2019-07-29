@@ -5,12 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.arm.pidlogic;
+package frc.robot.commands.arm;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Hold extends Command {
-  public Hold() {
+public class LevelProtocolCG extends Command {
+  public LevelProtocolCG() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }

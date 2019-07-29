@@ -5,12 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.arm.pidlogic;
+package frc.robot.commands.arm.pid;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SetLadderLevel extends Command {
-  public SetLadderLevel() {
+public class MovePidC extends Command {
+  public MovePidC() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }

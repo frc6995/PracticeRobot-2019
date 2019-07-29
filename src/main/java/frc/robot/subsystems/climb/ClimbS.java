@@ -5,12 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.arm.pidlogic;
+package frc.robot.subsystems.climb;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class YeetCargo extends Command {
-  public YeetCargo() {
+public class ClimbS extends Command {
+  public ClimbS() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }

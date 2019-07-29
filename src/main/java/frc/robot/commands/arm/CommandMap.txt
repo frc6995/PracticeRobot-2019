@@ -1,0 +1,16 @@
+we are having buttons do:
+1. go to desired level and hold   = LevelProtocolCG  //four buttons need to be assigned, one for each
+2. score, and go to home position = YeetProtocolCG   //one button
+
+LevelProtocolCG
+
+1. SetLevelC
+2. MovePidC
+3. HoldPidC
+
+YeetProtocolCG
+
+1. HoldPidC //in effect while Yeeting
+2. YeetC
+3. SetHomeC
+4. MoveHomeC

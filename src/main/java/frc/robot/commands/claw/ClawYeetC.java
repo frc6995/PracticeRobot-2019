@@ -1,13 +1,13 @@
-package frc.robot.commands.hand;
+package frc.robot.commands.claw;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class CargoYeetC extends Command {
+public class ClawYeetC extends Command {
 
   private double yeetSpeed = 0.7; //positive values jettison?
 
-  public CargoYeetC() {
+  public ClawYeetC() {
     requires(Robot.m_CargoClawS);
   }
 
