@@ -23,7 +23,7 @@ public class CargoJettisonC extends Command {
 
   @Override
   protected boolean isFinished() {
-    return Robot.m_CargoHandS.getCargoLimit() || isTimedOut();
+    return Robot.m_CargoHandS.getCargoLimit() == true || isTimedOut();
   }
 
   @Override

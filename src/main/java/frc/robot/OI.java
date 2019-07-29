@@ -1,24 +1,16 @@
 package frc.robot;
 
-import frc.robot.buttons.Xbox;
-import frc.robot.buttons.BBoard;
-import frc.robot.commands.hand.CargoIntakeC;
-import frc.robot.commands.hand.CargoJettisonC;
-import frc.robot.commands.arm.*;
+import frc.robot.interfaces.XBox;
+import frc.robot.interfaces.JStick;
 import frc.robot.RobotMap;
 
 public class OI {
 
   //input devices
-  public final Xbox xbox = new Xbox(RobotMap.OI_XBOX);
-  public final BBoard buttonBoard = new BBoard(RobotMap.OI_BUTTONBOARD);
+  public final XBox xBox = new XBox(RobotMap.OI_XBOX);
+  public final JStick jStick = new JStick(RobotMap.OI_JSTICK);
 
   public OI() {
-    //Button Board Commands
-    buttonBoard.right_index_toggleOnPress(new CargoIntakeC());
-    buttonBoard.right_index_toggleOnPress(new CargoJettisonC());
-    buttonBoard.left_index_runOnPress(new CargoHomeC());
-    buttonBoard.left_middle_runOnPress(new CargoRocketC());
-    buttonBoard.left_ring_runOnPress(new CargoShipC());
+
   }
 }

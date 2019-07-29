@@ -6,7 +6,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 public class RobotMap {
   //Input Devices
   public final static int               OI_XBOX                     = 0;
-  public final static int               OI_BUTTONBOARD              = 0;
+  public final static int               OI_JSTICK                   = 0;
   //CargoIntake Constants
   public final static int               PWM_ID_SPARK_HAND           = 0;
   public final static int               DIO_LIMIT_HAND              = 0;
