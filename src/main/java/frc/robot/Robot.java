@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DrivebaseS;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.PixyCamS;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,6 +29,7 @@ public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
 
   public static DrivebaseS m_drivebaseS;
+  public static PixyCamS m_pixyCamS;
 
   public static OI m_oi;
 
@@ -41,6 +43,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_drivebaseS = new DrivebaseS();
+    m_pixyCamS = new PixyCamS();
+    
     m_oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
