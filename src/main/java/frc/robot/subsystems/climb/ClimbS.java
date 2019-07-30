@@ -1,44 +1,54 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.subsystems.climb;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 
-public class ClimbS extends Command {
+/**
+ * Climbing Mechanism
+ */
+public class ClimbS extends Subsystem {
+  public static DoubleSolenoid climbFront;
+  public static DoubleSolenoid climbRear;
+  public static Spark legWheels;
+  public static DigitalInput limitFront;
+  public static DigitalInput limitRear;
+
   public ClimbS() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    climbFront = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMBFRONT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMBFRONT_RETRACT);
+    climbRear = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMBREAR_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMBREAR_RETRACT);
+    limitFront = new DigitalInput(RobotMap.DIO_CLIMB_FRONT_LIMIT);
+    limitRear = new DigitalInput(RobotMap.DIO_CLIMB_REAR_LIMIT);
+  }
+  
+  @Override
+  public void initDefaultCommand() {
   }
 
-  // Called just before this Command runs the first time
-  @Override
-  protected void initialize() {
+  //deploys the wheels
+  public void deploy() {
+    climbFront.set(Value.kForward);
+    climbFront.set(Value.kForward);
   }
 
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() {
+  //retracts the Wheels
+  public void retractFront() {
+    climbFront.set(Value.kReverse);
   }
 
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return false;
+  public void retractRear() {
+    climbRear.set(Value.kReverse);
   }
 
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
+  //limit switch boolean values that return true if hit
+  public boolean frontLimit() {
+    return limitFront.get();
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
+  public boolean rearLimit() {
+    return limitRear.get();
   }
 }

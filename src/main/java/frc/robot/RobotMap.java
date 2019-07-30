@@ -35,7 +35,7 @@ public class RobotMap {
     
   public final static double           kF_nB                       = 0.0; //power needed to keep arm up without a ball;
   public final static double           kF_B                        = 0.0; //power needed to keep arm up with ball.
-  //Motor Constants
+  //Arm Motor Constants
   public final static int              MOTOR_A_TALONID             = RobotMap.CAN_ID_TALON_ARM_A;
   public final static int              MOTOR_B_TALONID             = RobotMap.CAN_ID_TALON_ARM_B;
 
@@ -63,4 +63,13 @@ public class RobotMap {
   public final static int              ENCODER_DUTY_CYCLE          = 4096; //Number of counts per rotation
   public final static int              ENCODER_POS_HORIZONTAL      = 0; //Encoder position when the arm is horizontal.
   public final static double           ENCODER_TICKS_PER_DEG       = ENCODER_DUTY_CYCLE / 360;
+
+  //climb constants
+  public final static int              DIO_CLIMB_REAR_LIMIT = 0;
+  public final static int              DIO_CLIMB_FRONT_LIMIT = 0;
+
+  public final static int              PCM_ID_DSOLENOID_CLIMBFRONT_DEPLOY = 0;
+  public final static int              PCM_ID_DSOLENOID_CLIMBFRONT_RETRACT = 0;
+  public final static int              PCM_ID_DSOLENOID_CLIMBREAR_DEPLOY = 0;
+  public final static int              PCM_ID_DSOLENOID_CLIMBREAR_RETRACT = 0;
 }
