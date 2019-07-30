@@ -1,8 +1,7 @@
 package frc.robot;
 
-import frc.robot.interfaces.XBox;
+import frc.robot.controllermap.*;
 import frc.robot.subsystems.cargo.CargoArmS.ArmLevel;
-import frc.robot.interfaces.JStick;
 import frc.robot.RobotMap;
 import frc.robot.commands.arm.CancelProtocolCG;
 import frc.robot.commands.arm.LevelProtocolCG;

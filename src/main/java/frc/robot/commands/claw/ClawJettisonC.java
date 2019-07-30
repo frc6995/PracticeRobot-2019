@@ -4,13 +4,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * yeets cargo
+ * Jettisons cargo
  */
-public class ClawYeetC extends Command {
+public class ClawJettisonC extends Command {
 
-  private double yeetSpeed = 0.7; //positive values jettison?
+  private double jettisonSpeed = 0.7; //positive values jettison?
 
-  public ClawYeetC() {
+  public ClawJettisonC() {
     requires(Robot.m_CargoClawS);
   }
 
@@ -21,7 +21,7 @@ public class ClawYeetC extends Command {
 
   @Override
   protected void execute() {
-    Robot.m_CargoClawS.cargoSpeed(yeetSpeed);
+    Robot.m_CargoClawS.cargoSpeed(jettisonSpeed);
   }
 
   @Override

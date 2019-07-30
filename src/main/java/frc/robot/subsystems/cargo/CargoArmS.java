@@ -21,14 +21,14 @@ public class CargoArmS extends Subsystem {
 
   //private ArmLevel currentArmLevel = ArmLevel.ARM_HOME;
   private ArmLevel nextArmLevel = ArmLevel.ARM_HOME;
-   // Range in encoder counts where we consider ourselves "at" the set point
-   private int setPointRange = 250;
+  // Range in encoder counts where we consider ourselves "at" the set point
+  private int setPointRange = 250;
 
-   //laymans terms's: amount of time it stays within the set points 
+  //laymans terms's: amount of time it stays within the set points 
 
-   // Counts how many loops we have been within the ladder set point
-   private int countWithinSetPoint = 0;
-   private final int setPointLoops = 0;
+  // Counts how many loops we have been within the ladder set point
+  private int countWithinSetPoint = 0;
+  private final int setPointLoops = 0;
    
 
   @Override

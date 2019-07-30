@@ -1,4 +1,4 @@
-package frc.robot.interfaces;
+package frc.robot.controllermap;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
