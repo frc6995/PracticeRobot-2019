@@ -5,7 +5,7 @@ import frc.robot.subsystems.cargo.CargoArmS.ArmLevel;
 import frc.robot.RobotMap;
 import frc.robot.commands.arm.CancelProtocolCG;
 import frc.robot.commands.arm.LevelProtocolCG;
-import frc.robot.commands.arm.YeetProtocolCG;
+import frc.robot.commands.arm.JettisonProtocolCG;
 import frc.robot.commands.claw.ClawIntakeC;
 
 public class OI {
@@ -28,7 +28,7 @@ public class OI {
       jStick.button_12_runOnPress(new LevelProtocolCG(ArmLevel.ARM_REVERSE_ROCKET));
 
       //trigger yeets
-      jStick.button_5_runOnPress(new YeetProtocolCG());
+      jStick.button_5_runOnPress(new JettisonProtocolCG());
 
       //cancels level PID
       jStick.button_7_runOnPress(new CancelProtocolCG());
