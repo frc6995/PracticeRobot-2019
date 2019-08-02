@@ -72,4 +72,7 @@ public class RobotMap {
   public final static int              PCM_ID_DSOLENOID_CLIMBFRONT_RETRACT = 0;
   public final static int              PCM_ID_DSOLENOID_CLIMBREAR_DEPLOY = 0;
   public final static int              PCM_ID_DSOLENOID_CLIMBREAR_RETRACT = 0;
+
+  public final static int              PWM_ID_SPARK_WHEELS = 0;
+  
 }

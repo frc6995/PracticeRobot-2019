@@ -22,6 +22,7 @@ public class ClimbS extends Subsystem {
     climbRear = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMBREAR_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMBREAR_RETRACT);
     limitFront = new DigitalInput(RobotMap.DIO_CLIMB_FRONT_LIMIT);
     limitRear = new DigitalInput(RobotMap.DIO_CLIMB_REAR_LIMIT);
+    legWheels = new Spark(RobotMap.PWM_ID_SPARK_WHEELS);
   }
   
   @Override
@@ -50,5 +51,8 @@ public class ClimbS extends Subsystem {
 
   public boolean rearLimit() {
     return limitRear.get();
+  }
+  public void legWheels(double speed) {
+    legWheels.set(speed);
   }
 }
