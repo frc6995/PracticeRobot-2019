@@ -5,12 +5,14 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.subsystems.cargo.*;
+import frc.robot.subsystems.climb.ClimbS;
 
 public class Robot extends TimedRobot {
   
   //Subsystems
   public static CargoClawS m_CargoClawS = new CargoClawS();
   public static CargoArmS m_CargoArmS = new CargoArmS();
+  public static ClimbS m_ClimbS = new ClimbS();
 
   public static OI m_oi;
 
@@ -22,6 +24,7 @@ public class Robot extends TimedRobot {
     //Subsystems
     m_CargoClawS = new CargoClawS();
     m_CargoArmS = new CargoArmS();
+    m_ClimbS = new ClimbS();
     //OI
     m_oi = new OI();
   }
