@@ -3,6 +3,9 @@ package frc.robot.commands.climb;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
+/**
+ * deploys the wheels
+ */
 public class DeployC extends Command {
   public DeployC() {
     requires(Robot.m_ClimbS);

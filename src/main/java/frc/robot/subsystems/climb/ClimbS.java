@@ -55,4 +55,12 @@ public class ClimbS extends Subsystem {
   public void legWheels(double speed) {
     legWheels.set(speed);
   }
+  //MoveForwardC hits a limit switch
+  public boolean limitSwitchPressed() {
+    if (frontLimit() == true || rearLimit() == true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
