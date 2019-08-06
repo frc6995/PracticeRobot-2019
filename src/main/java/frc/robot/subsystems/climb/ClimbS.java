@@ -14,9 +14,11 @@ import frc.robot.RobotMap;
 public class ClimbS extends Subsystem {
 
   //if we are using single solenoid use these
-  //public static Solenoid climbFront;
-  //public static Solenoid climbRear;
-
+  //public static Solenoid climbFrontRight;
+  //public static Solenoid climbFrontLeft;
+  //public static Solenoid climbRearRight;
+  //public static Solenoid climbRearLeft;
+  
   //if we are using double solenoids, use these
   public static DoubleSolenoid climbFront;
   public static DoubleSolenoid climbRear;
@@ -27,8 +29,10 @@ public class ClimbS extends Subsystem {
 
   public ClimbS() {
     
-    //climbFront = new Solenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_RETRACT);
-    //climbRear = new Solenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RETRACT);
+    //climbFrontRight = new Solenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_RETRACT);
+    //climbFrontLeft = new Solenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_RETRACT);
+    //climbRearRight = new Solenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RETRACT);
+    //climbRearLeft = new Solenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RETRACT);
 
     climbFront = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_RETRACT);
     climbRear = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RETRACT);
@@ -44,20 +48,24 @@ public class ClimbS extends Subsystem {
 
   //deploys the wheels
   public void deploy() {
-    //climbFront.set(true);
-    //climbRear.set(true);
+    //climbFrontRight.set(true);
+    //climbFrontLeft.set(true);
+    //climbRearRight.set(true);
+    //climbRearLeft.set(true);
     climbFront.set(Value.kForward);
     climbFront.set(Value.kForward);
   }
 
   //retracts the Wheels
   public void retractFront() {
-    //climbFront.set(false);
+    //climbFrontRight.set(false);
+    //climbFrontLeft.set(false);
     climbFront.set(Value.kReverse);
   }
 
   public void retractRear() {
-    //climbRear.set(false);
+    //climbRearRight.set(false);
+    //ClimbRearLeft.set(false);
     climbRear.set(Value.kReverse);
   }
 
