@@ -2,6 +2,7 @@ package frc.robot.subsystems.climb;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+//import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -11,15 +12,27 @@ import frc.robot.RobotMap;
  * Climbing Mechanism
  */
 public class ClimbS extends Subsystem {
+
+  //if we are using single solenoid use these
+  //public static Solenoid climbFront;
+  //public static Solenoid climbRear;
+
+  //if we are using double solenoids, use these
   public static DoubleSolenoid climbFront;
   public static DoubleSolenoid climbRear;
+
   public static Spark legWheels;
   public static DigitalInput limitFront;
   public static DigitalInput limitRear;
 
   public ClimbS() {
-    climbFront = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMBFRONT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMBFRONT_RETRACT);
-    climbRear = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMBREAR_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMBREAR_RETRACT);
+    
+    //climbFront = new Solenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_RETRACT);
+    //climbRear = new Solenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RETRACT);
+
+    climbFront = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_RETRACT);
+    climbRear = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RETRACT);
+
     limitFront = new DigitalInput(RobotMap.DIO_CLIMB_FRONT_LIMIT);
     limitRear = new DigitalInput(RobotMap.DIO_CLIMB_REAR_LIMIT);
     legWheels = new Spark(RobotMap.PWM_ID_SPARK_WHEELS);
@@ -31,16 +44,20 @@ public class ClimbS extends Subsystem {
 
   //deploys the wheels
   public void deploy() {
+    //climbFront.set(true);
+    //climbRear.set(true);
     climbFront.set(Value.kForward);
     climbFront.set(Value.kForward);
   }
 
   //retracts the Wheels
   public void retractFront() {
+    //climbFront.set(false);
     climbFront.set(Value.kReverse);
   }
 
   public void retractRear() {
+    //climbRear.set(false);
     climbRear.set(Value.kReverse);
   }
 
