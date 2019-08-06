@@ -18,7 +18,7 @@ public class RetractFrontC extends Command {
 
   @Override
   protected void execute() {
-    Robot.m_ClimbS.retractRear();
+    Robot.m_ClimbS.retractFront();
   }
 
   @Override
