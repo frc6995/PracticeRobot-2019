@@ -72,15 +72,15 @@ public class CargoArmS extends Subsystem {
     armTalonA.selectProfileSlot(RobotMap.ARM_PID_SLOT, 0);
     armTalonA.configAllowableClosedloopError(RobotMap.ARM_PID_SLOT, 0);
 
-    armTalonA.config_kP(RobotMap.ARM_PID_SLOT, RobotMap.kP);
-    armTalonA.config_kI(RobotMap.ARM_PID_SLOT, RobotMap.kI);
-    armTalonA.config_kD(RobotMap.ARM_PID_SLOT, RobotMap.kD);
-    armTalonA.config_kF(RobotMap.ARM_PID_SLOT, (RobotMap.kF * 1023) / RobotMap.ENCODER_DUTY_CYCLE);
+    armTalonA.config_kP(RobotMap.ARM_PID_SLOT, RobotMap.ARM_kP);
+    armTalonA.config_kI(RobotMap.ARM_PID_SLOT, RobotMap.ARM_kI);
+    armTalonA.config_kD(RobotMap.ARM_PID_SLOT, RobotMap.ARM_kD);
+    armTalonA.config_kF(RobotMap.ARM_PID_SLOT, (RobotMap.ARM_kF * 1023) / RobotMap.ENCODER_DUTY_CYCLE);
 
-    armTalonA.config_IntegralZone(RobotMap.LADDER_PID_SLOT, RobotMap.INTEGRAL_ZONE);
+    armTalonA.config_IntegralZone(RobotMap.ARM_PID_SLOT, RobotMap.ARM_INTEGRAL_ZONE);
 
-    armTalonA.configClosedLoopPeakOutput(RobotMap.LADDER_PID_SLOT, RobotMap.PEAK_OUTPUT);
-    armTalonA.configClosedloopRamp(RobotMap.RAMP_TIME);
+    armTalonA.configClosedLoopPeakOutput(RobotMap.ARM_PID_SLOT, RobotMap.ARM_PEAK_OUTPUT);
+    armTalonA.configClosedloopRamp(RobotMap.ARM_RAMP_TIME);
 
     armTalonA.set(ControlMode.PercentOutput, 0);
   }
@@ -89,18 +89,19 @@ public class CargoArmS extends Subsystem {
 
   //tells the PID what encoder position we want to go to
   public int getArmSetPointEncoderCount() {
-    if (nextArmLevel == ArmLevel.ARM_HOME) {
-      return RobotMap.ARM_HOME;
-    } else if (nextArmLevel == ArmLevel.ARM_ROCKET){
-      return RobotMap.ARM_ROCKET;
-    } else if (nextArmLevel == ArmLevel.ARM_SHIP) {
-      return RobotMap.ARM_SHIP;
-    } else if (nextArmLevel == ArmLevel.ARM_REVERSE_ROCKET) {
-      return RobotMap.ARM_REVERSE_ROCKET;
-    } else if (nextArmLevel == ArmLevel.ARM_REVERSE_SHIP) {
-      return RobotMap.ARM_REVERSE_SHIP;   
-    } else {
-      return 0;
+    switch (nextArmLevel) {
+      case ARM_HOME :
+        return RobotMap.ARM_HOME;
+      case ARM_ROCKET :
+        return RobotMap.ARM_ROCKET;
+      case ARM_SHIP :
+        return RobotMap.ARM_SHIP;
+      case ARM_REVERSE_SHIP :
+        return RobotMap.ARM_REVERSE_SHIP;
+      case ARM_REVERSE_ROCKET :
+        return RobotMap.ARM_REVERSE_ROCKET;
+      default :
+        return 0;
     }
   }
 
@@ -111,7 +112,7 @@ public class CargoArmS extends Subsystem {
 
   //gets encoder current position
   public double getCurrentEncoderCount() {
-    return (armTalonA.getSensorCollection().getQuadraturePosition());
+    return (armTalonA.get() /**getSensorCollection().getQuadraturePosition()*/);
   }
 
   //gets how far away we are from desired set point
@@ -122,15 +123,15 @@ public class CargoArmS extends Subsystem {
   //PID container calculates kF_a
   public void runPid() {
     //arbitrary feed forward calculator
-    double  kF_a = 0.0;
+    double  f_a = 0.0;
     if(Robot.m_CargoClawS.getCargoLimit() == true){
-      kF_a = RobotMap.kF_B * Math.cos(Math.toRadians((getCurrentEncoderCount() - RobotMap.ENCODER_POS_HORIZONTAL) / RobotMap.ENCODER_TICKS_PER_DEG));
+      f_a = RobotMap.ARM_kF_B * Math.cos(Math.toRadians((getCurrentEncoderCount() - RobotMap.ENCODER_POS_HORIZONTAL) / RobotMap.ENCODER_TICKS_PER_DEG));
     }else if(Robot.m_CargoClawS.getCargoLimit() == false){
-      kF_a = RobotMap.kF_nB * Math.cos(Math.toRadians((getCurrentEncoderCount() - RobotMap.ENCODER_POS_HORIZONTAL) / RobotMap.ENCODER_TICKS_PER_DEG));
+      f_a = RobotMap.ARM_kF_nB * Math.cos(Math.toRadians((getCurrentEncoderCount() - RobotMap.ENCODER_POS_HORIZONTAL) / RobotMap.ENCODER_TICKS_PER_DEG));
     }
 
     //tells motors to move to desired set point
-    armTalonA.set(ControlMode.Position, getArmSetPointEncoderCount(), DemandType.ArbitraryFeedForward, kF_a);
+    armTalonA.set(ControlMode.Position, getArmSetPointEncoderCount(), DemandType.ArbitraryFeedForward, f_a);
 
     // If we are within the set point range add 1 to countWithinSetPoint, else set to 0
     if (Math.abs(getError()) < setPointRange) {
