@@ -20,7 +20,7 @@ public class MoveForwardC extends Command {
     Robot.m_ClimbS.legWheels(0.7);//fine tune this value
   }
 
-  //determines of a limit switch has been pressed and if true, stop moving forward
+  //determines if a limit switch has been pressed and if true, stop moving forward
   @Override
   protected boolean isFinished() {
     return Robot.m_ClimbS.limitSwitchPressed();

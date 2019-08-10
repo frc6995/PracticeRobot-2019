@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * retracts front wheels when limit switch
+ * retracts front wheels when limit switch is pressed
  */
 public class RetractFrontC extends Command {
   public RetractFrontC() {
