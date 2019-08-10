@@ -26,12 +26,12 @@ public class ArmLevelProtocolC extends Command {
 
   @Override
   protected void initialize() {
+    Robot.m_CargoArmS.setNextArmLevel(nextArmLevel);
   }
 
   //runs Pid to go to desired set point
   @Override
   protected void execute() {
-    Robot.m_CargoArmS.setNextArmLevel(nextArmLevel);
     Robot.m_CargoArmS.runPid();
   }
 
@@ -47,5 +47,6 @@ public class ArmLevelProtocolC extends Command {
 
   @Override
   protected void interrupted() {
+    end();
   }
 }

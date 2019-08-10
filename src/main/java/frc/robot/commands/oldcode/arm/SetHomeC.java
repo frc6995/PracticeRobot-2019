@@ -1,4 +1,4 @@
-package frc.robot.commands.arm.pid;
+package frc.robot.commands.arm;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
@@ -9,10 +9,8 @@ import frc.robot.subsystems.cargo.CargoArmS.ArmLevel;
  */
 public class SetHomeC extends Command {
 
-  ArmLevel nextArmLevel = ArmLevel.ARM_HOME;
-
   public SetHomeC() {
-    nextArmLevel = ArmLevel.ARM_HOME;
+    requires(Robot.m_CargoArmS);
   }
 
   @Override
@@ -21,7 +19,7 @@ public class SetHomeC extends Command {
 
   @Override
   protected void execute() {
-    Robot.m_CargoArmS.setNextArmLevel(nextArmLevel);
+    Robot.m_CargoArmS.setNextArmLevel(ArmLevel.ARM_HOME);
   }
 
   @Override
@@ -31,7 +29,7 @@ public class SetHomeC extends Command {
 
   @Override
   protected void end() {
-    Robot.m_CargoArmS.setNextArmLevel(nextArmLevel);
+    Robot.m_CargoArmS.setNextArmLevel(ArmLevel.ARM_HOME);
   }
 
   @Override

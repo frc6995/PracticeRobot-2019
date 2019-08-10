@@ -10,6 +10,7 @@ import frc.robot.RobotMap;
 
 public class CargoArmS extends Subsystem {
 
+  //levels for the arm
   public enum ArmLevel {
     ARM_HOME, ARM_ROCKET, ARM_SHIP, ARM_REVERSE_ROCKET, ARM_REVERSE_SHIP
   }
@@ -158,6 +159,7 @@ public class CargoArmS extends Subsystem {
   public boolean lowerlimitSwitchPressed() {
     return armLowerLimitSwitch.get();
   }
+  
   public boolean armUpperLimitSwitch() {
     return armUpperLimitSwitch.get();
   }

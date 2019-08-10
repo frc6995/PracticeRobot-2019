@@ -11,16 +11,19 @@ public class RetractFrontC extends Command {
     requires(Robot.m_ClimbS);
   }
 
+  //if front limit is pressed...
   @Override
   protected void initialize() {
     Robot.m_ClimbS.frontLimit();
   }
 
+  //retract the front
   @Override
   protected void execute() {
     Robot.m_ClimbS.retractFront();
   }
 
+  //retracts wheels once
   @Override
   protected boolean isFinished() {
     return true;

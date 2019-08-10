@@ -15,11 +15,13 @@ public class DeployC extends Command {
   protected void initialize() {
   }
 
+  //deploys the wheels
   @Override
   protected void execute() {
     Robot.m_ClimbS.deploy();
   }
 
+  //returns true when wheels have deployed
   @Override
   protected boolean isFinished() {
     return true;

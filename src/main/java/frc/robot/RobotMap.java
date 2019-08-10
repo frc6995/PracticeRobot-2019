@@ -68,6 +68,8 @@ public class RobotMap {
   public final static int            DIO_CLIMB_REAR_LIMIT                 = 0;
   public final static int            DIO_CLIMB_FRONT_LIMIT                = 0;
 
+  public final static int            PCM_ID_DSOLENOID_CLIMB_FRONT_MODULE  = 0;
+
   public final static int            PCM_ID_DSOLENOID_CLIMB_FRONT_DEPLOY  = 0;
   public final static int            PCM_ID_DSOLENOID_CLIMB_FRONT_RETRACT = 0;
   public final static int            PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY   = 0;

@@ -1,4 +1,4 @@
-package frc.robot.commands.claw;
+package frc.robot.commands.arm;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
@@ -16,19 +16,21 @@ public class ClawJettisonC extends Command {
 
   @Override
   protected void initialize() {
-    this.setTimeout(10); //whatever value
   }
 
+  //jettisons cargo
   @Override
   protected void execute() {
     Robot.m_CargoClawS.cargoSpeed(jettisonSpeed);
   }
 
+  //when limit switch is released or timed out...
   @Override
   protected boolean isFinished() {
-    return Robot.m_CargoClawS.getCargoLimit() == true || isTimedOut();
+    return Robot.m_CargoClawS.getCargoLimit() == false || isTimedOut();
   }
 
+  //stop motors
   @Override
   protected void end() {
     Robot.m_CargoClawS.cargoSpeed(0.0);
