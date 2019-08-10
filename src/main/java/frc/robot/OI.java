@@ -3,10 +3,10 @@ package frc.robot;
 import frc.robot.controllermap.*;
 import frc.robot.subsystems.cargo.CargoArmS.ArmLevel;
 import frc.robot.RobotMap;
-import frc.robot.commands.arm.ArmCancelProtocolCG;
-import frc.robot.commands.arm.LevelProtocolCG;
-import frc.robot.commands.arm.JettisonProtocolCG;
-import frc.robot.commands.claw.ClawIntakeC;
+import frc.robot.commands.arm.ArmCancelProtocolC;
+import frc.robot.commands.arm.ArmLevelProtocolC;
+import frc.robot.commands.arm.ArmJettisonProtocolC;
+import frc.robot.commands.arm.ClawIntakeC;
 import frc.robot.commands.climb.*;
 
 
@@ -24,16 +24,16 @@ public class OI {
       */
       //arm buttons
       //all four levels:
-      jStick.button_8_runOnPress(new LevelProtocolCG(ArmLevel.ARM_SHIP));
-      jStick.button_11_runOnPress(new LevelProtocolCG(ArmLevel.ARM_ROCKET));
-      jStick.button_9_runOnPress(new LevelProtocolCG(ArmLevel.ARM_REVERSE_SHIP));
-      jStick.button_12_runOnPress(new LevelProtocolCG(ArmLevel.ARM_REVERSE_ROCKET));
+      jStick.button_8_runOnPress(new ArmLevelProtocolC(ArmLevel.ARM_SHIP));
+      jStick.button_11_runOnPress(new ArmLevelProtocolC(ArmLevel.ARM_ROCKET));
+      jStick.button_9_runOnPress(new ArmLevelProtocolC(ArmLevel.ARM_REVERSE_SHIP));
+      jStick.button_12_runOnPress(new ArmLevelProtocolC(ArmLevel.ARM_REVERSE_ROCKET));
 
       //trigger yeets
-      jStick.button_5_runOnPress(new JettisonProtocolCG());
+      jStick.button_5_runOnPress(new ArmJettisonProtocolC());
 
       //cancels level PID
-      jStick.button_7_runOnPress(new ArmCancelProtocolCG());
+      jStick.button_7_runOnPress(new ArmCancelProtocolC());
 
       //reload is currently button 6
       jStick.button_6_runOnPress(new ClawIntakeC());

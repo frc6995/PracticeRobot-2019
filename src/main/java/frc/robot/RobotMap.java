@@ -21,8 +21,8 @@ public class RobotMap {
   public final static int               ARM_SHIP                    = 1000;
   public final static int               ARM_REVERSE_ROCKET          = 1500;
   public final static int               ARM_REVERSE_SHIP          = 2000;
-  //PID Constants
-  public final static int              LADDER_PID_SLOT             = 0;
+  //Arm PID Constants
+  public final static int              ARM_PID_SLOT             = 0;
 
   public final static int              INTEGRAL_ZONE               = 1500;
   public final static double           PEAK_OUTPUT                 = 0.2; //peak motor power.

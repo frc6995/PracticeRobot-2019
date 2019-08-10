@@ -69,13 +69,13 @@ public class CargoArmS extends Subsystem {
     armTalonA.configForwardSoftLimitEnable(RobotMap.LIMIT_SOFT_ENABLED, RobotMap.LIMIT_SOFT_TIMEOUT);
     armTalonA.configReverseSoftLimitEnable(RobotMap.LIMIT_SOFT_ENABLED, RobotMap.LIMIT_SOFT_TIMEOUT);
 
-    armTalonA.selectProfileSlot(RobotMap.LADDER_PID_SLOT, 0);
-    armTalonA.configAllowableClosedloopError(RobotMap.LADDER_PID_SLOT, 0);
+    armTalonA.selectProfileSlot(RobotMap.ARM_PID_SLOT, 0);
+    armTalonA.configAllowableClosedloopError(RobotMap.ARM_PID_SLOT, 0);
 
-    armTalonA.config_kP(RobotMap.LADDER_PID_SLOT, RobotMap.kP);
-    armTalonA.config_kI(RobotMap.LADDER_PID_SLOT, RobotMap.kI);
-    armTalonA.config_kD(RobotMap.LADDER_PID_SLOT, RobotMap.kD);
-    armTalonA.config_kF(RobotMap.LADDER_PID_SLOT, (RobotMap.kF * 1023) / RobotMap.ENCODER_DUTY_CYCLE);
+    armTalonA.config_kP(RobotMap.ARM_PID_SLOT, RobotMap.kP);
+    armTalonA.config_kI(RobotMap.ARM_PID_SLOT, RobotMap.kI);
+    armTalonA.config_kD(RobotMap.ARM_PID_SLOT, RobotMap.kD);
+    armTalonA.config_kF(RobotMap.ARM_PID_SLOT, (RobotMap.kF * 1023) / RobotMap.ENCODER_DUTY_CYCLE);
 
     armTalonA.config_IntegralZone(RobotMap.LADDER_PID_SLOT, RobotMap.INTEGRAL_ZONE);
 
