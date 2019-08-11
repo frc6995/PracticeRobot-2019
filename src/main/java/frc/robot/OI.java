@@ -1,7 +1,7 @@
 package frc.robot;
 
 import frc.robot.commands.arm.ArmCancelProtocolC;
-import frc.robot.commands.arm.ArmJettisonCG;
+import frc.robot.commands.arm.ArmJettisonProtocolCG;
 import frc.robot.commands.arm.ArmLevelProtocolC;
 import frc.robot.commands.arm.ClawIntakeC;
 import frc.robot.commands.climb.CancelC;
@@ -30,7 +30,7 @@ public class OI {
       jStick.button_12_runOnPress(new ArmLevelProtocolC(ArmLevel.ARM_REVERSE_ROCKET));
 
       //trigger yeets
-      jStick.button_5_runOnPress(new ArmJettisonCG());
+      jStick.button_5_runOnPress(new ArmJettisonProtocolCG());
 
       //cancels level PID
       jStick.button_7_runOnPress(new ArmCancelProtocolC());
