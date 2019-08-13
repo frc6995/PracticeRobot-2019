@@ -1,28 +1,30 @@
-package frc.robot.commands.arm.pid;
+package frc.robot.commands.climb.climbcg;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * moves Arm to Home Position
+ * retracts the Rear wheels
  */
-public class MoveHomeC extends Command {
-  public MoveHomeC() {
-    requires(Robot.m_CargoArmS);
+public class ClimbRetractRearC extends Command {
+  public ClimbRetractRearC() {
+    requires(Robot.m_ClimbS);
   }
 
   @Override
   protected void initialize() {
   }
 
+  //Retracts the rear wheels
   @Override
   protected void execute() {
-    Robot.m_CargoArmS.runPid();
+    Robot.m_ClimbS.retractRear();
   }
 
+  //when retracted, end command
   @Override
   protected boolean isFinished() {
-    return Robot.m_CargoArmS.isAtSetPoint();
+    return true;
   }
 
   @Override

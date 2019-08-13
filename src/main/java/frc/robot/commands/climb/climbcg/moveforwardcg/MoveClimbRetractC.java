@@ -1,13 +1,11 @@
-package frc.robot.commands.climb;
+package frc.robot.commands.climb.climbcg.moveforwardcg;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/**
- * Cancels the climbing operation, retracts both front and rear wheels in tandem
- */
-public class ClimbCancelC extends Command {
-  public ClimbCancelC() {
+//retracts wheels
+public class MoveClimbRetractC extends Command {
+  public MoveClimbRetractC() {
     requires(Robot.m_ClimbS);
   }
 
@@ -15,13 +13,13 @@ public class ClimbCancelC extends Command {
   protected void initialize() {
   }
 
-  //Retracts both front and rear wheels in tandem
+  //retracts wheels
   @Override
   protected void execute() {
     Robot.m_ClimbS.retract();
   }
 
-  //This command will end when execute() is done
+  //done retracting wheels
   @Override
   protected boolean isFinished() {
     return true;
