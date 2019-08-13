@@ -1,26 +1,29 @@
-package frc.robot.commands.climb;
+package frc.robot.commands.climb.climbcg;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * retracts the rear wheels when rear limit switch is pressed
+ * retracts front wheels when limit switch is pressed
  */
-public class RetractRearC extends Command {
-  public RetractRearC() {
+public class RetractFrontC extends Command {
+  public RetractFrontC() {
     requires(Robot.m_ClimbS);
   }
 
+  //if front limit is pressed...
   @Override
   protected void initialize() {
-    Robot.m_ClimbS.rearLimit();
+    Robot.m_ClimbS.frontLimit();
   }
 
+  //retract the front
   @Override
   protected void execute() {
-    Robot.m_ClimbS.retractRear();
+    Robot.m_ClimbS.retractFront();
   }
 
+  //retracts wheels once
   @Override
   protected boolean isFinished() {
     return true;

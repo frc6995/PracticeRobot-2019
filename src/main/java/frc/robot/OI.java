@@ -4,7 +4,7 @@ import frc.robot.commands.arm.ArmCancelProtocolC;
 import frc.robot.commands.arm.ArmJettisonProtocolCG;
 import frc.robot.commands.arm.ArmLevelProtocolC;
 import frc.robot.commands.arm.ClawIntakeC;
-import frc.robot.commands.climb.CancelC;
+import frc.robot.commands.climb.ClimbCancelC;
 import frc.robot.commands.climb.ClimbProtocolCG;
 import frc.robot.controllermap.JStick;
 import frc.robot.controllermap.XBox;
@@ -29,7 +29,7 @@ public class OI {
       jStick.button_9_runOnPress(new ArmLevelProtocolC(ArmLevel.ARM_REVERSE_SHIP));
       jStick.button_12_runOnPress(new ArmLevelProtocolC(ArmLevel.ARM_REVERSE_ROCKET));
 
-      //trigger yeets
+      //trigger Jettisons
       jStick.button_5_runOnPress(new ArmJettisonProtocolCG());
 
       //cancels level PID
@@ -42,6 +42,6 @@ public class OI {
       //climb all-in-one
       jStick.button_3_runOnPress(new ClimbProtocolCG());
       //cancels climb, moves down to be redone
-      jStick.button_10_runOnPress(new CancelC());
+      jStick.button_10_runOnPress(new ClimbCancelC());
   }
 }

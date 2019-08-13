@@ -1,13 +1,13 @@
-package frc.robot.commands.climb;
+package frc.robot.commands.climb.climbcg;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * cancels climb mechanism, retracts front and back in tandem
+ * deploys the wheels
  */
-public class CancelC extends Command {
-  public CancelC() {
+public class ClimbDeployC extends Command {
+  public ClimbDeployC() {
     requires(Robot.m_ClimbS);
   }
 
@@ -15,13 +15,13 @@ public class CancelC extends Command {
   protected void initialize() {
   }
 
-  //retracts leg wheels in tandem
+  //deploys the wheels
   @Override
   protected void execute() {
-    Robot.m_ClimbS.retract();
+    Robot.m_ClimbS.deploy();
   }
 
-  //returns true when retract is completed
+  //returns true when wheels have deployed
   @Override
   protected boolean isFinished() {
     return true;
@@ -33,6 +33,5 @@ public class CancelC extends Command {
 
   @Override
   protected void interrupted() {
-    end();
   }
 }

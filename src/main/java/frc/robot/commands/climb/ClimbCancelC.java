@@ -4,37 +4,35 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * move forward for time
+ * cancels climb mechanism, retracts front and back in tandem
  */
-public class MoveForwardTimoutC extends Command {
-  public MoveForwardTimoutC() {
+public class ClimbCancelC extends Command {
+  public ClimbCancelC() {
     requires(Robot.m_ClimbS);
-    //timeout
-    this.setTimeout(2);
   }
 
   @Override
   protected void initialize() {
   }
 
-  //move wheels
+  //retracts leg wheels in tandem
   @Override
   protected void execute() {
-    Robot.m_ClimbS.legWheels(0.7);
+    Robot.m_ClimbS.retract();
   }
 
-  //moves forward for timeout
+  //returns true when retract is completed
   @Override
   protected boolean isFinished() {
-    return isTimedOut();
+    return true;
   }
 
   @Override
   protected void end() {
-    Robot.m_ClimbS.legWheels(0.0);
   }
 
   @Override
   protected void interrupted() {
+    end();
   }
 }

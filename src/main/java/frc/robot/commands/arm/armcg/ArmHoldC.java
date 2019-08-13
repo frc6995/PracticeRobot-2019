@@ -1,4 +1,4 @@
-package frc.robot.commands.arm;
+package frc.robot.commands.arm.armcg;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
@@ -6,8 +6,8 @@ import frc.robot.Robot;
 /**
  * holds PID at set point until interrupted
  */
-public class HoldPidC extends Command {
-  public HoldPidC() {
+public class ArmHoldC extends Command {
+  public ArmHoldC() {
     requires(Robot.m_CargoArmS);
     //interruptable
     this.setInterruptible(true);

@@ -1,4 +1,4 @@
-package frc.robot.commands.arm;
+package frc.robot.commands.arm.armcg;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
@@ -7,8 +7,8 @@ import frc.robot.subsystems.cargo.CargoArmS.ArmLevel;
 /**
  * sets the PID to home and moves to home
  */
-public class MoveHomeC extends Command {
-  public MoveHomeC() {
+public class ArmHomeC extends Command {
+  public ArmHomeC() {
     requires(Robot.m_CargoArmS);
   }
 
