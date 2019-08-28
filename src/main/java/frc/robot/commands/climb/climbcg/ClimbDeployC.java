@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * deploys wheels
+ * Deploys wheels
  */
 public class ClimbDeployC extends Command {
   public ClimbDeployC() {
@@ -15,13 +15,13 @@ public class ClimbDeployC extends Command {
   protected void initialize() {
   }
 
-  //deploys wheels
+  // Deploys wheels
   @Override
   protected void execute() {
     Robot.m_ClimbS.deploy();
   }
 
-  //done when deployed
+  // Done when deployed
   @Override
   protected boolean isFinished() {
     return true;

@@ -15,13 +15,13 @@ public class ClimbCancelC extends Command {
   protected void initialize() {
   }
 
-  //Retracts both front and rear wheels in tandem
+  // Retracts both front and rear wheels in tandem
   @Override
   protected void execute() {
     Robot.m_ClimbS.retract();
   }
 
-  //This command will end when execute() is done
+  // This command will end when execute() is done
   @Override
   protected boolean isFinished() {
     return true;

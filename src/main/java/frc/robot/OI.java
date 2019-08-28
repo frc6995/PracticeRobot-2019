@@ -8,7 +8,7 @@ import frc.robot.commands.climb.ClimbCancelC;
 import frc.robot.commands.climb.ClimbProtocolCG;
 import frc.robot.controllermap.JStick;
 import frc.robot.controllermap.XBox;
-import frc.robot.subsystems.cargo.CargoArmS.ArmLevel;
+import frc.robot.subsystems.ArmS.ArmLevel;
 
 public class OI {
 

@@ -8,7 +8,7 @@ import frc.robot.Robot;
  */
 public class ArmHoldC extends Command {
   public ArmHoldC() {
-    requires(Robot.m_CargoArmS);
+    requires(Robot.m_ArmS);
     //interruptable
     this.setInterruptible(true);
   }
@@ -20,7 +20,7 @@ public class ArmHoldC extends Command {
   //holds pid at desired set point
   @Override
   protected void execute() {
-    Robot.m_CargoArmS.runPid();
+    Robot.m_ArmS.runPid();
   }
 
   //forever, until interrupted

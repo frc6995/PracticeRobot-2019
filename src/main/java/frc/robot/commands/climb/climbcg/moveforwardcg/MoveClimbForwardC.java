@@ -9,7 +9,7 @@ import frc.robot.Robot;
 public class MoveClimbForwardC extends Command {
   public MoveClimbForwardC(int time) {
     requires(Robot.m_ClimbS);
-    //timout time
+    // Timout time
     this.setTimeout(time);
   }
 
@@ -17,19 +17,19 @@ public class MoveClimbForwardC extends Command {
   protected void initialize() {
   }
 
-  //runs wheels
+  // Runs wheels
   @Override
   protected void execute() {
     Robot.m_ClimbS.legWheels(0.7);
   }
 
-  //until timed out
+  // Until timed out
   @Override
   protected boolean isFinished() {
     return isTimedOut();
   }
 
-  //stops wheels
+  // Stops wheels
   @Override
   protected void end() {
   }

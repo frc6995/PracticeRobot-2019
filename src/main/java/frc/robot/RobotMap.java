@@ -1,15 +1,27 @@
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-
 public class RobotMap {
   //Input Devices
+  /** 
+   * Ports are determined by USB ports
+  */
   public final static int            OI_XBOX                              = 0;
   public final static int            OI_JSTICK                            = 0;
-  //CargoIntake Constants
-  public final static int            PWM_ID_SPARK_HAND                    = 0;
-  public final static int            DIO_LIMIT_HAND                       = 0;
+  //Climb Constants
+  /**
+   * consists of 
+   */
+  public final static int            DIO_CLIMB_REAR_LIMIT                 = 0;
+  public final static int            DIO_CLIMB_FRONT_LIMIT                = 0;
+
+  public final static int            PCM_ID_DSOLENOID_CLIMB_FRONT_MODULE  = 0;
+
+  public final static int            PCM_ID_DSOLENOID_CLIMB_FRONT_DEPLOY  = 0;
+  public final static int            PCM_ID_DSOLENOID_CLIMB_FRONT_RETRACT = 0;
+  public final static int            PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY   = 0;
+  public final static int            PCM_ID_DSOLENOID_CLIMB_REAR_RETRACT  = 0;
+
+  public final static int            PWM_ID_SPARK_WHEELS                  = 0;
   //Arm Constants
   public final static int            CAN_ID_TALON_ARM_A                   = 0;
   public final static int            CAN_ID_TALON_ARM_B                   = 0;
@@ -49,10 +61,6 @@ public class RobotMap {
   public final static boolean        MOTOR_A_INVERT                       = false;
   public final static boolean        MOTOR_B_INVERT                       = false;
 
-  public final static NeutralMode    MOTOR_A_NEUTRAL_MODE                 = NeutralMode.Brake;
-  public final static NeutralMode    MOTOR_B_NEUTRAL_MODE                 = NeutralMode.Brake;
-
-  public final static FeedbackDevice FEEDBACK_DEVICE                      = FeedbackDevice.QuadEncoder;
   public final static boolean        FEEDBACK_DEVICE_INVERT               = false;
 
   public final static boolean        LIMIT_SOFT_ENABLED                   = true;
@@ -63,17 +71,10 @@ public class RobotMap {
   public final static int            ENCODER_DUTY_CYCLE                   = 4096; //Number of counts per rotation
   public final static int            ENCODER_POS_HORIZONTAL               = 0; //Encoder position when the arm is horizontal.
   public final static double         ENCODER_TICKS_PER_DEG                = ENCODER_DUTY_CYCLE / 360;
-
-  //climb constants
-  public final static int            DIO_CLIMB_REAR_LIMIT                 = 0;
-  public final static int            DIO_CLIMB_FRONT_LIMIT                = 0;
-
-  public final static int            PCM_ID_DSOLENOID_CLIMB_FRONT_MODULE  = 0;
-
-  public final static int            PCM_ID_DSOLENOID_CLIMB_FRONT_DEPLOY  = 0;
-  public final static int            PCM_ID_DSOLENOID_CLIMB_FRONT_RETRACT = 0;
-  public final static int            PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY   = 0;
-  public final static int            PCM_ID_DSOLENOID_CLIMB_REAR_RETRACT  = 0;
-
-  public final static int            PWM_ID_SPARK_WHEELS                  = 0;
+  //Subsubsystem Claw Constants
+  /**
+   * consists of limit switch and spark
+   */
+  public final static int            PWM_ID_SPARK_HAND                    = 0;
+  public final static int            DIO_LIMIT_HAND                       = 0;
 }

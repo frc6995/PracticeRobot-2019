@@ -2,7 +2,7 @@ package frc.robot.commands.arm;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.cargo.CargoArmS.ArmLevel;
+import frc.robot.subsystems.ArmS.ArmLevel;
 
 /**
  * Climb Protocol
@@ -17,7 +17,7 @@ public class ArmLevelProtocolC extends Command {
   ArmLevel nextArmLevel = ArmLevel.ARM_HOME;
 
   public ArmLevelProtocolC(ArmLevel level) {
-    requires(Robot.m_CargoArmS);
+    requires(Robot.m_ArmS);
     //sets desired level
     nextArmLevel = level;
     //this is an interruptable command
@@ -26,13 +26,13 @@ public class ArmLevelProtocolC extends Command {
 
   @Override
   protected void initialize() {
-    Robot.m_CargoArmS.setNextArmLevel(nextArmLevel);
+    Robot.m_ArmS.setNextArmLevel(nextArmLevel);
   }
 
   //runs Pid to go to desired set point
   @Override
   protected void execute() {
-    Robot.m_CargoArmS.runPid();
+    Robot.m_ArmS.runPid();
   }
 
   //we want it to keep running runPid()

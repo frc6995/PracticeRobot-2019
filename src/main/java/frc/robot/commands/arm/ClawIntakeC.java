@@ -13,7 +13,7 @@ public class ClawIntakeC extends Command {
   private double intakeSpeed = -0.7; //negative values intake?
 
   public ClawIntakeC() {
-    requires(Robot.m_CargoClawS);
+    requires(Robot.m_ArmS);
   }
 
   //set timout in case we don't get cargo
@@ -25,19 +25,19 @@ public class ClawIntakeC extends Command {
   //intakes cargo
   @Override
   protected void execute() {
-    Robot.m_CargoClawS.cargoSpeed(intakeSpeed);
+    Robot.m_ArmS.cargoSpeed(intakeSpeed);
   }
 
   //if cargo gets intaken or timed out, return true
   @Override
   protected boolean isFinished() {
-    return Robot.m_CargoClawS.getCargoLimit()  == true || isTimedOut();
+    return Robot.m_ArmS.getCargoLimit()  == true || isTimedOut();
   }
 
   //stop moter
   @Override
   protected void end() {
-    Robot.m_CargoClawS.cargoSpeed(0.0);
+    Robot.m_ArmS.cargoSpeed(0.0);
   }
 
   @Override

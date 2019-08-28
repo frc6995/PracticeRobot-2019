@@ -3,7 +3,9 @@ package frc.robot.commands.climb.climbcg.moveforwardcg;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-//retracts wheels
+/**
+ * Retracts wheels
+ */
 public class MoveClimbRetractC extends Command {
   public MoveClimbRetractC() {
     requires(Robot.m_ClimbS);
@@ -13,13 +15,13 @@ public class MoveClimbRetractC extends Command {
   protected void initialize() {
   }
 
-  //retracts wheels
+  // Retracts wheels
   @Override
   protected void execute() {
     Robot.m_ClimbS.retract();
   }
 
-  //done retracting wheels
+  // Done retracting wheels
   @Override
   protected boolean isFinished() {
     return true;

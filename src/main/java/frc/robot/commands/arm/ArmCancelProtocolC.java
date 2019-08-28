@@ -2,7 +2,7 @@ package frc.robot.commands.arm;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.cargo.CargoArmS.ArmLevel;
+import frc.robot.subsystems.ArmS.ArmLevel;
 
 /**
  * Cancel protocol
@@ -12,7 +12,7 @@ import frc.robot.subsystems.cargo.CargoArmS.ArmLevel;
  */
 public class ArmCancelProtocolC extends Command {
   public ArmCancelProtocolC() {
-    requires(Robot.m_CargoArmS);
+    requires(Robot.m_ArmS);
   }
   
   @Override
@@ -22,14 +22,14 @@ public class ArmCancelProtocolC extends Command {
   //moves home
   @Override
   protected void execute() {
-    Robot.m_CargoArmS.setNextArmLevel(ArmLevel.ARM_HOME);
-    Robot.m_CargoArmS.runPid();
+    Robot.m_ArmS.setNextArmLevel(ArmLevel.ARM_HOME);
+    Robot.m_ArmS.runPid();
   }
 
   //when at home, return true and end
   @Override
   protected boolean isFinished() {
-    return Robot.m_CargoArmS.isAtSetPoint();
+    return Robot.m_ArmS.isAtSetPoint();
   }
 
   @Override

@@ -1,4 +1,4 @@
-package frc.robot.subsystems.climb;
+package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -8,17 +8,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
- * Climbing Mechanism
+ * Climb Subsystem
  */
 public class ClimbS extends Subsystem {
 
-  //if we are using single solenoid use these
+  // If we are using single solenoid use these
   //public static Solenoid climbFrontRight;
   //public static Solenoid climbFrontLeft;
   //public static Solenoid climbRearRight;
   //public static Solenoid climbRearLeft;
   
-  //if we are using double solenoids, use these
+  // If we are using double solenoids, use these
   public static Value in = Value.kForward;
   public static Value out = Value.kReverse;
   public static DoubleSolenoid climbFront;
@@ -47,7 +47,7 @@ public class ClimbS extends Subsystem {
   public void initDefaultCommand() {
   }
 
-  //deploys the wheels
+  // Deploys the wheels
   public void deploy() {
     //climbFrontRight.set(true);
     //climbFrontLeft.set(true);
@@ -57,7 +57,7 @@ public class ClimbS extends Subsystem {
     climbFront.set(out);
   }
 
-  //retracts the Wheels
+  // Retracts the Wheels
   public void retractFront() {
     //climbFrontRight.set(false);
     //climbFrontLeft.set(false);
@@ -70,7 +70,7 @@ public class ClimbS extends Subsystem {
     climbRear.set(in);
   }
 
-  //retracts both Front and Rear wheels
+  // Retracts both Front and Rear wheels
   public void retract() {
     //climbFrontRight.set(false);
     //climbFrontLeft.set(false);
@@ -80,7 +80,7 @@ public class ClimbS extends Subsystem {
     climbRear.set(in);
   }
 
-  //limit switch boolean values that return true if hit
+  // Limit switch boolean values that return true if hit
   public boolean frontLimit() {
     return limitFront.get();
   }
@@ -89,12 +89,12 @@ public class ClimbS extends Subsystem {
     return limitRear.get();
   }
 
-  //leg wheel set speed
+  // leg wheel set desired speed
   public void legWheels(double speed) {
     legWheels.set(speed);
   }
 
-  //MoveForwardC hits a limit switch
+  // MoveForwardC hits a limit switch
   public boolean limitSwitchPressed() {
     if (frontLimit() == true || rearLimit() == true) {
       return true;
