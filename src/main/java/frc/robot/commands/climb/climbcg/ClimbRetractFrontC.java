@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * retracts the front wheels
+ * Retracts the Front Wheels
  */
 public class ClimbRetractFrontC extends Command {
   public ClimbRetractFrontC() {
@@ -15,13 +15,13 @@ public class ClimbRetractFrontC extends Command {
   protected void initialize() {
   }
 
-  //Retracts the front wheels
+  // Retracts the front wheels
   @Override
   protected void execute() {
     Robot.m_ClimbS.retractFront();
   }
 
-  //when retracted, end command
+  // When retracted, end command
   @Override
   protected boolean isFinished() {
     return true;

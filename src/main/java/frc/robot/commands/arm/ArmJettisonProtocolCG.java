@@ -5,14 +5,17 @@ import frc.robot.commands.arm.armcg.ArmHoldC;
 import frc.robot.commands.arm.armcg.ArmHomeC;
 import frc.robot.commands.arm.armcg.ClawJettisonC;
 
-public class ArmJettisonProtocolCG extends CommandGroup {
   /**
-   *  jettison protocol while holding pid, sequntials should be fine tuned
+   * Jettison Protocol
+   * 
+   * 1. Hold PID at set point
+   * 2. While Jettisoning Cargo
+   * 3. Sets home position, then moves home 
    */
+public class ArmJettisonProtocolCG extends CommandGroup {
   public ArmJettisonProtocolCG() {
     addParallel(new ArmHoldC());
     addSequential(new ClawJettisonC(), 1);
-    //addSequential(new WaitCommand(1));
     addSequential(new ArmHomeC());
   }
 }

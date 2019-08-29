@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * Retracts wheels
+ * Retracts Wheels
  */
 public class MoveClimbRetractC extends Command {
   public MoveClimbRetractC() {

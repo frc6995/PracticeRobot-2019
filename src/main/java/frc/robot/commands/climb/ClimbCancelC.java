@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * Cancels the climbing operation, retracts both front and rear wheels in tandem
+ * Cancels Climb
  */
 public class ClimbCancelC extends Command {
   public ClimbCancelC() {

@@ -6,36 +6,32 @@ import frc.robot.subsystems.ArmS.ArmLevel;
 
 /**
  * Climb Protocol
- * 
- * 1. sets desired arm level
- * 2. moves to desired arm level
- * 3. holds position with same Pid until interrupted
  */
 public class ArmLevelProtocolC extends Command {
 
-  //tells when turned on this is Home position
+  // Home is the default arm position
   ArmLevel nextArmLevel = ArmLevel.ARM_HOME;
 
+  // Gets desired arm level, interupptable, has argument 'level'
   public ArmLevelProtocolC(ArmLevel level) {
     requires(Robot.m_ArmS);
-    //sets desired level
     nextArmLevel = level;
-    //this is an interruptable command
     this.setInterruptible(true);
   }
 
+  // Sets desired arm level
   @Override
   protected void initialize() {
     Robot.m_ArmS.setNextArmLevel(nextArmLevel);
   }
 
-  //runs Pid to go to desired set point
+  // Runs PID to go to desired set point
   @Override
   protected void execute() {
     Robot.m_ArmS.runPid();
   }
 
-  //we want it to keep running runPid()
+  // Keep running runPid() to hold
   @Override
   protected boolean isFinished() {
     return false;

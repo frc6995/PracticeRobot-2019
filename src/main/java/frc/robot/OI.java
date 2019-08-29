@@ -10,38 +10,35 @@ import frc.robot.controllermap.JStick;
 import frc.robot.controllermap.XBox;
 import frc.robot.subsystems.ArmS.ArmLevel;
 
+/**
+ * Operator Interface
+ */
 public class OI {
 
-  //input devices
+  //We are using Joystick and XBox controllers
   public final XBox xBox = new XBox(RobotMap.OI_XBOX);
   public final JStick jStick = new JStick(RobotMap.OI_JSTICK);
 
+  /**
+   * Note:
+   * Buttons for joystick
+   * all button numbers correspond to buttons mapped in image found here: 
+   * https://samepage.io/app/#!/55f7d003b627e89b5d0b0c11258e2624567de58f/team-a4f52613587a4eddaeb9a554ab5ee00dac038e98/files/preview-796107915031679377
+   * Buttons for XBox
+   * img not available as of yet
+   */
   public OI() {
-      /**
-       * buttons for joystick,
-       * all buttons correspond to buttons mapped on image: 
-       * https://samepage.io/app/#!/55f7d003b627e89b5d0b0c11258e2624567de58f/team-a4f52613587a4eddaeb9a554ab5ee00dac038e98/files/preview-796107915031679377
-      */
-      //arm buttons
-      //all four levels:
+      // Arm buttons
+      jStick.button_6_runOnPress(new ClawIntakeC());
       jStick.button_8_runOnPress(new ArmLevelProtocolC(ArmLevel.ARM_SHIP));
       jStick.button_11_runOnPress(new ArmLevelProtocolC(ArmLevel.ARM_ROCKET));
       jStick.button_9_runOnPress(new ArmLevelProtocolC(ArmLevel.ARM_REVERSE_SHIP));
       jStick.button_12_runOnPress(new ArmLevelProtocolC(ArmLevel.ARM_REVERSE_ROCKET));
-
-      //trigger Jettisons
       jStick.button_5_runOnPress(new ArmJettisonProtocolCG());
-
-      //cancels level PID
       jStick.button_7_runOnPress(new ArmCancelProtocolC());
 
-      //reload is currently button 6
-      jStick.button_6_runOnPress(new ClawIntakeC());
-
-      //Climb buttons
-      //climb all-in-one
+      // Climb buttons
       jStick.button_3_runOnPress(new ClimbProtocolCG());
-      //cancels climb, moves down to be redone
       jStick.button_10_runOnPress(new ClimbCancelC());
   }
 }

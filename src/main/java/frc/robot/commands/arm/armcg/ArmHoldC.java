@@ -4,12 +4,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * holds PID at set point until interrupted
+ *  Holds PID at Set Point Until Interrupted
  */
 public class ArmHoldC extends Command {
+  // Interruptable
   public ArmHoldC() {
     requires(Robot.m_ArmS);
-    //interruptable
     this.setInterruptible(true);
   }
 
@@ -17,13 +17,13 @@ public class ArmHoldC extends Command {
   protected void initialize() {
   }
 
-  //holds pid at desired set point
+  // Holds pid at desired set point
   @Override
   protected void execute() {
     Robot.m_ArmS.runPid();
   }
 
-  //forever, until interrupted
+  // Keeps running runPid()
   @Override
   protected boolean isFinished() {
     return false;

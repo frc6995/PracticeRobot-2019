@@ -5,10 +5,7 @@ import frc.robot.Robot;
 import frc.robot.subsystems.ArmS.ArmLevel;
 
 /**
- * Cancel protocol
- * 
- * 1. sets home position
- * 2. moves home
+ * Cancel Protocol
  */
 public class ArmCancelProtocolC extends Command {
   public ArmCancelProtocolC() {
@@ -19,14 +16,14 @@ public class ArmCancelProtocolC extends Command {
   protected void initialize() {
   }
 
-  //moves home
+  // Sets home position, then moves home
   @Override
   protected void execute() {
     Robot.m_ArmS.setNextArmLevel(ArmLevel.ARM_HOME);
     Robot.m_ArmS.runPid();
   }
 
-  //when at home, return true and end
+  // When at home, end command
   @Override
   protected boolean isFinished() {
     return Robot.m_ArmS.isAtSetPoint();

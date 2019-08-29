@@ -4,37 +4,36 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * intakes the cargo and hits limit switch,
- * providing runPID to execute calculations regarding wether or not the arm is loaded 
+ * Cargo Intake
  */
 public class ClawIntakeC extends Command {
 
-  //speed for intaking
-  private double intakeSpeed = -0.7; //negative values intake?
+  // Rotates wheels to intake
+  private double intakeSpeed = -0.7;
 
   public ClawIntakeC() {
     requires(Robot.m_ArmS);
   }
 
-  //set timout in case we don't get cargo
+  // Set timout in case we don't get cargo
   @Override
   protected void initialize() {
-    this.setTimeout(10); //whatever value
+    this.setTimeout(10);
   }
 
-  //intakes cargo
+  // Intakes cargo
   @Override
   protected void execute() {
     Robot.m_ArmS.cargoSpeed(intakeSpeed);
   }
 
-  //if cargo gets intaken or timed out, return true
+  //if cargo gets intaken or timed out, end command
   @Override
   protected boolean isFinished() {
     return Robot.m_ArmS.getCargoLimit()  == true || isTimedOut();
   }
 
-  //stop moter
+  // Stop motor
   @Override
   protected void end() {
     Robot.m_ArmS.cargoSpeed(0.0);

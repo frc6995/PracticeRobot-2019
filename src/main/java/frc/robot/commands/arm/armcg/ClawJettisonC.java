@@ -4,11 +4,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * Jettisons cargo
+ * Jettisons Cargo
  */
 public class ClawJettisonC extends Command {
 
-  private double jettisonSpeed = 0.7; //positive values jettison?
+  // Rotates wheels to shoot out
+  private double jettisonSpeed = 0.7;
 
   public ClawJettisonC() {
     requires(Robot.m_ArmS);
@@ -18,19 +19,19 @@ public class ClawJettisonC extends Command {
   protected void initialize() {
   }
 
-  //jettisons cargo
+  // Jettisons cargo
   @Override
   protected void execute() {
     Robot.m_ArmS.cargoSpeed(jettisonSpeed);
   }
 
-  //when limit switch is released or timed out...
+  // Stop when claw jettisons or is timed out
   @Override
   protected boolean isFinished() {
     return Robot.m_ArmS.getCargoLimit() == false || isTimedOut();
   }
 
-  //stop motors
+  // Stops motors
   @Override
   protected void end() {
     Robot.m_ArmS.cargoSpeed(0.0);

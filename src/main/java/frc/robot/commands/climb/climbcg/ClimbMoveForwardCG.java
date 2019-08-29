@@ -8,10 +8,13 @@ import frc.robot.commands.climb.climbcg.moveforwardcg.MoveClimbRetractC;
 
 public class ClimbMoveForwardCG extends CommandGroup {
   /**
-   * move Forward algorithm, modifiers: 
-   * 1. time, desired time to run as a timout
-   * 2. useCancel, if you want to use the move backwards and retract algorithm,
-   * use "true" if to just stop the wheels, use "false" 
+   * Move Forward Algorithm 
+   * 
+   * 1. Robot moves forward for desired time.
+   * 2. If limit switch on front wheels is pressed, stop.
+   * 3. Or, if timed out, and no limit switch was pressed,
+   *    move backwards for small amount of time, and retract
+   *    wheels, ready to try again!
    */
   public ClimbMoveForwardCG(int time, boolean useCancel) {
 

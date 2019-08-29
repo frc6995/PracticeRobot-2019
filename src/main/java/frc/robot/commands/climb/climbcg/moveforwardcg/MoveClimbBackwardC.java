@@ -4,12 +4,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * Drives backwards, stops, then retracts wheels
+ * Drives Backwards, Stops, Then Retracts Wheels
  */
 public class MoveClimbBackwardC extends Command {
+
+  // How long Patrick moves backwards
   public MoveClimbBackwardC() {
     requires(Robot.m_ClimbS);
-    // Time wanted to move backwards
     this.setTimeout(1);
   }
 

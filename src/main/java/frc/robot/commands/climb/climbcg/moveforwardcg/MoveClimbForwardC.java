@@ -4,12 +4,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * Moves forward with timout
+ * Moves Forward With Timout
  */
 public class MoveClimbForwardC extends Command {
+  
+  // Arguments for how long Patrick moves forwards
   public MoveClimbForwardC(int time) {
     requires(Robot.m_ClimbS);
-    // Timout time
     this.setTimeout(time);
   }
 
