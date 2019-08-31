@@ -48,25 +48,33 @@ public class ArmS extends Subsystem {
   public ArmS() {
 
     /**
-     * this method needs further documentation
+     * TODO: This method needs further documentation
      */
-    //instantiates Talons
+    // Instantiates Talons
     armTalonA = new WPI_TalonSRX(RobotMap.CAN_ID_TALON_ARM_A);
     armTalonB = new WPI_TalonSRX(RobotMap.CAN_ID_TALON_ARM_B);
 
-    //instantiates Limit Switches
+    //Instantiates Sparks
+    cargoIntakeMotor = new Spark(RobotMap.PWM_ID_SPARK_HAND);
+
+    // Instantiates Limit Switches
     armUpperLimitSwitch = new DigitalInput(RobotMap.DIO_LIMIT_ARM_UPPER);
     armLowerLimitSwitch = new DigitalInput(RobotMap.DIO_LIMIT_ARM_LOWER);
-  
+    cargoLimit = new DigitalInput(RobotMap.DIO_LIMIT_HAND);
+
+    // Sets Talons to Factory Default
     armTalonA.configFactoryDefault(RobotMap.FACTORY_DEFAULT_TIMEOUT);
     armTalonB.configFactoryDefault(RobotMap.FACTORY_DEFAULT_TIMEOUT);
 
-    //tells armTalonB to mirror everything armTalon does
+    // Tells armTalonB to mirror everything armTalon does
     armTalonB.follow(armTalonA);
 
+    // TODO: Figure out if we need talons to be inverted
+    // Inverts the talons
     armTalonA.setInverted(RobotMap.MOTOR_A_INVERT);
     armTalonB.setInverted(RobotMap.MOTOR_B_INVERT);
 
+    // Sets Talons to TODO: Please explain this
     armTalonA.setNeutralMode(MOTOR_A_NEUTRAL_MODE);
     armTalonB.setNeutralMode(MOTOR_B_NEUTRAL_MODE);
 
@@ -75,7 +83,9 @@ public class ArmS extends Subsystem {
     armTalonA.configPeakCurrentDuration(RobotMap.CURRENT_PEAK_LIMIT_DURATION);
     armTalonA.configContinuousCurrentLimit(RobotMap.CURRENT_LIMIT_VALUE);
 
+    // We are using a Quad-encoder
     armTalonA.configSelectedFeedbackSensor(FEEDBACK_DEVICE);
+    // TODO: Inverted?
     armTalonA.setSensorPhase(RobotMap.FEEDBACK_DEVICE_INVERT);
 
     armTalonA.configForwardSoftLimitThreshold(RobotMap.LIMIT_SOFT_FORWARD, RobotMap.LIMIT_SOFT_TIMEOUT);
@@ -86,6 +96,8 @@ public class ArmS extends Subsystem {
     armTalonA.selectProfileSlot(RobotMap.ARM_PID_SLOT, 0);
     armTalonA.configAllowableClosedloopError(RobotMap.ARM_PID_SLOT, 0);
 
+    // TODO: Calculate PID
+    // Calculates the P.I.D variables
     armTalonA.config_kP(RobotMap.ARM_PID_SLOT, RobotMap.ARM_kP);
     armTalonA.config_kI(RobotMap.ARM_PID_SLOT, RobotMap.ARM_kI);
     armTalonA.config_kD(RobotMap.ARM_PID_SLOT, RobotMap.ARM_kD);
@@ -96,11 +108,7 @@ public class ArmS extends Subsystem {
     armTalonA.configClosedLoopPeakOutput(RobotMap.ARM_PID_SLOT, RobotMap.ARM_PEAK_OUTPUT);
     armTalonA.configClosedloopRamp(RobotMap.ARM_RAMP_TIME);
 
-    armTalonA.set(ControlMode.PercentOutput, 0);
-
-    //defines the claw
-    cargoIntakeMotor = new Spark(RobotMap.PWM_ID_SPARK_HAND);
-    cargoLimit = new DigitalInput(RobotMap.DIO_LIMIT_HAND);
+    armTalonA.set(ControlMode.PercentOutput, 0); 
   }
 
   // Tells the PID what encoder position in relation to the set point we want to go to

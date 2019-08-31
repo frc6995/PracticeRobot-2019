@@ -12,13 +12,13 @@ import frc.robot.RobotMap;
  */
 public class ClimbS extends Subsystem {
 
-  // If we are using single solenoid use these
+  // TODO: If we are using single solenoid use these
   //public static Solenoid climbFrontRight;
   //public static Solenoid climbFrontLeft;
   //public static Solenoid climbRearRight;
   //public static Solenoid climbRearLeft;
   
-  // If we are using double solenoids, use these
+  // TODO: If we are using double solenoids, use these
   public static Value in = Value.kForward;
   public static Value out = Value.kReverse;
   public static DoubleSolenoid climbFront;
