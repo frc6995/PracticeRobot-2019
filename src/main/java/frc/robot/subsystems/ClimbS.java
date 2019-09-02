@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -27,6 +28,7 @@ public class ClimbS extends Subsystem {
   public static Spark legWheels;
   public static DigitalInput limitFront;
   public static DigitalInput limitRear;
+  public static Ultrasonic ultSensorF;
 
   public ClimbS() {
     
@@ -54,7 +56,7 @@ public class ClimbS extends Subsystem {
     //climbRearRight.set(true);
     //climbRearLeft.set(true);
     climbFront.set(out);
-    climbFront.set(out);
+    climbRear.set(out);
   }
 
   // Retracts the Wheels

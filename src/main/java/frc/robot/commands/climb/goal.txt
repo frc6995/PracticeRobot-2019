@@ -1,0 +1,87 @@
+Goal:
+	To make the robot climb. Using two double solenoids and a single motor.
+Inputs:
+	User input to start
+	User input to cancel
+	Limit switch on the front legs
+	Limit switch on the back legs
+
+Outputs:
+	Deploy front
+	Retract front
+	Deploy Back
+	Retract Back
+	Leg Motor movement forward/backward
+
+Constraints:
+	No turning
+	Need to use commands or command groups
+	Command groups can only call commands
+	There is distance between the wheel and bumpers.
+	Double solenoids
+	Climb algorithm expects a start position
+
+Maximum Algorithm
+	Hardware Objects:
+		Sendors:
+			* Movement Motor is                            mMotor
+			* Double Solenoid Front is                     dblSolenoidF
+			* Double Solenoid Rear is                      dblSolenoidR
+
+		Sensors:
+			* Ultrasonic Sensor Right Front Bumper is      ultSensorFR
+			* Ultrasonic Sensor Left Front Bumper is       ultSensorFL
+			* Ultrasonic Sensor Front is                   ultSensorF
+			* Ultrasonic Sensor Rear is                    ultSensorR
+			* Limit switch dblSolenoidF position sensor is limSolenoidPosF
+			* Limit switch dblSolenoidR position sensor is limSolenoidPosR
+
+	Create robot state variables (booleans):
+		* Ultrasonic Sensor Right Front is               ultSensorFR
+		* Ultrasonic Sensor Left Front is                ultSensorFL
+		* Limit switch Front solenoid position sensor is limSolenoidPosF
+		* Limit switch Rear solenoid position sensor is  limSolenoidPosR
+		* mMotor is Running is                           motorState
+
+	Driver has initiated climb (button) and has not canceled climb
+		a. Deploys dblSolenoidF and dblSolenoidR
+		b. moves mMotor until ultSensorF returns true
+		c. retracts dblSolenoidF while mMotor is running and limSolenoidPosF returns true
+		d. proceeds to move mMotor until ultSensorR returns true
+		e. stops mMotor
+		f. retracts dblSolenoidR and limSolenoidPosR returns true sending signal to 
+		   Driver via shuffleboard that it is safe to move forward
+
+	Driver has canceled climb
+		a. get limSolenoidPosF
+		b. move mMotor backwards until ultSensorFR or ultSensorFL return true
+		c. move mMotor backwards for small amount of time
+		d. retract dblSolenoidF and dblSolenoidR
+
+Minimum Algorithm
+	Hardware Objects:
+		Sendors:
+			* Movement Motor is                            mMotor
+			* Double Solenoid Front is                     dblSolenoidF
+			* Double Solenoid Rear is                      dblSolenoidR
+
+		Sensors:
+			* Ultrasonic Sensor Front is                   ultSensorF
+			* Ultrasonic Sensor Rear is                    ultSensorR
+			* Limit switch dblSolenoidF position sensor is limSolenoidPosF
+
+	Create robot state variables (booleans):
+		* Limit switch Front solenoid position sensor is limSolenoidPosF
+
+	Driver has initiated climb (button) and has not canceled climb
+		a. Deploys dblSolenoidF and dblSolenoidR
+		b. moves mMotor until ultSensorF returns true
+		c. retracts dblSolenoidF while mMotor is running and limSolenoidPosF returns true
+		d. proceeds to move mMotor until ultSensorR returns true
+		e. stops mMotor
+		f. retracts dblSolenoidR
+
+	Driver has canceled climb
+		a. get limSolenoidPosF
+		b. move mMotor backwards for small amount of time
+		c. retract dblSolenoidF and dblSolenoidR
