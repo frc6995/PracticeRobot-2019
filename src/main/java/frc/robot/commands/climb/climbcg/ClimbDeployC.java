@@ -4,9 +4,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * Deploys wheels
+ * Deploys Wheels
  */
 public class ClimbDeployC extends Command {
+
   public ClimbDeployC() {
     requires(Robot.m_ClimbS);
   }
@@ -21,7 +22,7 @@ public class ClimbDeployC extends Command {
     Robot.m_ClimbS.deploy();
   }
 
-  // Done when deployed
+  // Only runs once
   @Override
   protected boolean isFinished() {
     return true;

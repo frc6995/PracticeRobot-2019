@@ -13,36 +13,47 @@ import frc.robot.RobotMap;
  */
 public class ClimbS extends Subsystem {
 
-  // TODO: If we are using single solenoid use these
-  //public static Solenoid climbFrontRight;
-  //public static Solenoid climbFrontLeft;
-  //public static Solenoid climbRearRight;
-  //public static Solenoid climbRearLeft;
-  
-  // TODO: If we are using double solenoids, use these
-  public static Value in = Value.kForward;
-  public static Value out = Value.kReverse;
-  public static DoubleSolenoid climbFront;
-  public static DoubleSolenoid climbRear;
+  // Variables
 
-  public static Spark legWheels;
-  public static DigitalInput limitFront;
-  public static DigitalInput limitRear;
+  // Senders
+  public static Spark mMotor;
+  //TODO: make these single solenoids
+  public static DoubleSolenoid dblSolenoidF;
+  public static DoubleSolenoid dblSolenoidR;
+
+  // Sensors
+  public static DigitalInput limSolenoidPosF;
+  public static DigitalInput limSolenoidPosB;
+  public static Ultrasonic ultSensorR;
+  public static Ultrasonic ultSensorL;
   public static Ultrasonic ultSensorF;
+  public static Ultrasonic ultSensorB;
+
+  // Returns true if solenoids are fully retracted
+  public boolean SolenoidPosF = limSolenoidPosF.get();
+  public boolean SolenoidPosB = limSolenoidPosB.get();
+
+  // Returns true if Front Ultrasonic Sensor sees Podium
+  //TODO: find out what to put in obj argument to say: "I see the podium"
+  public boolean frontRetract = ultSensorF.equals(obj);
+
+  // Returns true if Back Ultrasonic Sensor sees Podium
+  //TODO: find out what to put in obj argument to say: "I see the podium"
+  public boolean backRetract = ultSensorB.equals(obj);
 
   public ClimbS() {
     
-    //climbFrontRight = new Solenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_RETRACT);
-    //climbFrontLeft = new Solenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_RETRACT);
-    //climbRearRight = new Solenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RETRACT);
-    //climbRearLeft = new Solenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RETRACT);
-
-    climbFront = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_RETRACT);
-    climbRear = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RETRACT);
-
-    limitFront = new DigitalInput(RobotMap.DIO_CLIMB_FRONT_LIMIT);
-    limitRear = new DigitalInput(RobotMap.DIO_CLIMB_REAR_LIMIT);
-    legWheels = new Spark(RobotMap.PWM_ID_SPARK_WHEELS);
+    mMotor = new Spark(RobotMap.PWM_ID_SPARK_WHEELS);
+    dblSolenoidF = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_RETRACT);
+    dblSolenoidR = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RETRACT);
+    limSolenoidPosF = new DigitalInput(RobotMap.DIO_CLIMB_FRONT_LIMIT);
+    limSolenoidPosB = new DigitalInput(RobotMap.DIO_CLIMB_REAR_LIMIT);
+    //TODO: find out what pingChannel and echo Channel are
+    ultSensorR = new Ultrasonic(pingChannel, echoChannel);
+    ultSensorL = new Ultrasonic(pingChannel, echoChannel);
+    ultSensorF = new Ultrasonic(pingChannel, echoChannel);
+    ultSensorB = new Ultrasonic(pingChannel, echoChannel);
+    
   }
   
   @Override
@@ -51,57 +62,37 @@ public class ClimbS extends Subsystem {
 
   // Deploys the wheels
   public void deploy() {
-    //climbFrontRight.set(true);
-    //climbFrontLeft.set(true);
-    //climbRearRight.set(true);
-    //climbRearLeft.set(true);
-    climbFront.set(out);
-    climbRear.set(out);
+    dblSolenoidF.set(Value.kForward);
+    dblSolenoidR.set(Value.kForward);
   }
 
   // Retracts the Wheels
   public void retractFront() {
-    //climbFrontRight.set(false);
-    //climbFrontLeft.set(false);
-    climbFront.set(in);
+    dblSolenoidF.set(Value.kReverse);
   }
 
   public void retractRear() {
-    //climbRearRight.set(false);
-    //ClimbRearLeft.set(false);
-    climbRear.set(in);
+    dblSolenoidR.set(Value.kReverse);
   }
 
   // Retracts both Front and Rear wheels
   public void retract() {
-    //climbFrontRight.set(false);
-    //climbFrontLeft.set(false);
-    //climbRearRight.set(false);
-    //ClimbRearLeft.set(false);
-    climbFront.set(in);
-    climbRear.set(in);
+    dblSolenoidF.set(Value.kReverse);
+    dblSolenoidR.set(Value.kReverse);
   }
 
-  // Limit switch boolean values that return true if hit
-  public boolean frontLimit() {
-    return limitFront.get();
-  }
-
-  public boolean rearLimit() {
-    return limitRear.get();
-  }
-
-  // leg wheel set desired speed
-  public void legWheels(double speed) {
-    legWheels.set(speed);
-  }
-
-  // MoveForwardC hits a limit switch
-  public boolean limitSwitchPressed() {
-    if (frontLimit() == true || rearLimit() == true) {
+  // Bumper sensor, if a sensor no longer sees podium, return true
+  public boolean bumperSensor() {
+    //TODO: find out what to put in obj argument to say: "I no longer see the podium"
+    if (ultSensorL.equals(obj) == true || ultSensorR.equals(obj) == true) {
       return true;
     } else {
       return false;
     }
+  }
+
+  // leg wheel set desired speed
+  public void legWheels(double speed) {
+    mMotor.set(speed);
   }
 }
