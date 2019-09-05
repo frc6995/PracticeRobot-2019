@@ -3,11 +3,8 @@ package frc.robot.commands.climb;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/**
- * Retracts Wheels
- */
-public class ClimbCancelC extends Command {
-  public ClimbCancelC() {
+public class MoveBackwardC extends Command {
+  public MoveBackwardC() {
     requires(Robot.m_ClimbS);
   }
 
@@ -15,24 +12,25 @@ public class ClimbCancelC extends Command {
   protected void initialize() {
   }
 
-  // Retracts wheels
   @Override
   protected void execute() {
-    Robot.m_ClimbS.retract();
+    
   }
 
-  // Only runs once
+  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
+  // Called once after isFinished returns true
   @Override
   protected void end() {
   }
 
+  // Called when another command which requires one or more of the same
+  // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }

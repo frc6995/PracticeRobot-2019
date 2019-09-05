@@ -3,28 +3,29 @@ package frc.robot.commands.climb;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/**
- * Retracts Wheels
- */
-public class ClimbCancelC extends Command {
-  public ClimbCancelC() {
+public class MoveC extends Command {
+  private double speed;
+
+  public MoveC(double speed) {
     requires(Robot.m_ClimbS);
+    this.setInterruptible(true);
+    this.speed = speed;
   }
 
   @Override
   protected void initialize() {
   }
 
-  // Retracts wheels
+  // Moves forward
   @Override
   protected void execute() {
-    Robot.m_ClimbS.retract();
+    Robot.m_ClimbS.legWheels(this.speed);
   }
 
-  // Only runs once
+  // Keeps going until interrupted
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   @Override

@@ -4,10 +4,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * Retracts Wheels
+ * Deploys Wheels
  */
-public class ClimbCancelC extends Command {
-  public ClimbCancelC() {
+public class ClimbDeployC extends Command {
+
+  public ClimbDeployC() {
     requires(Robot.m_ClimbS);
   }
 
@@ -15,10 +16,10 @@ public class ClimbCancelC extends Command {
   protected void initialize() {
   }
 
-  // Retracts wheels
+  // Deploys wheels
   @Override
   protected void execute() {
-    Robot.m_ClimbS.retract();
+    Robot.m_ClimbS.deploy();
   }
 
   // Only runs once
