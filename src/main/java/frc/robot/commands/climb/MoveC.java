@@ -3,6 +3,9 @@ package frc.robot.commands.climb;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
+/**
+ * General Purpose, Move the Wheels For Desired Speed 
+ */
 public class MoveC extends Command {
   private double speed;
 
@@ -16,7 +19,7 @@ public class MoveC extends Command {
   protected void initialize() {
   }
 
-  // Moves forward
+  // Moves desired speed
   @Override
   protected void execute() {
     Robot.m_ClimbS.legWheels(this.speed);
