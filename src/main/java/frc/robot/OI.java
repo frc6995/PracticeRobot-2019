@@ -51,10 +51,8 @@ public class OI {
       xBox.x_runOnPressed(new RetractFrontC());
       xBox.y_runOnPressed(new RetractRearC());
       // Moves Forward
-      xBox.dpad_up_runOnPressed(new MoveC(0.7));
-      // Stops
-      xBox.dpad_center_runOnPressed(new MoveC(0.0));
+      xBox.dpad_up_runWhileHeld(new MoveC(0.7));
       // Moves Backwards
-      xBox.dpad_down_runOnPressed(new MoveC(-0.7));
+      xBox.dpad_up_left_runWhileHeld(new MoveC(-0.7));
   }
 }

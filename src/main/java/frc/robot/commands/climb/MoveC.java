@@ -28,11 +28,12 @@ public class MoveC extends Command {
   // Keeps going until interrupted
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   @Override
   protected void end() {
+    Robot.m_ClimbS.legWheels(0.0);
   }
 
   @Override
