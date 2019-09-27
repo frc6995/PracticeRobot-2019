@@ -4,12 +4,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DrivebaseS;
-import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.PixyCamS;
-import frc.robot.subsystems.arm.*;
+import frc.robot.subsystems.arm.CargoHandS;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,7 +20,6 @@ public class Robot extends TimedRobot {
   //Subsystems
   public static CargoHandS m_CargoHandS = new CargoHandS();
   public static DrivebaseS m_drivebaseS;
-  public static PixyCamS m_pixyCamS;
 
   public static OI m_oi;
 
@@ -35,7 +30,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     //Subsystems
     m_drivebaseS = new DrivebaseS();
-    m_pixyCamS = new PixyCamS();
+    
     m_CargoHandS = new CargoHandS();
     //OI
     m_oi = new OI();
