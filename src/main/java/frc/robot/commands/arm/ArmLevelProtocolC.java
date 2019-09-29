@@ -12,7 +12,7 @@ public class ArmLevelProtocolC extends Command {
   // Home is the default arm position
   ArmLevel nextArmLevel = ArmLevel.ARM_HOME;
 
-  // Gets desired arm level, interupptable, has argument 'level'
+  // Gets desired arm level, interruptable, has argument 'level'
   public ArmLevelProtocolC(ArmLevel level) {
     requires(Robot.m_ArmS);
     nextArmLevel = level;

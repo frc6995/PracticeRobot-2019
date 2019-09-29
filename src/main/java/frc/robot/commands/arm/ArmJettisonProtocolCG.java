@@ -2,8 +2,8 @@ package frc.robot.commands.arm;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.arm.armcg.ArmHoldC;
-import frc.robot.commands.arm.armcg.ArmHomeC;
 import frc.robot.commands.arm.armcg.ClawJettisonC;
+import frc.robot.subsystems.ArmS.ArmLevel;
 
   /**
    * Jettison Protocol
@@ -16,6 +16,6 @@ public class ArmJettisonProtocolCG extends CommandGroup {
   public ArmJettisonProtocolCG() {
     addParallel(new ArmHoldC());
     addSequential(new ClawJettisonC(), 1);
-    addSequential(new ArmHomeC());
+    addSequential(new ArmLevelProtocolC(ArmLevel.ARM_HOME));
   }
 }
