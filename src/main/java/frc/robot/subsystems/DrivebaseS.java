@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.InvertType;
@@ -17,10 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.drive.DriveArcadeXboxC;
 
-/**
- * Add your docs here.
- */
 public class DrivebaseS extends Subsystem {
+
   private WPI_VictorSPX driveLeftFront = null;
   private WPI_VictorSPX driveLeftRear = null;
   private WPI_VictorSPX driveRightFront = null;
@@ -28,14 +19,15 @@ public class DrivebaseS extends Subsystem {
 
   private DifferentialDrive differentialDrive = null;
 
-  public double rotThrot = 0.68;
+  public double rotThrot = 0.68; //This controls how fast we can spin.
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new DriveArcadeXboxC());
+    setDefaultCommand(new DriveArcadeXboxC()); //this starts the drive command running.
   }
 
   public DrivebaseS() {
+    //initialize the 4 motor controllers
     driveLeftFront = new WPI_VictorSPX(RobotMap.CAN_ID_VSPX_DRIVEBASE_LEFT_FRONT);
     driveLeftRear = new WPI_VictorSPX(RobotMap.CAN_ID_VSPX_DRIVEBASE_LEFT_REAR);
     driveRightFront = new WPI_VictorSPX(RobotMap.CAN_ID_VSPX_DRIVEBASE_RIGHT_FRONT);
@@ -43,14 +35,17 @@ public class DrivebaseS extends Subsystem {
 
     differentialDrive = new DifferentialDrive(driveLeftFront, driveRightFront);
 
+    //make sure all of the configs are default
     driveLeftRear.configFactoryDefault();
     driveLeftFront.configFactoryDefault();
     driveRightRear.configFactoryDefault();
     driveRightFront.configFactoryDefault();
 
+    //make the neccessary follower setup
     driveLeftRear.follow(driveLeftFront);
     driveRightRear.follow(driveRightFront);
 
+    //invert the right side
     driveLeftFront.setInverted(false);
     driveLeftRear.setInverted(InvertType.FollowMaster);
     driveRightFront.setInverted(true);
@@ -61,6 +56,7 @@ public class DrivebaseS extends Subsystem {
     driveRightFront.setNeutralMode(NeutralMode.Brake);
     driveRightRear.setNeutralMode(NeutralMode.Brake);
 
+    //the right side was already inverted above
     differentialDrive.setRightSideInverted(false);
   }
 
@@ -71,7 +67,7 @@ public class DrivebaseS extends Subsystem {
     SmartDashboard.putNumber("Throttle", throttle);
   }
 
-  //visionDrive added for VisionAlign. It has no motor deadzones.
+  //Vision Drive has no motor deadzones. If we don't use vision on Patrick, remove
   public void visionDrive(double moveSpeed, double rotateSpeed) {
     driveLeftFront.set(moveSpeed + rotateSpeed);
     driveRightFront.set(moveSpeed - rotateSpeed);

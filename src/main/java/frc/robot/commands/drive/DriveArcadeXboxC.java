@@ -20,26 +20,43 @@ public class DriveArcadeXboxC extends Command {
 
   @Override
   protected void execute() {
-    //forwardSpeed = -Robot.m_oi.xbox.left_trigger();
-    //backwardSpeed = -Robot.m_oi.xbox.right_trigger();
-    
-    //Robot.m_drivebaseS.rotThrot = Robot.m_drivebaseS.driveChooser.getSelected().rotThrotConst;
-    //SmartDashboard.putNumber("ConstThrot", Robot.m_drivebaseS.rotThrot);
-    
+    //this prevents errors from trying to move forward and back at the same time
     moveSpeed = -Robot.m_oi.xbox.left_trigger() + Robot.m_oi.xbox.right_trigger();
     rotSpeed = Robot.m_oi.xbox.left_stick_x();
 
-    if(Robot.m_oi.xbox.left_bumper_pressed()) {
-      switch(numberPressed) {
-        case 0:  throttle = 0.95; numberPressed = 1; break;
-        case 1:  throttle = 0.90; numberPressed = 2; break;
-        case 2:  throttle = 0.80; numberPressed = 3; break;
-        case 3:  throttle = 0.65; numberPressed = 4; break;
-        case 4:  throttle = 0.50; numberPressed = 5; break;
-        case 5:  throttle = 1.00; numberPressed = 0; break;
-        default: throttle = 1.00; numberPressed = 0; break;
+    //this gives the driver control of the throttle
+    if (Robot.m_oi.xbox.left_bumper_pressed()) {
+      switch (numberPressed) {
+      case 0:
+        throttle = 0.95;
+        numberPressed = 1;
+        break;
+      case 1:
+        throttle = 0.90;
+        numberPressed = 2;
+        break;
+      case 2:
+        throttle = 0.80;
+        numberPressed = 3;
+        break;
+      case 3:
+        throttle = 0.65;
+        numberPressed = 4;
+        break;
+      case 4:
+        throttle = 0.50;
+        numberPressed = 5;
+        break;
+      case 5:
+        throttle = 1.00;
+        numberPressed = 0;
+        break;
+      default:
+        throttle = 1.00;
+        numberPressed = 0;
+        break;
       }
-    } else if(Robot.m_oi.xbox.right_bumper()) {
+    } else if (Robot.m_oi.xbox.right_bumper()) {
       throttle = 1;
       numberPressed = 0;
     }
