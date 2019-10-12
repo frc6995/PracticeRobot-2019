@@ -61,4 +61,24 @@ public class ClimbS extends Subsystem {
   public void legWheels(double speed) {
     mMotor.set(speed);
   }
+
+  // Returns bumper is over the podium
+  public boolean bumperIsOver() {
+    return ultSensorFront;
+  }
+
+  // Returns if Center of Gravity is over the podium
+  public boolean cGIsOver() {
+    return ultSensorMiddle;
+  }
+
+  // Limit front wheelS position
+  public boolean solenoidPosF() {
+    return limSolenoidPosF;
+  }
+
+  public boolean solenoidPosR() {
+    return limSolenoidPosR;
+  }
+
 }

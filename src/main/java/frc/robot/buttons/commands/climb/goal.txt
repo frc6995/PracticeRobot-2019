@@ -21,42 +21,6 @@ Constraints:
 	Double solenoids
 	Climb algorithm expects a start position
 
-Algorithm
-	Hardware Objects:
-		Sendors:
-			* Movement Motor is                            mMotor
-			* Solenoid Front Right is                      SolenoidFrontRight
-			* Solenoid Front Left is                       SolenoidFrontLeft
-			* Solenoid Back Right is                       SolenoidBackRight
-			* Solenoid Back Left is                        SolenoidBackLeft
-
-		Sensors:
-			* Ultrasonic Sensor Front is                   ultSensorFront
-			* Ultrasonic Sensor Back is                    ultSensorMiddle
-			* Limit switch Front position sensor is        limSolenoidPosF
-			* Limit switch Rear position sensor is         limSolenoidPosR
-
-	Create robot state variables (booleans):
-		* Ultrasonic Bumper Sensor Front is                     bumperIsOver
-		* Ultrasonic Bumper Sensor Center of gravity is         cGIsOver
-		* Limit switch Front solenoid position sensor is        solenoidPosF
-		* Limit switch Rear solenoid position sensor is         solenoidPosR
-
-	Driver has initiated climb (button) and has not canceled climb
-		a. Deploys SolenoidBackLeft SolenoidBackRight SolenoidFrontLeft SolenoidFrontRight
-		b. moves mMotor until ultSensorF returns true
-		c. retracts dblSolenoidF while mMotor is running and limSolenoidPosF returns true
-		d. proceeds to move mMotor until ultSensorR returns true
-		e. stops mMotor
-		f. retracts dblSolenoidB and limSolenoidPosR returns true, sending signal to 
-		   Driver via shuffleboard that it is safe to move forward
-
-	Driver has canceled climb
-		a. get limSolenoidPosF
-		b. move mMotor backwards until ultSensorR or ultSensorL return true
-		c. move mMotor backwards for small amount of time
-		d. retract dblSolenoidF and dblSolenoidB
-
 Maximum Algorithm
 	Hardware Objects:
 		Sendors:

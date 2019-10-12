@@ -4,11 +4,6 @@ import frc.robot.commands.arm.ArmCancelProtocolC;
 import frc.robot.commands.arm.ArmJettisonProtocolCG;
 import frc.robot.commands.arm.ArmLevelProtocolC;
 import frc.robot.commands.arm.ClawIntakeC;
-import frc.robot.commands.climb.ClimbCancelC;
-import frc.robot.commands.climb.ClimbDeployC;
-import frc.robot.commands.climb.MoveC;
-import frc.robot.commands.climb.RetractFrontC;
-import frc.robot.commands.climb.RetractRearC;
 import frc.robot.controllermap.JStick;
 import frc.robot.controllermap.XBox;
 import frc.robot.subsystems.ArmS.ArmLevel;
@@ -44,15 +39,6 @@ public class OI {
       //jStick.button_3_runOnPress(new ClimbProtocolCG());
       //jStick.button_10_runOnPress(new ClimbCancelC());
 
-      // "dumb" buttons for the Climbing Mechanism
-      //deploys wheels
-      xBox.a_runOnPressed(new ClimbDeployC());
-      xBox.b_runOnPressed(new ClimbCancelC());
-      xBox.x_runOnPressed(new RetractFrontC());
-      xBox.y_runOnPressed(new RetractRearC());
-      // Moves Forward
-      xBox.dpad_up_runWhileHeld(new MoveC(0.7));
-      // Moves Backwards
-      xBox.dpad_up_left_runWhileHeld(new MoveC(-0.7));
+      
   }
 }
