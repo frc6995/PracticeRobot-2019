@@ -1,4 +1,4 @@
-package frc.robot.buttons;
+package frc.robot.controllermap;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.command.Command;
  * @author Elijah Sauder
  */
 
-public class Xbox {
+public class XBox {
     private static XboxController xbox;
     private static JoystickButton a;
     private static JoystickButton b;
@@ -95,7 +95,7 @@ public class Xbox {
      * 
      * @param port : the port on the driver station that the Xbox is plugged into.
      */
-    public Xbox(int port) {
+    public XBox(int port) {
         xbox = new XboxController(port);
         a = new JoystickButton(xbox, BUTTON_A);
         b = new JoystickButton(xbox, BUTTON_B);
