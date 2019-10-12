@@ -4,24 +4,28 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import frc.robot.subsystems.arm.*;
+import frc.robot.commands.UltrasonicTest;
+import frc.robot.subsystems.UltrasonicS;
+import frc.robot.subsystems.arm.CargoHandS;
 
 public class Robot extends TimedRobot {
   
   //Subsystems
-  public static CargoHandS m_CargoHandS = new CargoHandS();
-
+  public static CargoHandS m_CargoHandS;
+  public static UltrasonicS m_UltrasonicS;
   public static OI m_oi;
 
+  public static UltrasonicTest ultrasonicTest;
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
-
+~
   @Override
   public void robotInit() {
     //Subsystems
     m_CargoHandS = new CargoHandS();
     //OI
-    m_oi = new OI();
+    m_UltrasonicS = new UltrasonicS();
+    ultrasonicTest = new UltrasonicTest();
   }
 
   @Override
@@ -34,7 +38,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    Scheduler.getInstance().run();
+    
+    it Scheduler.getInstance().run();
+    m_UltrasonicS.getDistance();
   }
 
   @Override

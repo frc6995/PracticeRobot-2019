@@ -8,7 +8,7 @@ public class CargoIntakeC extends Command {
   private double intakeSpeed = -0.7; //negative values intake?
 
   public CargoIntakeC() {
-    requires(Robot.m_CargoHandS);
+    //requires(Robot.m_CargoHandS);
   }
 
   @Override
