@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -16,6 +17,7 @@ public class ClimbS extends Subsystem {
   public static Solenoid climbFrontLeft;
   public static Solenoid climbRearRight;
   public static Solenoid climbRearLeft;
+  private AnalogInput ai;// = new AnalogInput(RobotMap.ULTRASONIC_SENSOR);
 
   public ClimbS() {
     mMotor = new Spark(RobotMap.PWM_ID_SPARK_WHEELS);
@@ -23,11 +25,12 @@ public class ClimbS extends Subsystem {
     climbFrontLeft = new Solenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_RETRACT);
     climbRearRight = new Solenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RETRACT);
     climbRearLeft = new Solenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RETRACT);
-    
+    ai = new AnalogInput(RobotMap.ULTRASONIC_SENSOR);
   }
   
   @Override
   public void initDefaultCommand() {
+    getDistance();
   }
 
   // Deploys the wheels
@@ -81,4 +84,10 @@ public class ClimbS extends Subsystem {
     return limSolenoidPosR;
   }
 
+  // Gets how far we are away from the podium
+  public double getDistance(){
+    double distance = ai.getValue() / 8;
+    System.out.println(distance);
+    return (distance);
+  }
 }
