@@ -65,26 +65,35 @@ public class ClimbS extends Subsystem {
     mMotor.set(speed);
   }
 
-  // Returns bumper is over the podium
+  // Returns True if bumper is over the podium
   public boolean bumperIsOver() {
-    return ultSensorFront;
+    if (getDistance() <= 5) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  // Returns if Center of Gravity is over the podium
+  // Returns True if Center of Gravity is over the podium
   public boolean cGIsOver() {
-    return ultSensorMiddle;
+    if (getDistance() == 5) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  // Limit front wheelS position
-  public boolean solenoidPosF() {
-    return limSolenoidPosF;
-  }
+  // // Limit front wheel position
+  // public boolean solenoidPosF() {
+  //   return limSolenoidPosF;
+  // }
 
-  public boolean solenoidPosR() {
-    return limSolenoidPosR;
-  }
+  // // Limit Rear wheel position
+  // public boolean solenoidPosR() {
+  //   return limSolenoidPosR;
+  // }
 
-  // Gets how far we are away from the podium
+  // get the distance under which 
   public double getDistance(){
     double distance = ai.getValue() / 8;
     System.out.println(distance);

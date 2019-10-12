@@ -20,6 +20,7 @@ public class RobotMap {
   public final static int            PCM_ID_DSOLENOID_CLIMB_FRONT_RETRACT = 0;
   public final static int            PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY   = 0;
   public final static int            PCM_ID_DSOLENOID_CLIMB_REAR_RETRACT  = 0;
+  public final static int            ULTRASONIC_SENSOR                    = 0;
 
   public final static int            PWM_ID_SPARK_WHEELS                  = 0;
   //Arm Constants
