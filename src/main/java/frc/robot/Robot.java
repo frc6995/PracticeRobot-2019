@@ -6,21 +6,17 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.subsystems.DrivebaseS;
 import frc.robot.subsystems.arm.CargoHandS;
-
-/**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the TimedRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the build.gradle file in the
- * project.
- */
+import frc.robot.subsystems.ArmS;
+import frc.robot.subsystems.ClimbS;
 
 public class Robot extends TimedRobot {
   
   //Subsystems
   public static CargoHandS m_CargoHandS = new CargoHandS();
   public static DrivebaseS m_drivebaseS;
-
+  public static ArmS m_ArmS = new ArmS();
+  public static ClimbS m_ClimbS = new ClimbS();
+  //OI
   public static OI m_oi;
 
   Command m_autonomousCommand;
@@ -32,6 +28,10 @@ public class Robot extends TimedRobot {
     m_drivebaseS = new DrivebaseS();
     
     m_CargoHandS = new CargoHandS();
+
+    m_ArmS = new ArmS();
+    m_ClimbS = new ClimbS();
+
     //OI
     m_oi = new OI();
   }
