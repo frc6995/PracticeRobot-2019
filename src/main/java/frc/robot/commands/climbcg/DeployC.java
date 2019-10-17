@@ -1,31 +1,26 @@
-package frc.robot.commands.climb;
+package frc.robot.commands.climbcg;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * General Purpose, Move the Wheels For Desired Speed 
+ * Deploys the Wheels
  */
-public class MoveC extends Command {
-  private double speed;
-
-  public MoveC(double speed) {
+public class DeployC extends Command {
+  public DeployC() {
     requires(Robot.m_ClimbS);
-    this.setInterruptible(true);
-    this.speed = speed;
   }
 
   @Override
   protected void initialize() {
   }
 
-  // Moves desired speed
+  // Deploys Wheels
   @Override
   protected void execute() {
-    Robot.m_ClimbS.legWheels(this.speed);
+    Robot.m_ClimbS.deploy();
   }
 
-  // Keeps going until interrupted
   @Override
   protected boolean isFinished() {
     return true;
@@ -33,7 +28,6 @@ public class MoveC extends Command {
 
   @Override
   protected void end() {
-    Robot.m_ClimbS.legWheels(0.0);
   }
 
   @Override

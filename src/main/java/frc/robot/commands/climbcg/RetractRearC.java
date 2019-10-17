@@ -1,27 +1,28 @@
-package frc.robot.commands.climb.climbcg.moveforwardcg;
+package frc.robot.commands.climbcg;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * Retracts Wheels
+ * Retracts Rear Wheels
  */
-public class MoveClimbRetractC extends Command {
-  public MoveClimbRetractC() {
+public class RetractRearC extends Command {
+  public RetractRearC() {
     requires(Robot.m_ClimbS);
   }
 
+  // Interrupt MoveC when Middle Ultrasonic sensor above podium
   @Override
   protected void initialize() {
+    Robot.m_ClimbS.centerIsOver();
   }
 
-  // Retracts wheels
+  // Retract Rear Wheels
   @Override
   protected void execute() {
-    Robot.m_ClimbS.retract();
+    Robot.m_ClimbS.retractRear();
   }
 
-  // Done retracting wheels
   @Override
   protected boolean isFinished() {
     return true;

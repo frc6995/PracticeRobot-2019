@@ -1,28 +1,29 @@
-package frc.robot.commands.climb;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * Cancels Climb
+ * Retracts Wheels
  */
 public class ClimbCancelC extends Command {
   public ClimbCancelC() {
     requires(Robot.m_ClimbS);
   }
 
+  // Maybe Have a check Paramater, something that tells robot that 
+  // front wheels are on the podium, and will not try to cancel.
   @Override
   protected void initialize() {
-    Robot.m_ClimbS.frontRetract = true;
   }
 
-  // Retracts both front and rear wheels in tandem
+  // Retracts Wheels
   @Override
   protected void execute() {
     Robot.m_ClimbS.retract();
   }
 
-  // This command will end when execute() is done
+  // When done, return true
   @Override
   protected boolean isFinished() {
     return true;
