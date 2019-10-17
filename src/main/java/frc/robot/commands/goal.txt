@@ -25,10 +25,10 @@ Algorithm
 	Hardware Objects:
 		Sendors:
 			* Movement Motor is                            mMotor
-			* Solenoid Front Right is                      SolenoidFrontRight
-			* Solenoid Front Left is                       SolenoidFrontLeft
-			* Solenoid Back Right is                       SolenoidBackRight
-			* Solenoid Back Left is                        SolenoidBackLeft
+			* Double Solenoid Front Right is               SolenoidFrontRight
+			* Double Solenoid Front Left is                SolenoidFrontLeft
+			* Double Solenoid Back Right is                SolenoidBackRight
+			* Double Solenoid Back Left is                 SolenoidBackLeft
 
 		Sensors:
 			* Ultrasonic Sensor Front is                   ultSensorFront

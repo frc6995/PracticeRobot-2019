@@ -1,12 +1,6 @@
 package frc.robot;
 
-import frc.robot.commands.arm.ArmCancelProtocolC;
-import frc.robot.commands.arm.ArmJettisonProtocolCG;
-import frc.robot.commands.arm.ArmLevelProtocolC;
-import frc.robot.commands.arm.ClawIntakeC;
 import frc.robot.controllermap.JStick;
-import frc.robot.controllermap.XBox;
-import frc.robot.subsystems.ArmS.ArmLevel;
 
 /**
  * Operator Interface
@@ -14,7 +8,6 @@ import frc.robot.subsystems.ArmS.ArmLevel;
 public class OI {
 
   //We are using Joystick and XBox controllers
-  public final XBox xBox = new XBox(RobotMap.OI_XBOX);
   public final JStick jStick = new JStick(RobotMap.OI_JSTICK);
 
   /**
@@ -27,17 +20,22 @@ public class OI {
    */
   public OI() {
       // Arm buttons
-      jStick.button_6_runOnPress(new ClawIntakeC());
-      jStick.button_8_runOnPress(new ArmLevelProtocolC(ArmLevel.ARM_SHIP));
-      jStick.button_11_runOnPress(new ArmLevelProtocolC(ArmLevel.ARM_ROCKET));
-      jStick.button_9_runOnPress(new ArmLevelProtocolC(ArmLevel.ARM_REVERSE_SHIP));
-      jStick.button_12_runOnPress(new ArmLevelProtocolC(ArmLevel.ARM_REVERSE_ROCKET));
-      jStick.button_5_runOnPress(new ArmJettisonProtocolCG());
-      jStick.button_7_runOnPress(new ArmCancelProtocolC());
+
+
+      // jStick.button_6_runOnPress(new ClawIntakeC());
+      // jStick.button_8_runOnPress(new ArmLevelProtocolC(ArmLevel.ARM_SHIP));
+      // jStick.button_11_runOnPress(new ArmLevelProtocolC(ArmLevel.ARM_ROCKET));
+      // jStick.button_9_runOnPress(new ArmLevelProtocolC(ArmLevel.ARM_REVERSE_SHIP));
+      // jStick.button_12_runOnPress(new ArmLevelProtocolC(ArmLevel.ARM_REVERSE_ROCKET));
+      // jStick.button_5_runOnPress(new ArmJettisonProtocolCG());
+      // jStick.button_7_runOnPress(new ArmCancelProtocolC());
 
       // Climb buttons for auto mechanism
       //jStick.button_3_runOnPress(new ClimbProtocolCG());
       //jStick.button_10_runOnPress(new ClimbCancelC());
+
+
+
 
       
   }

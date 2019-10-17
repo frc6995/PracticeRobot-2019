@@ -1,63 +1,36 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
- * Climb Subsystem
+ * Climb Mechanism, Autonomous
  */
 public class ClimbS extends Subsystem {
 
-  // Senders
+  // Hardware Objects
   public static Spark mMotor;
-  public static Solenoid climbFrontRight;
-  public static Solenoid climbFrontLeft;
-  public static Solenoid climbRearRight;
-  public static Solenoid climbRearLeft;
-  private AnalogInput ai;// = new AnalogInput(RobotMap.ULTRASONIC_SENSOR);
-
+  public static DoubleSolenoid dblSolenoidFront;
+  public static DoubleSolenoid dblSolenoidRear;
+  public static AnalogInput ultSensorFront;
+  public static AnalogInput ultSensorMiddle;
+  
+  // Distance Above Podium
+  public static Double Distance = 0.0;
+  
   public ClimbS() {
     mMotor = new Spark(RobotMap.PWM_ID_SPARK_WHEELS);
-    climbFrontRight = new Solenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_RETRACT);
-    climbFrontLeft = new Solenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_RETRACT);
-    climbRearRight = new Solenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RETRACT);
-    climbRearLeft = new Solenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RETRACT);
-    ai = new AnalogInput(RobotMap.ULTRASONIC_SENSOR);
+    dblSolenoidFront = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_RETRACT);
+    dblSolenoidRear = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RETRACT);
+    ultSensorFront = new AnalogInput(RobotMap.ULTRASONIC_SENSOR_FRONT);
+    ultSensorMiddle = new AnalogInput(RobotMap.ULTRASONIC_SENSOR_MIDDLE);
   }
-  
+
   @Override
   public void initDefaultCommand() {
-    getDistance();
-  }
-
-  // Deploys the wheels
-  public void deploy() {
-    climbFrontRight.set(true);
-    climbFrontLeft.set(true);
-    climbRearRight.set(true);
-    climbRearLeft.set(true);
-  }
-
-  // Retracts the wheels
-  public void retractFront() {
-    climbFrontLeft.set(false);
-    climbFrontRight.set(false);
-  }
-
-  public void retractRear() {
-    climbRearLeft.set(false);
-    climbRearRight.set(false);
-  }
-
-  // Retracts both Front and Rear wheels
-  public void retract() {
-    climbRearLeft.set(false);
-    climbRearRight.set(false);
-    climbFrontLeft.set(false);
-    climbFrontRight.set(false);
   }
 
   // leg wheel set desired speed
@@ -65,38 +38,55 @@ public class ClimbS extends Subsystem {
     mMotor.set(speed);
   }
 
-  // Returns True if bumper is over the podium
-  public boolean bumperIsOver() {
-    if (getDistance() <= 5) {
+  // Deploys Wheels
+  public void deploy() {
+    dblSolenoidFront.set(DoubleSolenoid.Value.kForward);
+    dblSolenoidRear.set(DoubleSolenoid.Value.kForward);
+  }
+
+  // Retracts Front Wheels
+  public void retractFront() {
+    dblSolenoidFront.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  // Retracts Rear Wheels
+  public void retractRear() {
+    dblSolenoidRear.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  // Retracts Wheels
+  public void retract() {
+    dblSolenoidFront.set(DoubleSolenoid.Value.kReverse);
+    dblSolenoidRear.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  // Gets how far above the front Wheels are
+  public double getDistanceFront() {
+    double distance = ultSensorFront.getValue() / 8;
+    return(distance);
+  }
+
+  // Gets how far above the Center of Gravity is
+  public double getDistanceMiddle() {
+    double distance = ultSensorMiddle.getValue() / 8;
+    return(distance);
+  }
+
+  // Returns True if the Front Wheels are over the podium
+  public boolean frontIsOver(){
+    if (getDistanceFront() <= Distance) {
       return true;
     } else {
       return false;
     }
   }
 
-  // Returns True if Center of Gravity is over the podium
-  public boolean cGIsOver() {
-    if (getDistance() == 5) {
+  // Returns True if the Center of Gravity is over the podium
+  public boolean centerIsOver(){
+    if (getDistanceMiddle() <= Distance) {
       return true;
     } else {
       return false;
     }
-  }
-
-  // // Limit front wheel position
-  // public boolean solenoidPosF() {
-  //   return limSolenoidPosF;
-  // }
-
-  // // Limit Rear wheel position
-  // public boolean solenoidPosR() {
-  //   return limSolenoidPosR;
-  // }
-
-  // get the distance under which 
-  public double getDistance(){
-    double distance = ai.getValue() / 8;
-    System.out.println(distance);
-    return (distance);
   }
 }
