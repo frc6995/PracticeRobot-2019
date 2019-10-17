@@ -1,6 +1,13 @@
 package frc.robot;
 
 public class RobotMap {
+
+  //Drivebase constants
+  public final static int CAN_ID_VSPX_DRIVEBASE_LEFT_FRONT = 1;
+  public final static int CAN_ID_VSPX_DRIVEBASE_LEFT_REAR = 2;
+  public final static int CAN_ID_VSPX_DRIVEBASE_RIGHT_FRONT = 3;
+  public final static int CAN_ID_VSPX_DRIVEBASE_RIGHT_REAR = 4;
+
   //Input Devices
   /** 
    * Ports are determined by USB ports
