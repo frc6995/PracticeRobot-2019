@@ -1,4 +1,4 @@
-package frc.robot.commands.climbcg;
+package frc.robot.commands.climb.climbcg;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
@@ -11,7 +11,11 @@ public class MoveC extends Command {
   // Sets Desired speed
   public double speed;
 
-  // Move forward at set speed, and continues to do so until reaching desired timeout, or interrupted
+  /**
+   * Move forward at set speed
+   * @param speed desired speed
+   * @param timeout desired timeout
+   */
   public MoveC(double speed, double timeout) {
     requires(Robot.m_ClimbS);
     this.setInterruptible(true);
@@ -28,10 +32,10 @@ public class MoveC extends Command {
     Robot.m_ClimbS.legWheels(speed);
   }
 
-  // Until Timed Out  
+  // Until Timed Out, or a limit switch is pressed  
   @Override
   protected boolean isFinished() {
-    return isTimedOut();
+    return isTimedOut() || Robot.m_ClimbS.frontLegs() || Robot.m_ClimbS.rearLegs();
   }
 
   @Override

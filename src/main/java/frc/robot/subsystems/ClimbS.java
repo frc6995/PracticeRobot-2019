@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -17,6 +18,8 @@ public class ClimbS extends Subsystem {
   public static DoubleSolenoid dblSolenoidRear;
   public static AnalogInput ultSensorFront;
   public static AnalogInput ultSensorMiddle;
+  public static DigitalInput limPosFront;
+  public static DigitalInput limPosRear;
   
   // Distance Above Podium
   public static Double Distance = 0.0;
@@ -27,6 +30,8 @@ public class ClimbS extends Subsystem {
     dblSolenoidRear = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RETRACT);
     ultSensorFront = new AnalogInput(RobotMap.ULTRASONIC_SENSOR_FRONT);
     ultSensorMiddle = new AnalogInput(RobotMap.ULTRASONIC_SENSOR_MIDDLE);
+    limPosFront = new DigitalInput(RobotMap.DIO_CLIMB_FRONT_LIMIT);
+    limPosRear = new DigitalInput(RobotMap.DIO_CLIMB_REAR_LIMIT);
   }
 
   @Override
@@ -88,5 +93,15 @@ public class ClimbS extends Subsystem {
     } else {
       return false;
     }
+  }
+
+  // Front wheels are not fully retracted
+  public boolean frontLegs() {
+    return limPosFront.get();
+  }
+
+  // Rear wheels are not fully retracted
+  public boolean rearLegs() {
+    return limPosRear.get();
   }
 }

@@ -1,28 +1,29 @@
-package frc.robot.commands.climbcg;
+package frc.robot.commands.climb;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * Retracts Front Wheels
+ * Retracts Wheels
  */
-public class RetractFrontC extends Command {
-  public RetractFrontC() {
+public class ClimbCancelC extends Command {
+  public ClimbCancelC() {
     requires(Robot.m_ClimbS);
   }
 
-  // Interrupt MoveC when Front Ultrasonic sensor above podium
+  // Maybe Have a check Paramater, something that tells robot that 
+  // front wheels are on the podium, and will not try to cancel.
   @Override
   protected void initialize() {
-    Robot.m_ClimbS.frontIsOver();
   }
 
-  // Retract Front Wheels
+  // Retracts Wheels
   @Override
   protected void execute() {
-    Robot.m_ClimbS.retractFront();
+    Robot.m_ClimbS.retract();
   }
 
+  // When done, return true
   @Override
   protected boolean isFinished() {
     return true;

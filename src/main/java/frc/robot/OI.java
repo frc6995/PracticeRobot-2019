@@ -1,8 +1,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ClimbCancelC;
-import frc.robot.commands.ClimbProtocolCG;
+import frc.robot.commands.climb.ClimbCancelC;
+import frc.robot.commands.climb.ClimbProtocolCG;
 import frc.robot.controllermap.BBoard;
 import frc.robot.controllermap.JStick;
 
