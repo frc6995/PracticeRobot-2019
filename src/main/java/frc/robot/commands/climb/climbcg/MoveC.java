@@ -8,8 +8,9 @@ import frc.robot.Robot;
  */
 public class MoveC extends Command {
 
-  // Sets Desired speed
+  // Variables
   public double speed;
+  public double timeout;
 
   /**
    * Move forward at set speed
@@ -35,7 +36,7 @@ public class MoveC extends Command {
   // Until Timed Out, or a limit switch is pressed  
   @Override
   protected boolean isFinished() {
-    return isTimedOut() || Robot.m_ClimbS.frontLegs() || Robot.m_ClimbS.rearLegs();
+    return isTimedOut() || Robot.m_ClimbS.frontPistons() || Robot.m_ClimbS.rearPistons();
   }
 
   @Override

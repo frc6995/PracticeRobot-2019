@@ -7,25 +7,34 @@ import frc.robot.Robot;
  * Retracts Rear Wheels
  */
 public class RetractRearC extends Command {
-  public RetractRearC() {
+  
+  // Variables
+  public double podium;
+
+  /**
+   * Retracts Front Wheels
+   * @param podium how far away the podium is
+   */
+  public RetractRearC(double podium) {
     requires(Robot.m_ClimbS);
   }
 
-  // Interrupt MoveC when Middle Ultrasonic sensor above podium
+  // Interrupt MoveC when Rear Ultrasonic sensor above podium
   @Override
   protected void initialize() {
-    Robot.m_ClimbS.centerIsOver();
+    Robot.m_ClimbS.centerIsOver(podium);
   }
 
-  // Retract Rear Wheels
+  // Retract Front Wheels
   @Override
   protected void execute() {
     Robot.m_ClimbS.retractRear();
   }
 
+  // Until the pistons are fully retracted
   @Override
   protected boolean isFinished() {
-    return true;
+    return Robot.m_ClimbS.rearPistons();
   }
 
   @Override

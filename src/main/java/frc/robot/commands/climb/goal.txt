@@ -24,98 +24,40 @@ Constraints:
 Algorithm
 	Hardware Objects:
 		Sendors:
-			* Movement Motor is                            mMotor
-			* Double Solenoid Front Right is               SolenoidFrontRight
-			* Double Solenoid Front Left is                SolenoidFrontLeft
-			* Double Solenoid Back Right is                SolenoidBackRight
-			* Double Solenoid Back Left is                 SolenoidBackLeft
-
+		* Movement Motor is                             mMotor
+		* Double Solenoid Front Right is                dblSolenoidFrontRight
+		* Double Solenoid Front Left is                 dblSolenoidFrontLeft
+		* Double Solenoid Back Right is                 dblSolenoidRearRight
+		* Double Solenoid Back Left is                  dblSolenoidRearLeft
 		Sensors:
-			* Ultrasonic Sensor Front is                   ultSensorFront
-			* Ultrasonic Sensor Back is                    ultSensorMiddle
-			* Limit switch Front position sensor is        limSolenoidPosF
-			* Limit switch Rear position sensor is         limSolenoidPosR
+		* Ultrasonic Sensor Front is                    ultSensorFront
+		* Ultrasonic Sensor Back is                     ultSensorMiddle
+		* Limit switch Front piston regulator is        limPosFront
+		* Limit switch Rear piston regulator is         limPosRear
+
+	Create Variable Managers (Methods):
+		* Regulates motor speed                         legWheels(paramaters speed,timeout)
+		* Deploys all pistons                           deploy()
+		* Retracts front pistons                        retractFront()
+		* Retracts rear pistons                         retractRear()
+		* Retracts all pistons                          retract()
 
 	Create robot state variables (booleans):
-		* Ultrasonic Bumper Sensor Front is                     bumperIsOver
-		* Ultrasonic Bumper Sensor Center of gravity is         cGIsOver
-		* Limit switch Front solenoid position sensor is        solenoidPosF
-		* Limit switch Rear solenoid position sensor is         solenoidPosR
+		* Ultrasonic bumper sensor is                   frontIsOver()
+		* Ultrasonic center of gravity sensor is        centerIsOver()
+		* Ultrasonic height sensor                      height(paramaters altitude)
+		* Limit switch front piston retracted regulator frontPistons()
+		* Limit switch rear piston retracted regulator  rearPistons()
 
-	Driver has initiated climb (button) and has not canceled climb
-		a. Deploys SolenoidBackLeft SolenoidBackRight SolenoidFrontLeft SolenoidFrontRight
-		b. moves mMotor until ultSensorF returns true
-		c. retracts dblSolenoidF while mMotor is running and limSolenoidPosF returns true
-		d. proceeds to move mMotor until ultSensorR returns true
-		e. stops mMotor
-		f. retracts dblSolenoidB and limSolenoidPosR returns true, sending signal to 
-		   Driver via shuffleboard that it is safe to move forward
+	Driver has initiated climb (button):
+		a. Calls deploy() method
+		b. Calls legWheels() until frontIsOver() returns true or timed out
+		c. Calls retractFront(), until frontPistons() returns true
+		d. Calls legWheels() until centerIsOver() returns true or timed out
+		e. Calls retractRear(), until RearPistons() returns true
+		f. Driver manually moves forward rest of way
 
-	Driver has canceled climb
-		a. get limSolenoidPosF
-		b. move mMotor backwards until ultSensorR or ultSensorL return true
-		c. move mMotor backwards for small amount of time
-		d. retract dblSolenoidF and dblSolenoidB
-
-Maximum Algorithm
-	Hardware Objects:
-		Sendors:
-			* Movement Motor is                            mMotor
-			* Double Solenoid Front is                     dblSolenoidF
-			* Double Solenoid Back is                      dblSolenoidB
-
-		Sensors:
-			* Ultrasonic Sensor Right Front Bumper is      ultSensorR
-			* Ultrasonic Sensor Left Front Bumper is       ultSensorL
-			* Ultrasonic Sensor Front is                   ultSensorF
-			* Ultrasonic Sensor Back is                    ultSensorB
-			* Limit switch dblSolenoidF position sensor is limSolenoidPosF
-			* Limit switch dblSolenoidR position sensor is limSolenoidPosR
-
-	Create robot state variables (booleans):
-		* Ultrasonic Bumper Sensor is                    bumperSensor
-		* Limit switch Front solenoid position sensor is SolenoidPosF
-		* Limit switch Back solenoid position sensor is  SolenoidPosB
-
-	Driver has initiated climb (button) and has not canceled climb
-		a. Deploys dblSolenoidF and dblSolenoidR
-		b. moves mMotor until ultSensorF returns true
-		c. retracts dblSolenoidF while mMotor is running and limSolenoidPosF returns true
-		d. proceeds to move mMotor until ultSensorR returns true
-		e. stops mMotor
-		f. retracts dblSolenoidB and limSolenoidPosR returns true, sending signal to 
-		   Driver via shuffleboard that it is safe to move forward
-
-	Driver has canceled climb
-		a. get limSolenoidPosF
-		b. move mMotor backwards until ultSensorR or ultSensorL return true
-		c. move mMotor backwards for small amount of time
-		d. retract dblSolenoidF and dblSolenoidB
-
-Minimum Algorithm
-	Hardware Objects:
-		Sendors:
-			* Movement Motor is                            mMotor
-			* Double Solenoid Front is                     dblSolenoidF
-			* Double Solenoid Back is                      dblSolenoidB
-
-		Sensors:
-			* Ultrasonic Sensor Front is                   ultSensorF
-			* Ultrasonic Sensor Back is                    ultSensorB
-			* Limit switch dblSolenoidF position sensor is limSolenoidPosF
-
-	Create robot state variables (booleans):
-		* Limit switch Front solenoid position sensor is limSolenoidPosF
-
-	Driver has initiated climb (button) and has not canceled climb
-		a. Deploys dblSolenoidF and dblSolenoidR
-		b. moves mMotor until ultSensorF returns true
-		c. retracts dblSolenoidF while mMotor is running and limSolenoidPosF returns true
-		d. proceeds to move mMotor until ultSensorR returns true
-		e. stops mMotor
-		f. retracts dblSolenoidB
-
-	Driver has canceled climb
-		a. get limSolenoidPosF
-		b. move mMotor backwards for small amount of time
-		c. retract dblSolenoidF and dblSolenoidB
+	Driver has canceled climb (button):
+		a. Get Value of frontPistons(), if true, ignore cancellation
+		b. Call legWheels() to move backwards until timed out
+		c. Call Retract()

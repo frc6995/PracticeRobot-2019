@@ -7,7 +7,15 @@ import frc.robot.Robot;
  * Deploys the Wheels
  */
 public class DeployC extends Command {
-  public DeployC() {
+
+  // Variables
+  public double altitude;
+
+  /**
+   * Deploys Wheels
+   * @param altitude Desired height
+   */
+  public DeployC(double altitude) {
     requires(Robot.m_ClimbS);
   }
 
@@ -21,9 +29,10 @@ public class DeployC extends Command {
     Robot.m_ClimbS.deploy();
   }
 
+  // Until reached desired height
   @Override
   protected boolean isFinished() {
-    return true;
+    return Robot.m_ClimbS.height(altitude);
   }
 
   @Override

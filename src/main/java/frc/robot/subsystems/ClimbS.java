@@ -12,22 +12,24 @@ import frc.robot.RobotMap;
  */
 public class ClimbS extends Subsystem {
 
-  // Hardware Objects
+  // Hardware objects
   public static Spark mMotor;
-  public static DoubleSolenoid dblSolenoidFront;
-  public static DoubleSolenoid dblSolenoidRear;
+  public static DoubleSolenoid dblSolenoidFrontLeft;
+  public static DoubleSolenoid dblSolenoidFrontRight;
+  public static DoubleSolenoid dblSolenoidRearLeft;
+  public static DoubleSolenoid dblSolenoidRearRight;
   public static AnalogInput ultSensorFront;
   public static AnalogInput ultSensorMiddle;
   public static DigitalInput limPosFront;
   public static DigitalInput limPosRear;
   
-  // Distance Above Podium
-  public static Double Distance = 0.0;
   
   public ClimbS() {
     mMotor = new Spark(RobotMap.PWM_ID_SPARK_WHEELS);
-    dblSolenoidFront = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_RETRACT);
-    dblSolenoidRear = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RETRACT);
+    dblSolenoidFrontLeft = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_LEFT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_LEFT_RETRACT);
+    dblSolenoidFrontRight = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_RIGHT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_RIGHT_RETRACT);
+    dblSolenoidRearLeft = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_LEFT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_LEFT_RETRACT);
+    dblSolenoidRearRight = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RIGHT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RIGHT_RETRACT);
     ultSensorFront = new AnalogInput(RobotMap.ULTRASONIC_SENSOR_FRONT);
     ultSensorMiddle = new AnalogInput(RobotMap.ULTRASONIC_SENSOR_MIDDLE);
     limPosFront = new DigitalInput(RobotMap.DIO_CLIMB_FRONT_LIMIT);
@@ -38,70 +40,88 @@ public class ClimbS extends Subsystem {
   public void initDefaultCommand() {
   }
 
-  // leg wheel set desired speed
+  /**
+   * mMotor Regulator
+   * @param speed desired speed
+   */
   public void legWheels(double speed) {
     mMotor.set(speed);
   }
 
-  // Deploys Wheels
+  // Deploys pistons
   public void deploy() {
-    dblSolenoidFront.set(DoubleSolenoid.Value.kForward);
-    dblSolenoidRear.set(DoubleSolenoid.Value.kForward);
+    dblSolenoidFrontLeft.set(DoubleSolenoid.Value.kForward);
+    dblSolenoidFrontRight.set(DoubleSolenoid.Value.kForward);
+    dblSolenoidRearLeft.set(DoubleSolenoid.Value.kForward);
+    dblSolenoidRearRight.set(DoubleSolenoid.Value.kForward);
   }
 
-  // Retracts Front Wheels
+  // Retracts front pistons
   public void retractFront() {
-    dblSolenoidFront.set(DoubleSolenoid.Value.kReverse);
+    dblSolenoidFrontLeft.set(DoubleSolenoid.Value.kReverse);
+    dblSolenoidFrontRight.set(DoubleSolenoid.Value.kReverse);
   }
 
-  // Retracts Rear Wheels
+  // Retracts rear pistons
   public void retractRear() {
-    dblSolenoidRear.set(DoubleSolenoid.Value.kReverse);
+    dblSolenoidRearLeft.set(DoubleSolenoid.Value.kReverse);
+    dblSolenoidRearRight.set(DoubleSolenoid.Value.kReverse);
   }
 
-  // Retracts Wheels
+  // Retracts all pistons
   public void retract() {
-    dblSolenoidFront.set(DoubleSolenoid.Value.kReverse);
-    dblSolenoidRear.set(DoubleSolenoid.Value.kReverse);
+    dblSolenoidFrontLeft.set(DoubleSolenoid.Value.kReverse);
+    dblSolenoidFrontRight.set(DoubleSolenoid.Value.kReverse);
+    dblSolenoidRearLeft.set(DoubleSolenoid.Value.kReverse);
+    dblSolenoidRearRight.set(DoubleSolenoid.Value.kReverse);
   }
 
-  // Gets how far above the front Wheels are
+  // Gets the distance of the Front ultrasonic
   public double getDistanceFront() {
     double distance = ultSensorFront.getValue() / 8;
     return(distance);
   }
 
-  // Gets how far above the Center of Gravity is
+  // Gets the distance of the middle ultrasonic
   public double getDistanceMiddle() {
     double distance = ultSensorMiddle.getValue() / 8;
     return(distance);
   }
 
-  // Returns True if the Front Wheels are over the podium
-  public boolean frontIsOver(){
-    if (getDistanceFront() <= Distance) {
+  // Returns true if the front wheels are over the podium
+  public boolean frontIsOver(double podium) {
+    if (getDistanceFront() <= podium) {
       return true;
     } else {
       return false;
     }
   }
 
-  // Returns True if the Center of Gravity is over the podium
-  public boolean centerIsOver(){
-    if (getDistanceMiddle() <= Distance) {
+  // Returns true if the center of gravity is over the podium
+  public boolean centerIsOver(double podium) {
+    if (getDistanceMiddle() <= podium) {
       return true;
     } else {
       return false;
     }
   }
 
-  // Front wheels are not fully retracted
-  public boolean frontLegs() {
+  // Returns true when pistons reach desired height
+  public boolean height(double altitude) {
+    if (getDistanceMiddle() <= altitude) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // Returns true when front pistons are fully retracted
+  public boolean frontPistons() {
     return limPosFront.get();
   }
 
-  // Rear wheels are not fully retracted
-  public boolean rearLegs() {
+  // Returns true when rear pistons are fully retracted
+  public boolean rearPistons() {
     return limPosRear.get();
   }
 }

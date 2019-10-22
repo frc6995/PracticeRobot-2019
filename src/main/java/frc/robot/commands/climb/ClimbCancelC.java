@@ -4,29 +4,27 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * Retracts Wheels
+ * Cancels climb if front pistons are not retracted
  */
 public class ClimbCancelC extends Command {
   public ClimbCancelC() {
     requires(Robot.m_ClimbS);
   }
 
-  // Maybe Have a check Paramater, something that tells robot that 
-  // front wheels are on the podium, and will not try to cancel.
   @Override
   protected void initialize() {
   }
 
-  // Retracts Wheels
+  // Retracts all Pistons
   @Override
   protected void execute() {
     Robot.m_ClimbS.retract();
   }
 
-  // When done, return true
+  // Returns true when pistons are fully retracted
   @Override
   protected boolean isFinished() {
-    return true;
+    return Robot.m_ClimbS.frontPistons() && Robot.m_ClimbS.rearPistons();
   }
 
   @Override
