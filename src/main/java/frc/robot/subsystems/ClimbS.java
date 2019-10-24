@@ -43,9 +43,11 @@ public class ClimbS extends Subsystem {
   /**
    * mMotor Regulator
    * @param speed desired speed
+   * @param timeout desired timeout
    */
-  public void legWheels(double speed) {
+  public void legWheels(double speed, double timeout) {
     mMotor.set(speed);
+    mMotor.setExpiration(timeout);
   }
 
   // Deploys pistons

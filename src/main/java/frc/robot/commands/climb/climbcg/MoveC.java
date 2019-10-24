@@ -30,7 +30,7 @@ public class MoveC extends Command {
   // Moves for speed
   @Override
   protected void execute() {
-    Robot.m_ClimbS.legWheels(speed);
+    Robot.m_ClimbS.legWheels(speed, timeout);
   }
 
   // Until Timed Out, or a limit switch is pressed  

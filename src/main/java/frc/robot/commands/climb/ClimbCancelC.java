@@ -15,10 +15,15 @@ public class ClimbCancelC extends Command {
   protected void initialize() {
   }
 
-  // Retracts all Pistons
+  // If front pistons are deployed, move backwards, then retract all pistons
   @Override
   protected void execute() {
-    Robot.m_ClimbS.retract();
+    if (!Robot.m_ClimbS.frontPistons()) {
+      Robot.m_ClimbS.legWheels(0.0, 0.0);
+      Robot.m_ClimbS.retract();
+    } else {
+      end();
+    }
   }
 
   // Returns true when pistons are fully retracted

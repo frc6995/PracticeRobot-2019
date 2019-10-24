@@ -58,6 +58,6 @@ Algorithm
 		f. Driver manually moves forward rest of way
 
 	Driver has canceled climb (button):
-		a. Get Value of frontPistons(), if true, ignore cancellation
-		b. Call legWheels() to move backwards until timed out
+		a. Get value of frontPistons(), if false, end()
+		b. If true, Call legWheels() to move backwards until timed out
 		c. Call Retract()
