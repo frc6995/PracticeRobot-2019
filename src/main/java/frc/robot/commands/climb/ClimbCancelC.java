@@ -7,6 +7,7 @@ import frc.robot.Robot;
  * Cancels climb if front pistons are not retracted
  */
 public class ClimbCancelC extends Command {
+  
   public ClimbCancelC() {
     requires(Robot.m_ClimbS);
   }
@@ -18,7 +19,11 @@ public class ClimbCancelC extends Command {
   // Retracts all Pistons
   @Override
   protected void execute() {
-    Robot.m_ClimbS.retract();
+    if (!Robot.m_ClimbS.frontPistons()){
+      Robot.m_ClimbS.retract();
+    } else {
+      end();
+    }  
   }
 
   // Returns true when pistons are fully retracted
