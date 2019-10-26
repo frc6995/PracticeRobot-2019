@@ -14,10 +14,8 @@ public class ClimbS extends Subsystem {
 
   // Hardware objects
   public static Spark mMotor;
-  public static DoubleSolenoid dblSolenoidFrontLeft;
-  public static DoubleSolenoid dblSolenoidFrontRight;
-  public static DoubleSolenoid dblSolenoidRearLeft;
-  public static DoubleSolenoid dblSolenoidRearRight;
+  public static DoubleSolenoid dblSolenoidFront;
+  public static DoubleSolenoid dblSolenoidRear;
   public static AnalogInput ultSensorFront;
   public static AnalogInput ultSensorMiddle;
   public static DigitalInput limPosFront;
@@ -26,10 +24,8 @@ public class ClimbS extends Subsystem {
   
   public ClimbS() {
     mMotor = new Spark(RobotMap.PWM_ID_SPARK_WHEELS);
-    dblSolenoidFrontLeft = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_LEFT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_LEFT_RETRACT);
-    dblSolenoidFrontRight = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_RIGHT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_RIGHT_RETRACT);
-    dblSolenoidRearLeft = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_LEFT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_LEFT_RETRACT);
-    dblSolenoidRearRight = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RIGHT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RIGHT_RETRACT);
+    dblSolenoidFront = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_FRONT_RETRACT);
+    dblSolenoidRear = new DoubleSolenoid(RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY, RobotMap.PCM_ID_DSOLENOID_CLIMB_REAR_RETRACT);
     ultSensorFront = new AnalogInput(RobotMap.ULTRASONIC_SENSOR_FRONT);
     ultSensorMiddle = new AnalogInput(RobotMap.ULTRASONIC_SENSOR_MIDDLE);
     limPosFront = new DigitalInput(RobotMap.DIO_CLIMB_FRONT_LIMIT);
@@ -50,43 +46,51 @@ public class ClimbS extends Subsystem {
     mMotor.setExpiration(timeout);
   }
 
-  // Deploys pistons
-  public void deploy() {
-    dblSolenoidFrontLeft.set(DoubleSolenoid.Value.kForward);
-    dblSolenoidFrontRight.set(DoubleSolenoid.Value.kForward);
-    dblSolenoidRearLeft.set(DoubleSolenoid.Value.kForward);
-    dblSolenoidRearRight.set(DoubleSolenoid.Value.kForward);
+  // Retracts front pistons
+  public void deployFront() {
+    dblSolenoidFront.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  // Retracts rear pistons
+  public void deployRear() {
+    dblSolenoidRear.set(DoubleSolenoid.Value.kForward);
+  }
+
+  // Stops front pistons
+  public void stopFront() {
+    dblSolenoidFront.set(DoubleSolenoid.Value.kOff);
+  }
+
+  // Stops rear pistons
+  public void stopRear() {
+    dblSolenoidRear.set(DoubleSolenoid.Value.kOff);
   }
 
   // Retracts front pistons
   public void retractFront() {
-    dblSolenoidFrontLeft.set(DoubleSolenoid.Value.kReverse);
-    dblSolenoidFrontRight.set(DoubleSolenoid.Value.kReverse);
+    dblSolenoidFront.set(DoubleSolenoid.Value.kReverse);
   }
 
-  // Retracts rear pistons
+  // Retract rear pistons
   public void retractRear() {
-    dblSolenoidRearLeft.set(DoubleSolenoid.Value.kReverse);
-    dblSolenoidRearRight.set(DoubleSolenoid.Value.kReverse);
+    dblSolenoidRear.set(DoubleSolenoid.Value.kReverse);  
   }
 
   // Retracts all pistons
   public void retract() {
-    dblSolenoidFrontLeft.set(DoubleSolenoid.Value.kReverse);
-    dblSolenoidFrontRight.set(DoubleSolenoid.Value.kReverse);
-    dblSolenoidRearLeft.set(DoubleSolenoid.Value.kReverse);
-    dblSolenoidRearRight.set(DoubleSolenoid.Value.kReverse);
+    dblSolenoidFront.set(DoubleSolenoid.Value.kReverse);
+    dblSolenoidRear.set(DoubleSolenoid.Value.kReverse);
   }
 
   // Gets the distance of the Front ultrasonic
   public double getDistanceFront() {
-    double distance = ultSensorFront.getValue() / 8;
+    double distance = ultSensorFront.getValue() * 3.175;
     return(distance);
   }
 
   // Gets the distance of the middle ultrasonic
   public double getDistanceMiddle() {
-    double distance = ultSensorMiddle.getValue() / 8;
+    double distance = ultSensorMiddle.getValue() * 3.175; // 25.4 / 8
     return(distance);
   }
 

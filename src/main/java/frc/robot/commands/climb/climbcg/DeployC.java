@@ -26,7 +26,16 @@ public class DeployC extends Command {
   // Deploys Wheels
   @Override
   protected void execute() {
-    Robot.m_ClimbS.deploy();
+    if (Robot.m_ClimbS.getDistanceFront() < Robot.m_ClimbS.getDistanceMiddle()) {
+      Robot.m_ClimbS.deployFront();
+      Robot.m_ClimbS.stopRear();
+    } if (Robot.m_ClimbS.getDistanceMiddle() < Robot.m_ClimbS.getDistanceFront()) {
+      Robot.m_ClimbS.deployRear();
+      Robot.m_ClimbS.stopFront();
+    } else {
+      Robot.m_ClimbS.deployFront();
+      Robot.m_ClimbS.deployRear();
+    } 
   }
 
   // Until reached desired height
