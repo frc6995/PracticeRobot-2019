@@ -3,10 +3,10 @@ package frc.robot;
 public class RobotMap {
 
   //Drivebase constants
-  public final static int CAN_ID_VSPX_DRIVEBASE_LEFT_FRONT = 1;
-  public final static int CAN_ID_VSPX_DRIVEBASE_LEFT_REAR = 2;
-  public final static int CAN_ID_VSPX_DRIVEBASE_RIGHT_FRONT = 3;
-  public final static int CAN_ID_VSPX_DRIVEBASE_RIGHT_REAR = 4;
+  public final static int CAN_ID_VSPX_DRIVEBASE_LEFT_FRONT = 10;
+  public final static int CAN_ID_VSPX_DRIVEBASE_LEFT_REAR = 12;
+  public final static int CAN_ID_VSPX_DRIVEBASE_RIGHT_FRONT = 13;
+  public final static int CAN_ID_VSPX_DRIVEBASE_RIGHT_REAR = 14;
 
   //Input Devices
   /** 
@@ -30,8 +30,7 @@ public class RobotMap {
 
   public final static int            PWM_ID_SPARK_WHEELS                  = 0;
   //Arm Constants
-  public final static int            CAN_ID_TALON_ARM_A                   = 0;
-  public final static int            CAN_ID_TALON_ARM_B                   = 0;
+  public final static int            CAN_ID_TALON_ARM_A                   = 20;
   public final static int            DIO_LIMIT_ARM_UPPER                  = 0;
   public final static int            DIO_LIMIT_ARM_LOWER                  = 0;
   //Arm level encoder Constants
@@ -56,7 +55,6 @@ public class RobotMap {
   public final static double         ARM_kF_B                             = 0.0; //power needed to keep arm up with ball.
   //Arm Motor Constants
   public final static int            MOTOR_A_TALONID                      = RobotMap.CAN_ID_TALON_ARM_A;
-  public final static int            MOTOR_B_TALONID                      = RobotMap.CAN_ID_TALON_ARM_B;
 
   public final static int            FACTORY_DEFAULT_TIMEOUT              = 100; //in ms
 

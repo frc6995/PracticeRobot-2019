@@ -17,11 +17,9 @@ import frc.robot.RobotMap;
 public class ArmS extends Subsystem {
 
   // Variables
-  public final static NeutralMode MOTOR_A_NEUTRAL_MODE = NeutralMode.Brake;
-  public final static NeutralMode MOTOR_B_NEUTRAL_MODE = NeutralMode.Brake;
+  public final static NeutralMode MOTOR_NEUTRAL_MODE = NeutralMode.Brake;
   public final static FeedbackDevice FEEDBACK_DEVICE = FeedbackDevice.QuadEncoder;
-  public WPI_TalonSRX armTalonA = null; 
-  public WPI_TalonSRX armTalonB = null;
+  public WPI_TalonSRX armTalon = null;
   private DigitalInput armUpperLimitSwitch;
   private DigitalInput armLowerLimitSwitch;
   public static Spark cargoIntakeMotor;
@@ -51,8 +49,7 @@ public class ArmS extends Subsystem {
      * TODO: This method needs further documentation
      */
     // Instantiates Talons
-    armTalonA = new WPI_TalonSRX(RobotMap.CAN_ID_TALON_ARM_A);
-    armTalonB = new WPI_TalonSRX(RobotMap.CAN_ID_TALON_ARM_B);
+    armTalon = new WPI_TalonSRX(RobotMap.CAN_ID_TALON_ARM_A);
 
     //Instantiates Sparks
     cargoIntakeMotor = new Spark(RobotMap.PWM_ID_SPARK_HAND);
@@ -63,52 +60,46 @@ public class ArmS extends Subsystem {
     cargoLimit = new DigitalInput(RobotMap.DIO_LIMIT_HAND);
 
     // Sets Talons to Factory Default
-    armTalonA.configFactoryDefault(RobotMap.FACTORY_DEFAULT_TIMEOUT);
-    armTalonB.configFactoryDefault(RobotMap.FACTORY_DEFAULT_TIMEOUT);
-
-    // Tells armTalonB to mirror everything armTalon does
-    armTalonB.follow(armTalonA);
+    armTalon.configFactoryDefault(RobotMap.FACTORY_DEFAULT_TIMEOUT);
 
     // TODO: Figure out if we need talons to be inverted
     // Inverts the talons
-    armTalonA.setInverted(RobotMap.MOTOR_A_INVERT);
-    armTalonB.setInverted(RobotMap.MOTOR_B_INVERT);
+    armTalon.setInverted(RobotMap.MOTOR_A_INVERT);
 
     // Sets Talons to TODO: Please explain this
-    armTalonA.setNeutralMode(MOTOR_A_NEUTRAL_MODE);
-    armTalonB.setNeutralMode(MOTOR_B_NEUTRAL_MODE);
+    armTalon.setNeutralMode(MOTOR_NEUTRAL_MODE);
 
-    armTalonA.enableCurrentLimit(RobotMap.CURRENT_LIMIT_ENABLED);
-    armTalonA.configPeakCurrentLimit(RobotMap.CURRENT_PEAK_LIMIT_VALUE);
-    armTalonA.configPeakCurrentDuration(RobotMap.CURRENT_PEAK_LIMIT_DURATION);
-    armTalonA.configContinuousCurrentLimit(RobotMap.CURRENT_LIMIT_VALUE);
+    armTalon.enableCurrentLimit(RobotMap.CURRENT_LIMIT_ENABLED);
+    armTalon.configPeakCurrentLimit(RobotMap.CURRENT_PEAK_LIMIT_VALUE);
+    armTalon.configPeakCurrentDuration(RobotMap.CURRENT_PEAK_LIMIT_DURATION);
+    armTalon.configContinuousCurrentLimit(RobotMap.CURRENT_LIMIT_VALUE);
 
     // We are using a Quad-encoder
-    armTalonA.configSelectedFeedbackSensor(FEEDBACK_DEVICE);
+    armTalon.configSelectedFeedbackSensor(FEEDBACK_DEVICE);
     // TODO: Inverted?
-    armTalonA.setSensorPhase(RobotMap.FEEDBACK_DEVICE_INVERT);
+    armTalon.setSensorPhase(RobotMap.FEEDBACK_DEVICE_INVERT);
 
-    armTalonA.configForwardSoftLimitThreshold(RobotMap.LIMIT_SOFT_FORWARD, RobotMap.LIMIT_SOFT_TIMEOUT);
-    armTalonA.configReverseSoftLimitThreshold(RobotMap.LIMIT_SOFT_REVERSE, RobotMap.LIMIT_SOFT_TIMEOUT);
-    armTalonA.configForwardSoftLimitEnable(RobotMap.LIMIT_SOFT_ENABLED, RobotMap.LIMIT_SOFT_TIMEOUT);
-    armTalonA.configReverseSoftLimitEnable(RobotMap.LIMIT_SOFT_ENABLED, RobotMap.LIMIT_SOFT_TIMEOUT);
+    armTalon.configForwardSoftLimitThreshold(RobotMap.LIMIT_SOFT_FORWARD, RobotMap.LIMIT_SOFT_TIMEOUT);
+    armTalon.configReverseSoftLimitThreshold(RobotMap.LIMIT_SOFT_REVERSE, RobotMap.LIMIT_SOFT_TIMEOUT);
+    armTalon.configForwardSoftLimitEnable(RobotMap.LIMIT_SOFT_ENABLED, RobotMap.LIMIT_SOFT_TIMEOUT);
+    armTalon.configReverseSoftLimitEnable(RobotMap.LIMIT_SOFT_ENABLED, RobotMap.LIMIT_SOFT_TIMEOUT);
 
-    armTalonA.selectProfileSlot(RobotMap.ARM_PID_SLOT, 0);
-    armTalonA.configAllowableClosedloopError(RobotMap.ARM_PID_SLOT, 0);
+    armTalon.selectProfileSlot(RobotMap.ARM_PID_SLOT, 0);
+    armTalon.configAllowableClosedloopError(RobotMap.ARM_PID_SLOT, 0);
 
     // TODO: Calculate PID
     // Calculates the P.I.D variables
-    armTalonA.config_kP(RobotMap.ARM_PID_SLOT, RobotMap.ARM_kP);
-    armTalonA.config_kI(RobotMap.ARM_PID_SLOT, RobotMap.ARM_kI);
-    armTalonA.config_kD(RobotMap.ARM_PID_SLOT, RobotMap.ARM_kD);
-    armTalonA.config_kF(RobotMap.ARM_PID_SLOT, (RobotMap.ARM_kF * 1023) / RobotMap.ENCODER_DUTY_CYCLE);
+    armTalon.config_kP(RobotMap.ARM_PID_SLOT, RobotMap.ARM_kP);
+    armTalon.config_kI(RobotMap.ARM_PID_SLOT, RobotMap.ARM_kI);
+    armTalon.config_kD(RobotMap.ARM_PID_SLOT, RobotMap.ARM_kD);
+    armTalon.config_kF(RobotMap.ARM_PID_SLOT, (RobotMap.ARM_kF * 1023) / RobotMap.ENCODER_DUTY_CYCLE);
 
-    armTalonA.config_IntegralZone(RobotMap.ARM_PID_SLOT, RobotMap.ARM_INTEGRAL_ZONE);
+    armTalon.config_IntegralZone(RobotMap.ARM_PID_SLOT, RobotMap.ARM_INTEGRAL_ZONE);
 
-    armTalonA.configClosedLoopPeakOutput(RobotMap.ARM_PID_SLOT, RobotMap.ARM_PEAK_OUTPUT);
-    armTalonA.configClosedloopRamp(RobotMap.ARM_RAMP_TIME);
+    armTalon.configClosedLoopPeakOutput(RobotMap.ARM_PID_SLOT, RobotMap.ARM_PEAK_OUTPUT);
+    armTalon.configClosedloopRamp(RobotMap.ARM_RAMP_TIME);
 
-    armTalonA.set(ControlMode.PercentOutput, 0); 
+    armTalon.set(ControlMode.PercentOutput, 0); 
   }
 
   // Tells the PID what encoder position in relation to the set point we want to go to
@@ -136,12 +127,12 @@ public class ArmS extends Subsystem {
 
   // Gets encoder current position
   public double getCurrentEncoderCount() {
-    return (armTalonA.get());
+    return (armTalon.get());
   }
 
   // Gets how far away we are from desired set point
   public int getError() {
-    return armTalonA.getClosedLoopError();
+    return armTalon.getClosedLoopError();
   }
 
   /**
@@ -158,7 +149,7 @@ public class ArmS extends Subsystem {
       f_a = RobotMap.ARM_kF_nB * Math.cos(Math.toRadians((getCurrentEncoderCount() - RobotMap.ENCODER_POS_HORIZONTAL) / RobotMap.ENCODER_TICKS_PER_DEG));
     }
 
-    armTalonA.set(ControlMode.Position, getArmSetPointEncoderCount(), DemandType.ArbitraryFeedForward, f_a);
+    armTalon.set(ControlMode.Position, getArmSetPointEncoderCount(), DemandType.ArbitraryFeedForward, f_a);
 
     if (Math.abs(getError()) < setPointRange) {
       countWithinSetPoint++;
