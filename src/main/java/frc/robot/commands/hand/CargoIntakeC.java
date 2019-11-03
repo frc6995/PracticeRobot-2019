@@ -2,10 +2,9 @@ package frc.robot.commands.hand;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotPreferences;
 
 public class CargoIntakeC extends Command {
-
-  private double intakeSpeed = -0.7; //negative values intake?
 
   public CargoIntakeC() {
     requires(Robot.m_CargoHandS);
@@ -18,7 +17,8 @@ public class CargoIntakeC extends Command {
 
   @Override
   protected void execute() {
-    Robot.m_CargoHandS.cargoSpeed(intakeSpeed);
+    double speed = RobotPreferences.cargoIntakeSpeed.getValue();
+    Robot.m_CargoHandS.cargoSpeed(speed);
   }
 
   @Override

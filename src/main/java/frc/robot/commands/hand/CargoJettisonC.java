@@ -2,10 +2,9 @@ package frc.robot.commands.hand;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotPreferences;
 
 public class CargoJettisonC extends Command {
-
-  private double jettisonSpeed = 0.7; //positive values jettison?
 
   public CargoJettisonC() {
     requires(Robot.m_CargoHandS);
@@ -18,7 +17,8 @@ public class CargoJettisonC extends Command {
 
   @Override
   protected void execute() {
-    Robot.m_CargoHandS.cargoSpeed(jettisonSpeed);
+    double speed = RobotPreferences.cargoShootSpeed.getValue();
+    Robot.m_CargoHandS.cargoSpeed(speed);
   }
 
   @Override
