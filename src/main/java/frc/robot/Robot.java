@@ -4,15 +4,13 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import frc.robot.subsystems.DrivebaseS;
-import frc.robot.subsystems.arm.CargoHandS;
 import frc.robot.subsystems.ArmS;
 import frc.robot.subsystems.ClimbS;
+import frc.robot.subsystems.DrivebaseS;
 
 public class Robot extends TimedRobot {
-  
+
   //Subsystems
-  public static CargoHandS m_CargoHandS = new CargoHandS();
   public static DrivebaseS m_drivebaseS;
   public static ArmS m_ArmS = new ArmS();
   public static ClimbS m_ClimbS = new ClimbS();
@@ -26,8 +24,6 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     //Subsystems
     m_drivebaseS = new DrivebaseS();
-    
-    m_CargoHandS = new CargoHandS();
 
     m_ArmS = new ArmS();
     m_ClimbS = new ClimbS();
