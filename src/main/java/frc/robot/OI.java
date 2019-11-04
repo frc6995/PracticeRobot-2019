@@ -10,7 +10,7 @@ import frc.robot.commands.climb.MoveC;
 import frc.robot.commands.climb.RetractFrontC;
 import frc.robot.commands.climb.RetractRearC;
 import frc.robot.controllermap.JStick;
-import frc.robot.controllermap.XBox;
+import frc.robot.controllermap.Xbox;
 import frc.robot.subsystems.ArmS.ArmLevel;
 
 /**
@@ -19,7 +19,7 @@ import frc.robot.subsystems.ArmS.ArmLevel;
 public class OI {
 
   //We are using Joystick and XBox controllers
-  public final XBox xBox = new XBox(RobotMap.OI_XBOX);
+  public final Xbox xbox = new Xbox(RobotMap.OI_XBOX);
   public final JStick jStick = new JStick(RobotMap.OI_JSTICK);
 
   /**
@@ -46,13 +46,13 @@ public class OI {
 
       // "dumb" buttons for the Climbing Mechanism
       //deploys wheels
-      xBox.a_runOnPressed(new ClimbDeployC());
-      xBox.b_runOnPressed(new ClimbCancelC());
-      xBox.x_runOnPressed(new RetractFrontC());
-      xBox.y_runOnPressed(new RetractRearC());
+      xbox.a_runOnPressed(new ClimbDeployC());
+      xbox.b_runOnPressed(new ClimbCancelC());
+      xbox.x_runOnPressed(new RetractFrontC());
+      xbox.y_runOnPressed(new RetractRearC());
       // Moves Forward
-      xBox.dpad_up_runWhileHeld(new MoveC(0.7));
+      xbox.dpad_up_runWhileHeld(new MoveC(0.7));
       // Moves Backwards
-      xBox.dpad_up_left_runWhileHeld(new MoveC(-0.7));
+      xbox.dpad_up_left_runWhileHeld(new MoveC(-0.7));
   }
 }

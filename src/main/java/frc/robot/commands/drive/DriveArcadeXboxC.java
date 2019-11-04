@@ -21,11 +21,11 @@ public class DriveArcadeXboxC extends Command {
   @Override
   protected void execute() {
     //this prevents errors from trying to move forward and back at the same time
-    moveSpeed = -Robot.m_oi.xBox.left_trigger() + Robot.m_oi.xBox.right_trigger();
-    rotSpeed = Robot.m_oi.xBox.left_stick_x();
+    moveSpeed = -Robot.m_oi.xbox.left_trigger() + Robot.m_oi.xbox.right_trigger();
+    rotSpeed = Robot.m_oi.xbox.left_stick_x();
 
     //this gives the driver control of the throttle
-    if (Robot.m_oi.xBox.left_bumper_pressed()) {
+    if (Robot.m_oi.xbox.left_bumper_pressed()) {
       switch (numberPressed) {
       case 0:
         throttle = 0.95;
@@ -56,7 +56,7 @@ public class DriveArcadeXboxC extends Command {
         numberPressed = 0;
         break;
       }
-    } else if (Robot.m_oi.xBox.right_bumper()) {
+    } else if (Robot.m_oi.xbox.right_bumper()) {
       throttle = 1;
       numberPressed = 0;
     }
