@@ -25,7 +25,7 @@ public class DriveArcadeXboxC extends Command {
     rotSpeed = Robot.m_oi.xbox.left_stick_x();
 
     //this gives the driver control of the throttle
-    if (Robot.m_oi.xbox.left_bumper_pressed()) {
+    if (Robot.m_oi.xbox.left_bumper()) {
       switch (numberPressed) {
       case 0:
         throttle = 0.95;
