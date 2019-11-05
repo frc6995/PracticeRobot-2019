@@ -634,9 +634,9 @@ public class Xbox {
     }
 
     // public boolean left_bumper_pressed() {
-    //     return xbox.getBumperPressed(Hand.kLeft);
+    // return xbox.getBumperPressed(Hand.kLeft);
     // }
-    
+
     /**
      * Runs a command when the Xbox Left Bumper button is pressed.
      * 
