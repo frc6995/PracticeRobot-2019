@@ -6,8 +6,6 @@ import frc.robot.commands.climb.ClimbDeployC;
 import frc.robot.commands.climb.MoveC;
 import frc.robot.commands.climb.RetractFrontC;
 import frc.robot.commands.climb.RetractRearC;
-import frc.robot.commands.hand.CargoIntakeC;
-import frc.robot.commands.hand.CargoJettisonC;
 import frc.robot.RobotMap;
 
 public class OI {

@@ -17,6 +17,9 @@ public class NomadDoublePreference extends NomadPreference {
     public NomadDoublePreference(String name, double defaultValue) {
         m_defaultValue = defaultValue;
         m_name = name;
+        if (!Preferences.getInstance().containsKey(m_name)){
+            Preferences.getInstance().putDouble(m_name, m_defaultValue);
+        }
     }
 
     /**

@@ -14,7 +14,7 @@ public class RobotMap {
   public static final int CAN_ID_VSPX_DRIVEBASE_RIGHT_REAR = 13;
 
   public static final int PCM_ID = 1;
-  public static final int PWM_ID_SPARK_WHEELS = 0;
+  public static final int PWM_ID_SPARK_WHEELS = 1;
   public static final int PCM_ID_DSOLENOID_CLIMB_FRONT_DEPLOY = 0;
   public static final int PCM_ID_DSOLENOID_CLIMB_FRONT_RETRACT = 1;
   public static final int PCM_ID_DSOLENOID_CLIMB_REAR_DEPLOY = 2;
