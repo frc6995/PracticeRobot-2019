@@ -1,3 +1,5 @@
+***This repository has been archived. Moving into the new game season we shall be working in 2020 repositories.***
+
 # PracticeRobot-2019
 Patrick's 2019 Offseason Repository
 
